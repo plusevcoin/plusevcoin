@@ -58,16 +58,16 @@ QString BitcoinUnits::description(int unit)
     switch(unit)
     {
     case PEVC: return QString("PlusEVCoin");
-    case mPEVC: return QString("milliPlusEVCoin (1 / 1,000)");
-    case uPEVC: return QString("microPlusEVCoin (1 / 1,000,000)");
-    case nPEVC: return QString("nanoPlusEVCoin (1 / 100,000,000)");
-    case KPEVC: return QString("KiloPlusEVCoin (1 * 1,000)");
-    case MPEVC: return QString("MegaPlusEVCoin (1 * 1,000,000)");
-    case GPEVC: return QString("GigaPlusEVCoin (1 * 1,000,000,000)");
+    case mPEVC: return QString("milliPEVCoin (1 / 1,000)");
+    case uPEVC: return QString("microPEVCoin (1 / 1,000,000)");
+    case nPEVC: return QString("nanoPEVCoin (1 / 100,000,000)");
+    case KPEVC: return QString("KiloPEVCoin (1 * 1,000)");
+    case MPEVC: return QString("MegaPEVCoin (1 * 1,000,000)");
+    case GPEVC: return QString("GigaPEVCoin (1 * 1,000,000,000)");
     default: return QString("???");
     }
 }
-//a single unit (.00000001) of PlusEVCoin is called a "nanoPlusEVCoin."
+//a single unit (.00000001) of PlusEVCoin is called a "chip".
 qint64 BitcoinUnits::factor(int unit)
 {
     switch(unit)

@@ -4,7 +4,7 @@
  * W.J. van der Laan 2011-2012
  * The Bitcoin Developers 2011-2012
  * The Litecoin Developers 201-2013 [201 CE? Yeah right, what did you code it on?]
- * The PlusEVCoin Foxes 2014
+ * The FoxCoin Foxes 2014
  */
 #include "bitcoingui.h"
 #include "transactiontablemodel.h"

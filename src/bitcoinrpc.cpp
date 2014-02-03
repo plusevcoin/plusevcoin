@@ -2,7 +2,7 @@
 // Copyright (c) 2009-2012 The Bitcoin developers
 // Copyright (c) 2011-2012 The Litecoin Developers
 // Copyright (c) 2013 Adam M. (Wouldn't want your name to be lower case, would you?)
-// Copyright (c) 2014 PlusEVCoin Foxes.
+// Copyright (c) 2014 Foxcoin Foxes
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
