@@ -98,7 +98,7 @@ void AskPassphraseDialog::accept()
             break;
         }
         QMessageBox::StandardButton retval = QMessageBox::question(this, tr("Confirm FoxHole barricade"),
-                 tr("WARNING: If you barricade your FoxHole and lose your passphrase, you will <b>LOSE ALL OF YOUR FoxCoins!!!!</b>!\nAre you sure you wish to barricade your FoxHole?"),
+                 tr("WARNING: If you barricade your FoxHole and lose your passphrase, you will <b>LOSE ALL OF YOUR PlusEVCoins!!!!</b>!\nAre you sure you wish to barricade your FoxHole?"),
                  QMessageBox::Yes|QMessageBox::Cancel,
                  QMessageBox::Cancel);
         if(retval == QMessageBox::Yes)
@@ -108,7 +108,7 @@ void AskPassphraseDialog::accept()
                 if(model->setWalletEncrypted(true, newpass1))
                 {
                     QMessageBox::warning(this, tr("FoxHole barricaded"),
-                                         tr("FoxCoin will close now to finish the barricade process. Remember that barricading your FoxHole cannot fully protect your FoxCoin from being stolen by malware infecting your computer."));
+                                         tr("PlusEVCoin will close now to finish the barricade process. Remember that barricading your FoxHole cannot fully protect your PlusEVCoin from being stolen by malware infecting your computer."));
                     QApplication::quit();
                 }
                 else

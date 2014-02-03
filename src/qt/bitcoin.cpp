@@ -109,7 +109,7 @@ static std::string Translate(const char* psz)
 static void handleRunawayException(std::exception *e)
 {
     PrintExceptionContinue(e, "Runaway exception");
-    QMessageBox::critical(0, "Runaway exception", BitcoinGUI::tr("A fatal error occured. FoxCoin can no longer continue safely and will quit.") + QString("\n\n") + QString::fromStdString(strMiscWarning));
+    QMessageBox::critical(0, "Runaway exception", BitcoinGUI::tr("A fatal error occured. PlusEVCoin can no longer continue safely and will quit.") + QString("\n\n") + QString::fromStdString(strMiscWarning));
     exit(1);
 }
 
@@ -121,7 +121,7 @@ int main(int argc, char *argv[])
     // Do this early as we don't want to bother initializing if we are just calling IPC
     for (int i = 1; i < argc; i++)
     {
-        if (boost::algorithm::istarts_with(argv[i], "FoxCoin:"))
+        if (boost::algorithm::istarts_with(argv[i], "PlusEVCoin:"))
         {
             const char *strURI = argv[i];
             try {
@@ -169,12 +169,12 @@ int main(int argc, char *argv[])
 
     // Application identification (must be set before OptionsModel is initialized,
     // as it is used to locate QSettings)
-    app.setOrganizationName("FoxCoin");
+    app.setOrganizationName("PlusEVCoin");
     app.setOrganizationDomain("we-have-no-domain-yet.nex");
     if(GetBoolArg("-testnet")) // Separate UI settings for testnet
-        app.setApplicationName("foxcoin-qt-testnet");
+        app.setApplicationName("plusevcoin-qt-testnet");
     else
-        app.setApplicationName("FoxCoin-qt");
+        app.setApplicationName("PlusEVCoin-qt");
 
     // ... then GUI settings:
     OptionsModel optionsModel;
@@ -278,7 +278,7 @@ int main(int argc, char *argv[])
                 // Check for URI in argv
                 for (int i = 1; i < argc; i++)
                 {
-                    if (boost::algorithm::istarts_with(argv[i], "FoxCoin:"))
+                    if (boost::algorithm::istarts_with(argv[i], "PlusEVCoin:"))
                     {
                         const char *strURI = argv[i];
                         try {
@@ -299,7 +299,7 @@ int main(int argc, char *argv[])
                 window.setWalletModel(0);
                 guiref = 0;
             }
-            // Shutdown the core and it's threads, but don't exit FoxCoin-Qt here
+            // Shutdown the core and it's threads, but don't exit PlusEVCoin-Qt here
             Shutdown(NULL);
         }
         else

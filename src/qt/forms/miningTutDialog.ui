@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>How to mine FoxCoin</string>
+   <string>How to mine PlusEVCoin</string>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout_2">
    <item>
@@ -65,7 +65,7 @@
            <cursorShape>IBeamCursor</cursorShape>
           </property>
           <property name="text">
-           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;foxcoin&lt;/span&gt; version: &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;plusevcoin&lt;/span&gt; version: &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
           <property name="textInteractionFlags">
            <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
@@ -126,8 +126,8 @@ Go to help in the top left corner, and then click on 'Debug window' inside that 
 
 With GPU:
 
-Find your the RPC Username and Password in your FoxCoin.conf file in appdata (Or OSX/*nix equivalent), then, goto CG/CUDA miner
-directory and create a file called SoloMineFoxCoins.bat, right click and click edit, and enter in the following script:
+Find your the RPC Username and Password in your PlusEVCoin.conf file in appdata (Or OSX/*nix equivalent), then, goto CG/CUDA miner
+directory and create a file called SoloMinePlusEVCoins.bat, right click and click edit, and enter in the following script:
 [Yourminingprogram.exe] --scrypt -o 127.0.0.1:9919 -u [Insert RPC username here] -p [Insert RPC password here]</string>
        </property>
        <property name="textInteractionFlags">
@@ -153,15 +153,15 @@ directory and create a file called SoloMineFoxCoins.bat, right click and click e
        <property name="text">
         <string>With CPU:
 
-Download minerd, and place it in any directory. Sign up for a FoxCoin-Mining pool, they can be found in the same place where you
-downloaded FoxCoin-qt, and create a worker on the pool, the password can be x (it doesn't matter) now create a batch file (sh on
+Download minerd, and place it in any directory. Sign up for a PlusEVCoin-Mining pool, they can be found in the same place where you
+downloaded PlusEVCoin-qt, and create a worker on the pool, the password can be x (it doesn't matter) now create a batch file (sh on
 OSX) and enter in the following command minerd.exe -a scrypt -s 6 -t 16 [Your pools URL:PORT, can be found in getting started]
  -O poolusername.worker.workerpassword
 
 With GPU:
 
-Download cg/cuda miner, and place it in any directory. Sign up for a FoxCoin-Mining pool, they can be found in the same place where you
-downloaded FoxCoin-qt, and create a worker on the pool, the password can be x (it doesn't matter) now create a batch file (sh on
+Download cg/cuda miner, and place it in any directory. Sign up for a PlusEVCoin-Mining pool, they can be found in the same place where you
+downloaded PlusEVCoin-qt, and create a worker on the pool, the password can be x (it doesn't matter) now create a batch file (sh on
 OSX) and enter in the following command cg/cuda.exe --scrypt [Your pools URL:PORT, can be found in getting started]
  -O poolusername.worker.workerpassword -I 10</string>
        </property>

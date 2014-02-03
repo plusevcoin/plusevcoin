@@ -212,7 +212,7 @@ void MiningPage::minerError(QProcess::ProcessError error)
 {
     if (error == QProcess::FailedToStart)
     {
-        reportToList("Digger failed to start. Make sure you have the minerd executable and libraries in the same directory as FoxCoin-qt.", ERROR, NULL);
+        reportToList("Digger failed to start. Make sure you have the minerd executable and libraries in the same directory as PlusEVCoin-qt.", ERROR, NULL);
     }
 }
 

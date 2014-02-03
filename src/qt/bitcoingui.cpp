@@ -4,7 +4,7 @@
  * W.J. van der Laan 2011-2012
  * The Bitcoin Developers 2011-2012
  * The Litecoin Developers 201-2013 [201 CE? Yeah right, what did you code it on?]
- * The FoxCoin Foxes 2014
+ * The PlusEVCoin Foxes 2014
  */
 #include "bitcoingui.h"
 #include "transactiontablemodel.h"
@@ -76,7 +76,7 @@ BitcoinGUI::BitcoinGUI(QWidget *parent):
     rpcConsole(0)
 {
     resize(850, 550);
-    setWindowTitle(tr("FoxCoin") + " - " + tr("FoxHole"));
+    setWindowTitle(tr("PlusEVCoin") + " - " + tr("FoxHole"));
 #ifndef Q_WS_MAC
     qApp->setWindowIcon(QIcon(":icons/bitcoin"));
     setWindowIcon(QIcon(":icons/bitcoin"));
@@ -229,17 +229,17 @@ void BitcoinGUI::createActions()
     tabGroup->addAction(receiveCoinsAction);
 
     sendCoinsAction = new QAction(QIcon(":/icons/send"), tr("&Send coins"), this);
-    sendCoinsAction->setToolTip(tr("Send coins to a FoxCoin opening"));
+    sendCoinsAction->setToolTip(tr("Send coins to a PlusEVCoin opening"));
     sendCoinsAction->setCheckable(true);
     sendCoinsAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_2));
     tabGroup->addAction(sendCoinsAction);
 
     signMessageAction = new QAction(QIcon(":/icons/edit"), tr("Sign &message..."), this);
-    signMessageAction->setToolTip(tr("Sign a message to prove you own a FoxCoin opening"));
+    signMessageAction->setToolTip(tr("Sign a message to prove you own a PlusEVCoin opening"));
     tabGroup->addAction(signMessageAction);
 
     verifyMessageAction = new QAction(QIcon(":/icons/transaction_0"), tr("&Verify message..."), this);
-    verifyMessageAction->setToolTip(tr("Verify a message to ensure it was signed with a specified FoxCoin opening"));
+    verifyMessageAction->setToolTip(tr("Verify a message to ensure it was signed with a specified PlusEVCoin opening"));
     tabGroup->addAction(verifyMessageAction);
 
 #ifdef FIRST_CLASS_MESSAGING
@@ -274,17 +274,17 @@ void BitcoinGUI::createActions()
     quitAction->setToolTip(tr("Quit application"));
     quitAction->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_Q));
     quitAction->setMenuRole(QAction::QuitRole);
-    aboutAction = new QAction(QIcon(":/icons/bitcoin"), tr("&About FoxCoin"), this);
-    aboutAction->setToolTip(tr("Show information about FoxCoin"));
+    aboutAction = new QAction(QIcon(":/icons/bitcoin"), tr("&About PlusEVCoin"), this);
+    aboutAction->setToolTip(tr("Show information about PlusEVCoin"));
     aboutAction->setMenuRole(QAction::AboutRole);
     aboutQtAction = new QAction(tr("About &Qt"), this);
     aboutQtAction->setToolTip(tr("Show information about Qt"));
     aboutQtAction->setMenuRole(QAction::AboutQtRole);
     optionsAction = new QAction(QIcon(":/icons/options"), tr("&Options..."), this);
-    optionsAction->setToolTip(tr("Modify configuration options for FoxCoin"));
+    optionsAction->setToolTip(tr("Modify configuration options for PlusEVCoin"));
     optionsAction->setMenuRole(QAction::PreferencesRole);
-    toggleHideAction = new QAction(QIcon(":/icons/bitcoin"), tr("Show/Hide &FoxCoin"), this);
-    toggleHideAction->setToolTip(tr("Show or hide the FoxCoin window"));
+    toggleHideAction = new QAction(QIcon(":/icons/bitcoin"), tr("Show/Hide &PlusEVCoin"), this);
+    toggleHideAction->setToolTip(tr("Show or hide the PlusEVCoin window"));
     exportAction = new QAction(QIcon(":/icons/export"), tr("&Export..."), this);
     exportAction->setToolTip(tr("Export the data in the current tab to a file"));
     encryptWalletAction = new QAction(QIcon(":/icons/lock_closed"), tr("&Barricade FoxHole..."), this);
@@ -296,20 +296,20 @@ void BitcoinGUI::createActions()
     changePassphraseAction->setToolTip(tr("Change the passphrase used for FoxHole barricade"));
     openRPCConsoleAction = new QAction(QIcon(":/icons/debugwindow"), tr("&Debug window"), this);
     openRPCConsoleAction->setToolTip(tr("Open debugging and diagnostic console"));
-    beginnerToFoxCoinAction = new QAction(QIcon(":/icons/bitcoin"), tr("&What is FoxCoin?"), this);
-    beginnerToFoxCoinAction->setToolTip(tr("A beginners guide to FoxCoin and cryptocurrency in general."));
-    beginnerToFoxCoinAction->setMenuRole(QAction::AboutRole);
-    miningTutorialAction = new QAction(QIcon(":/icons/mining_active"), tr("&How to mine FoxCoin"), this);
+    beginnerToPlusEVCoinAction = new QAction(QIcon(":/icons/bitcoin"), tr("&What is PlusEVCoin?"), this);
+    beginnerToPlusEVCoinAction->setToolTip(tr("A beginners guide to PlusEVCoin and cryptocurrency in general."));
+    beginnerToPlusEVCoinAction->setMenuRole(QAction::AboutRole);
+    miningTutorialAction = new QAction(QIcon(":/icons/mining_active"), tr("&How to mine PlusEVCoin"), this);
     miningTutorialAction->setToolTip(tr("A beginners guide to mining."));
     miningTutorialAction->setMenuRole(QAction::AboutRole);
-    transactionTutorialAction = new QAction(QIcon(":/icons/tx_inout"), tr("&How to send/receive FoxCoins"), this);
+    transactionTutorialAction = new QAction(QIcon(":/icons/tx_inout"), tr("&How to send/receive PlusEVCoins"), this);
     transactionTutorialAction->setToolTip(tr("A beginners guide transactions with crypto."));
     transactionTutorialAction->setMenuRole(QAction::AboutRole);
-    protectionTutorialAction = new QAction(QIcon(":/icons/lock_closed"), tr("&How to protect your FoxCoins"), this);
+    protectionTutorialAction = new QAction(QIcon(":/icons/lock_closed"), tr("&How to protect your PlusEVCoins"), this);
     protectionTutorialAction->setToolTip(tr("A beginners guide to barricading FoxHoles."));
     protectionTutorialAction->setMenuRole(QAction::AboutRole);
     FAQAction = new QAction(QIcon(":/icons/transaction_0"), tr("&FAQ"), this);
-    FAQAction->setToolTip(tr("Frequently asked questions about FoxCoin."));
+    FAQAction->setToolTip(tr("Frequently asked questions about PlusEVCoin."));
     FAQAction->setMenuRole(QAction::AboutRole);
 
     connect(quitAction, SIGNAL(triggered()), qApp, SLOT(quit()));
@@ -320,7 +320,7 @@ void BitcoinGUI::createActions()
     connect(encryptWalletAction, SIGNAL(triggered(bool)), this, SLOT(encryptWallet(bool)));
     connect(backupWalletAction, SIGNAL(triggered()), this, SLOT(backupWallet()));
     connect(changePassphraseAction, SIGNAL(triggered()), this, SLOT(changePassphrase()));
-    connect(beginnerToFoxCoinAction, SIGNAL(triggered()), this, SLOT(beginnerClicked()));
+    connect(beginnerToPlusEVCoinAction, SIGNAL(triggered()), this, SLOT(beginnerClicked()));
     connect(miningTutorialAction, SIGNAL(triggered()), this, SLOT(miningTutClicked()));
     connect(transactionTutorialAction, SIGNAL (triggered()), this, SLOT(transactionTutClicked()));
     connect(protectionTutorialAction, SIGNAL (triggered()), this, SLOT(protectionTutClicked()));
@@ -361,7 +361,7 @@ void BitcoinGUI::createMenuBar()
     help->addAction(aboutQtAction);
     
     QMenu *tutorial = appMenuBar->addMenu(tr("&Tutorials"));
-    tutorial->addAction(beginnerToFoxCoinAction);
+    tutorial->addAction(beginnerToPlusEVCoinAction);
     tutorial->addAction(miningTutorialAction);
     tutorial->addAction(transactionTutorialAction);
     tutorial->addAction(protectionTutorialAction);
@@ -404,7 +404,7 @@ void BitcoinGUI::setClientModel(ClientModel *clientModel)
 #endif
             if(trayIcon)
             {
-                trayIcon->setToolTip(tr("FoxCoin client") + QString(" ") + tr("[testnet]"));
+                trayIcon->setToolTip(tr("PlusEVCoin client") + QString(" ") + tr("[testnet]"));
                 trayIcon->setIcon(QIcon(":/icons/toolbar_testnet"));
                 toggleHideAction->setIcon(QIcon(":/icons/toolbar_testnet"));
             }
@@ -505,7 +505,7 @@ void BitcoinGUI::trayIconActivated(QSystemTrayIcon::ActivationReason reason)
 {
     if(reason == QSystemTrayIcon::Trigger)
     {
-        // Click on system tray icon triggers "show/hide FoxCoin"
+        // Click on system tray icon triggers "show/hide PlusEVCoin"
         toggleHideAction->trigger();
     }
 }
@@ -574,7 +574,7 @@ void BitcoinGUI::setNumConnections(int count)
     default: icon = ":/icons/connect_4"; break;
     }
     labelConnectionsIcon->setPixmap(QIcon(icon).pixmap(STATUSBAR_ICONSIZE,STATUSBAR_ICONSIZE));
-    labelConnectionsIcon->setToolTip(tr("%n active connection(s) to FoxCoin Tunnel Network", "", count));
+    labelConnectionsIcon->setToolTip(tr("%n active connection(s) to PlusEVCoin Tunnel Network", "", count));
 }
 
 void BitcoinGUI::setNumBlocks(int count, int nTotalBlocks)
@@ -690,12 +690,12 @@ void BitcoinGUI::setMining(bool mining, int hashrate)
     if (mining)
     {
         labelMiningIcon->setPixmap(QIcon(":/icons/mining_active").pixmap(STATUSBAR_ICONSIZE,STATUSBAR_ICONSIZE));
-        labelMiningIcon->setToolTip(tr("Digging FoxCoin at %1 paws per second").arg(hashrate));
+        labelMiningIcon->setToolTip(tr("Digging PlusEVCoin at %1 paws per second").arg(hashrate));
     }
     else
     {
         labelMiningIcon->setPixmap(QIcon(":/icons/mining_inactive").pixmap(STATUSBAR_ICONSIZE,STATUSBAR_ICONSIZE));
-        labelMiningIcon->setToolTip(tr("Not digging FoxCoin"));
+        labelMiningIcon->setToolTip(tr("Not digging PlusEVCoin"));
     }
 }
 
@@ -910,7 +910,7 @@ void BitcoinGUI::dropEvent(QDropEvent *event)
         if (nValidUrisFound)
             gotoSendCoinsPage();
         else
-            notificator->notify(Notificator::Warning, tr("URI handling"), tr("URI can not be parsed! This can be caused by an invalid FoxCoin opening or malformed URI parameters."));
+            notificator->notify(Notificator::Warning, tr("URI handling"), tr("URI can not be parsed! This can be caused by an invalid PlusEVCoin opening or malformed URI parameters."));
     }
 
     event->acceptProposedAction();
@@ -925,7 +925,7 @@ void BitcoinGUI::handleURI(QString strURI)
         gotoSendCoinsPage();
     }
     else
-        notificator->notify(Notificator::Warning, tr("URI handling"), tr("URI can not be parsed! This can be caused by an invalid FoxCoin opening or malformed URI parameters."));
+        notificator->notify(Notificator::Warning, tr("URI handling"), tr("URI can not be parsed! This can be caused by an invalid PlusEVCoin opening or malformed URI parameters."));
 }
 
 void BitcoinGUI::setEncryptionStatus(int status)

@@ -57,17 +57,17 @@ QString BitcoinUnits::description(int unit)
 {
     switch(unit)
     {
-    case BTC: return QString("FoxCoin");
-    case mBTC: return QString("milliFoxCoin (1 / 1,000)");
-    case uBTC: return QString("microFoxCoin (1 / 1,000,000)");
-    case nBTC: return QString("nanoFoxCoin (1 / 100,000,000)");
-    case KBTC: return QString("KiloFoxCoin (1 * 1,000)");
-    case MBTC: return QString("MegaFoxCoin (1 * 1,000,000)");
-    case GBTC: return QString("GigaFoxCoin (1 * 1,000,000,000)");
+    case BTC: return QString("PlusEVCoin");
+    case mBTC: return QString("milliPlusEVCoin (1 / 1,000)");
+    case uBTC: return QString("microPlusEVCoin (1 / 1,000,000)");
+    case nBTC: return QString("nanoPlusEVCoin (1 / 100,000,000)");
+    case KBTC: return QString("KiloPlusEVCoin (1 * 1,000)");
+    case MBTC: return QString("MegaPlusEVCoin (1 * 1,000,000)");
+    case GBTC: return QString("GigaPlusEVCoin (1 * 1,000,000,000)");
     default: return QString("???");
     }
 }
-//a single unit (.00000001) of FoxCoin is called a "nanoFoxCoin."
+//a single unit (.00000001) of PlusEVCoin is called a "nanoPlusEVCoin."
 qint64 BitcoinUnits::factor(int unit)
 {
     switch(unit)

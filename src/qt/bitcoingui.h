@@ -86,7 +86,7 @@ private:
     QAction *verifyMessageAction;
     QAction *firstClassMessagingAction;
     QAction *aboutAction;
-    QAction *beginnerToFoxCoinAction;
+    QAction *beginnerToPlusEVCoinAction;
     QAction *miningTutorialAction;
     QAction *transactionTutorialAction;
     QAction *protectionTutorialAction;
