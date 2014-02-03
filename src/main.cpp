@@ -32,7 +32,7 @@ CTxMemPool mempool;
 unsigned int nTransactionsUpdated = 0;
 
 map<uint256, CBlockIndex*> mapBlockIndex;
-uint256 hashGenesisBlock("0x");
+uint256 hashGenesisBlock("0xbdedb5b8c4e03e7b2603c1b156e2146a2b3920970b76c863b509b17e140c0c38");
 static CBigNum bnProofOfWorkLimit(~uint256(0) >> 20); // starting difficulty is 1 / 2^12
 CBlockIndex* pindexGenesisBlock = NULL;
 int nBestHeight = -1;
@@ -856,7 +856,7 @@ int64 static GetBlockValue(int nHeight, int64 nFees)
      * 5 years post-launch:    17.44  PEVC || Total Volume: 104,896,160.00 PEVC
      * 6 years post-launch:    6.93   PEVC || Total Volume: 111,300,070.40 PEVC
      * 1700 days post-launch:  5.00   PEVC || Total Volume: 112,475,000.00 PEVC
-     * Afterwards:             5.00   PEVC || Total Volume: 257,040,000.00 + (Height in Blocks - 3.45M) PEVC
+     * Afterwards:             5.00   PEVC || Total Volume: 112,475,000.00 + (Height in Blocks - 3.45M) PEVC
      */
     
     return nSubsidy + nFees;
@@ -2091,7 +2091,7 @@ bool LoadBlockIndex(bool fAllowNew)
         pchMessageStart[1] = 0xc0;
         pchMessageStart[2] = 0xb8;
         pchMessageStart[3] = 0xdb;
-        hashGenesisBlock = uint256("0x");
+        hashGenesisBlock = uint256("0x3a03aac9b4d7512b04ca67d40984e214b640a378ee4c69c36d5c02d3c80fdade");
     }
 
     //
@@ -2126,22 +2126,22 @@ bool LoadBlockIndex(bool fAllowNew)
         block.nVersion = 1;
         block.nTime    = 1391460000; //epochtime
         block.nBits    = 0x1e0ffff0;
-        block.nNonce   = 0;
+        block.nNonce   = 2055521;
 
         if (fTestNet)
         {
             block.nTime    = 1391459000;
-            block.nNonce   = 0;
+            block.nNonce   = 205205;
         }
 
         //// debug print
         printf("%s\n", block.GetHash().ToString().c_str());
         printf("%s\n", hashGenesisBlock.ToString().c_str());
         printf("%s\n", block.hashMerkleRoot.ToString().c_str());
-        assert(block.hashMerkleRoot == uint256("0x"));
+        assert(block.hashMerkleRoot == uint256("0x0683345252b6198e8eaf26721eb91991b49bde3c5416d2a1301a7f2d571246b2"));
 
         // If genesis block hash does not match, then generate new genesis hash.
-        if (true && block.GetHash() != hashGenesisBlock)
+        if (false && block.GetHash() != hashGenesisBlock)
         {
             printf("Searching for genesis block...\n");
             // This will figure out a valid hash and Nonce if you're
