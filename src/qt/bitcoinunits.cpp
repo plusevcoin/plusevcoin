@@ -14,10 +14,6 @@ QList<BitcoinUnits::Unit> BitcoinUnits::availableUnits()
     unitlist.append(PEVC);
     unitlist.append(mPEVC);
     unitlist.append(uPEVC);
-    unitlist.append(nPEVC);
-    unitlist.append(KPEVC);
-    unitlist.append(MPEVC);
-    unitlist.append(GPEVC);
     return unitlist;
 }
 
@@ -28,10 +24,6 @@ bool BitcoinUnits::valid(int unit)
     case PEVC:
     case mPEVC:
     case uPEVC:
-    case nPEVC:
-    case KPEVC:
-    case MPEVC:
-    case GPEVC:
         return true;
     default:
         return false;
@@ -45,10 +37,6 @@ QString BitcoinUnits::name(int unit)
     case PEVC: return QString("PEVC");
     case mPEVC: return QString("mPEVC");
     case uPEVC: return QString::fromUtf8("μPEVC");
-    case nPEVC: return QString("nPEVC");
-    case KPEVC: return QString("KPEVC");
-    case MPEVC: return QString("MPEVC");
-    case GPEVC: return QString("GPEVC");
     default: return QString("???");
     }
 }
@@ -60,10 +48,6 @@ QString BitcoinUnits::description(int unit)
     case PEVC: return QString("PlusEVCoin");
     case mPEVC: return QString("milliPEVCoin (1 / 1,000)");
     case uPEVC: return QString("microPEVCoin (1 / 1,000,000)");
-    case nPEVC: return QString("nanoPEVCoin (1 / 100,000,000)");
-    case KPEVC: return QString("KiloPEVCoin (1 * 1,000)");
-    case MPEVC: return QString("MegaPEVCoin (1 * 1,000,000)");
-    case GPEVC: return QString("GigaPEVCoin (1 * 1,000,000,000)");
     default: return QString("???");
     }
 }
@@ -75,10 +59,6 @@ qint64 BitcoinUnits::factor(int unit)
     case PEVC:  return 100000000;
     case mPEVC: return 100000;
     case uPEVC: return 100;
-    case nPEVC: return 1;
-    case KPEVC: return 100000000000;
-    case MPEVC: return 100000000000000;
-    case GPEVC: return 100000000000000000;
     default:   return 100000000;
     }
 }
@@ -90,10 +70,6 @@ int BitcoinUnits::amountDigits(int unit)
     case PEVC: return 11; // 1,000,000,000 (# digits, without commas)
     case mPEVC: return 13; // 1,000,000,000,000
     case uPEVC: return 16; // 1,000,000,000,000,000
-    case nPEVC: return 18; // 100,000,000,000,000,000 
-    case KPEVC: return 7; // 1,000,000
-    case MPEVC: return 4; // 1,000
-    case GPEVC: return 1; // 1
     default: return 0;
     }
 }
@@ -105,10 +81,6 @@ int BitcoinUnits::decimals(int unit)
     case PEVC: return 8;
     case mPEVC: return 5;
     case uPEVC: return 2;
-    case nPEVC: return 0;
-    case KPEVC: return 11;
-    case MPEVC: return 14;
-    case GPEVC: return 17;
     default: return 0;
     }
 }
