@@ -286,7 +286,7 @@ bool WalletModel::changePassphrase(const SecureString &oldPass, const SecureStri
     bool retval;
     {
         LOCK(wallet->cs_wallet);
-        wallet->Lock(); // Make sure FoxHole is locked before attempting pass change
+        wallet->Lock(); // Make sure Wallet is locked before attempting pass change
         retval = wallet->ChangeWalletPassphrase(oldPass, newPass);
     }
     return retval;

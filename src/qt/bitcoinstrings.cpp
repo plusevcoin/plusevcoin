@@ -25,7 +25,7 @@ QT_TRANSLATE_NOOP("bitcoin-core", ""
 "Detach block and opening databases. Increases shutdown time (default: 0)"),
 QT_TRANSLATE_NOOP("bitcoin-core", ""
 "Error: The transaction was rejected.  This might happen if some of the coins "
-"in your FoxHole were already spent, such as if you used a copy of foxhole.dat "
+"in your Wallet were already spent, such as if you used a copy of wallet.dat "
 "and coins were spent in the copy but not marked as spent here."),
 QT_TRANSLATE_NOOP("bitcoin-core", ""
 "Error: This transaction requires a transaction fee of at least %s because of "
@@ -61,7 +61,7 @@ QT_TRANSLATE_NOOP("bitcoin-core", "An error occured while setting up the RPC por
 QT_TRANSLATE_NOOP("bitcoin-core", "Bind to given opening. Use [host]:port notation for IPv6"),
 QT_TRANSLATE_NOOP("bitcoin-core", "PlusEVCoin version"),
 QT_TRANSLATE_NOOP("bitcoin-core", "PlusEVCoin"),
-QT_TRANSLATE_NOOP("bitcoin-core", "Cannot downgrade FoxHole"),
+QT_TRANSLATE_NOOP("bitcoin-core", "Cannot downgrade Wallet"),
 QT_TRANSLATE_NOOP("bitcoin-core", "Cannot initialize keypool"),
 QT_TRANSLATE_NOOP("bitcoin-core", "Cannot resolve -bind address: '%s'"),
 QT_TRANSLATE_NOOP("bitcoin-core", "Cannot resolve -externalip address: '%s'"),
@@ -73,12 +73,12 @@ QT_TRANSLATE_NOOP("bitcoin-core", "Discover own IP address (default: 1 when list
 QT_TRANSLATE_NOOP("bitcoin-core", "Don't generate coins"),
 QT_TRANSLATE_NOOP("bitcoin-core", "Done loading"),
 QT_TRANSLATE_NOOP("bitcoin-core", "Error loading blkindex.dat"),
-QT_TRANSLATE_NOOP("bitcoin-core", "Error loading foxhole.dat"),
-QT_TRANSLATE_NOOP("bitcoin-core", "Error loading foxhole.dat: FoxHole corrupted"),
-QT_TRANSLATE_NOOP("bitcoin-core", "Error loading foxhole.dat: FoxHole requires newer version of PlusEVCoin"),
+QT_TRANSLATE_NOOP("bitcoin-core", "Error loading wallet.dat"),
+QT_TRANSLATE_NOOP("bitcoin-core", "Error loading wallet.dat: Wallet corrupted"),
+QT_TRANSLATE_NOOP("bitcoin-core", "Error loading wallet.dat: Wallet requires newer version of PlusEVCoin"),
 QT_TRANSLATE_NOOP("bitcoin-core", "Error"),
 QT_TRANSLATE_NOOP("bitcoin-core", "Error: Transaction creation failed  "),
-QT_TRANSLATE_NOOP("bitcoin-core", "Error: FoxHole barricaded, unable to create transaction  "),
+QT_TRANSLATE_NOOP("bitcoin-core", "Error: Wallet barricaded, unable to create transaction  "),
 QT_TRANSLATE_NOOP("bitcoin-core", "Error: could not start node"),
 QT_TRANSLATE_NOOP("bitcoin-core", "Failed to listen on any port. Use -listen=0 if you want this."),
 QT_TRANSLATE_NOOP("bitcoin-core", "Fee per KB to add to transactions you send"),
@@ -134,7 +134,7 @@ QT_TRANSLATE_NOOP("bitcoin-core", "To use the %s option"),
 QT_TRANSLATE_NOOP("bitcoin-core", "Unable to bind to %s on this computer (bind returned error %d, %s)"),
 QT_TRANSLATE_NOOP("bitcoin-core", "Unknown -socks proxy version requested: %i"),
 QT_TRANSLATE_NOOP("bitcoin-core", "Unknown network specified in -onlynet: '%s'"),
-QT_TRANSLATE_NOOP("bitcoin-core", "Upgrade FoxHole to latest format"),
+QT_TRANSLATE_NOOP("bitcoin-core", "Upgrade Wallet to latest format"),
 QT_TRANSLATE_NOOP("bitcoin-core", "Usage:"),
 QT_TRANSLATE_NOOP("bitcoin-core", "Use OpenSSL (https) for JSON-RPC connections"),
 QT_TRANSLATE_NOOP("bitcoin-core", "Use UPnP to map the listening port (default: 0)"),
@@ -142,7 +142,7 @@ QT_TRANSLATE_NOOP("bitcoin-core", "Use UPnP to map the listening port (default: 
 QT_TRANSLATE_NOOP("bitcoin-core", "Use proxy to reach tor hidden services (default: same as -proxy)"),
 QT_TRANSLATE_NOOP("bitcoin-core", "Use the test network"),
 QT_TRANSLATE_NOOP("bitcoin-core", "Username for JSON-RPC connections"),
-QT_TRANSLATE_NOOP("bitcoin-core", "FoxHole needed to be rewritten: restart PlusEVCoin to complete"),
+QT_TRANSLATE_NOOP("bitcoin-core", "Wallet needed to be rewritten: restart PlusEVCoin to complete"),
 QT_TRANSLATE_NOOP("bitcoin-core", "Warning: Disk space is low"),
 QT_TRANSLATE_NOOP("bitcoin-core", "Warning: this version is obsolete, upgrade required"),
 };

@@ -35,7 +35,7 @@ public:
 
     void Init();
 
-    /* Migrate settings from foxhole.dat after app initialization */
+    /* Migrate settings from wallet.dat after app initialization */
     bool Upgrade(); /* returns true if settings upgraded */
 
     int rowCount(const QModelIndex & parent = QModelIndex()) const;

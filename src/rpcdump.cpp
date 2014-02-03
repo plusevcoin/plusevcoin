@@ -61,7 +61,7 @@ Value importprivkey(const Array& params, bool fHelp)
         pwalletMain->SetAddressBookName(vchAddress, strLabel);
 
         if (!pwalletMain->AddKey(key))
-            throw JSONRPCError(-4,"Error adding key to FoxHole");
+            throw JSONRPCError(-4,"Error adding key to Wallet");
 
         pwalletMain->ScanForWalletTransactions(pindexGenesisBlock, true);
         pwalletMain->ReacceptWalletTransactions();

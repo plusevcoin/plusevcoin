@@ -272,9 +272,9 @@ std::string HelpMessage()
         "  -rpcallowip=<ip>       " + _("Allow JSON-RPC connections from specified IP address") + "\n" +
         "  -rpcconnect=<ip>       " + _("Send commands to node running on <ip> (default: 127.0.0.1)") + "\n" +
         "  -blocknotify=<cmd>     " + _("Execute command when the best block changes (%s in cmd is replaced by block hash)") + "\n" +
-        "  -upgradewallet         " + _("Upgrade FoxHole to latest format") + "\n" +
+        "  -upgradewallet         " + _("Upgrade Wallet to latest format") + "\n" +
         "  -keypool=<n>           " + _("Set key pool size to <n> (default: 100)") + "\n" +
-        "  -rescan                " + _("Rescan the block chain for missing FoxHole transactions") + "\n" +
+        "  -rescan                " + _("Rescan the block chain for missing Wallet transactions") + "\n" +
         "  -checkblocks=<n>       " + _("How many blocks to check at startup (default: 2500, 0 = all)") + "\n" +
         "  -checklevel=<n>        " + _("How thorough the block verification is (0-6, default: 1)") + "\n" +
         "  -loadblock=<file>      " + _("Imports blocks from external blk000?.dat file") + "\n" +
@@ -648,26 +648,26 @@ bool AppInit2()
 
     // ********************************************************* Step 7: load wallet
 
-    uiInterface.InitMessage(_("Loading FoxHole..."));
-    printf("Loading FoxHole...\n");
+    uiInterface.InitMessage(_("Loading Wallet..."));
+    printf("Loading Wallet...\n");
     nStart = GetTimeMillis();
     bool fFirstRun;
-    pwalletMain = new CWallet("foxhole.dat");
+    pwalletMain = new CWallet("wallet.dat");
     int nLoadWalletRet = pwalletMain->LoadWallet(fFirstRun);
     if (nLoadWalletRet != DB_LOAD_OK)
     {
         if (nLoadWalletRet == DB_CORRUPT)
-            strErrors << _("Error loading foxhole.dat: FoxHole corrupted") << "\n";
+            strErrors << _("Error loading wallet.dat: Wallet corrupted") << "\n";
         else if (nLoadWalletRet == DB_TOO_NEW)
-            strErrors << _("Error loading foxhole.dat: Wallet requires newer version of PlusEVCoin") << "\n";
+            strErrors << _("Error loading wallet.dat: Wallet requires newer version of PlusEVCoin") << "\n";
         else if (nLoadWalletRet == DB_NEED_REWRITE)
         {
-            strErrors << _("FoxHole needed to be rewritten: restart PlusEVCoin to complete") << "\n";
+            strErrors << _("Wallet needed to be rewritten: restart PlusEVCoin to complete") << "\n";
             printf("%s", strErrors.str().c_str());
             return InitError(strErrors.str());
         }
         else
-            strErrors << _("Error loading foxhole.dat") << "\n";
+            strErrors << _("Error loading wallet.dat") << "\n";
     }
 
     if (GetBoolArg("-upgradewallet", fFirstRun))
@@ -675,14 +675,14 @@ bool AppInit2()
         int nMaxVersion = GetArg("-upgradewallet", 0);
         if (nMaxVersion == 0) // the -upgradewallet without argument case
         {
-            printf("Performing foxhole upgrade to %i\n", FEATURE_LATEST);
+            printf("Performing wallet upgrade to %i\n", FEATURE_LATEST);
             nMaxVersion = CLIENT_VERSION;
-            pwalletMain->SetMinVersion(FEATURE_LATEST); // permanently upgrade the FoxHole immediately
+            pwalletMain->SetMinVersion(FEATURE_LATEST); // permanently upgrade the Wallet immediately
         }
         else
-            printf("Allowing foxhole upgrade up to %i\n", nMaxVersion);
+            printf("Allowing wallet upgrade up to %i\n", nMaxVersion);
         if (nMaxVersion < pwalletMain->GetVersion())
-            strErrors << _("Cannot downgrade foxhole") << "\n";
+            strErrors << _("Cannot downgrade wallet") << "\n";
         pwalletMain->SetMaxVersion(nMaxVersion);
     }
 
@@ -700,7 +700,7 @@ bool AppInit2()
     }
 
     printf("%s", strErrors.str().c_str());
-    printf(" FoxHole      %15"PRI64d"ms\n", GetTimeMillis() - nStart);
+    printf(" Wallet      %15"PRI64d"ms\n", GetTimeMillis() - nStart);
 
     RegisterWallet(pwalletMain);
 
@@ -709,7 +709,7 @@ bool AppInit2()
         pindexRescan = pindexGenesisBlock;
     else
     {
-        CWalletDB walletdb("foxhole.dat");
+        CWalletDB walletdb("wallet.dat");
         CBlockLocator locator;
         if (walletdb.ReadBestBlock(locator))
             pindexRescan = locator.GetBlockIndex();

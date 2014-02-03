@@ -76,7 +76,7 @@ BitcoinGUI::BitcoinGUI(QWidget *parent):
     rpcConsole(0)
 {
     resize(850, 550);
-    setWindowTitle(tr("PlusEVCoin") + " - " + tr("FoxHole"));
+    setWindowTitle(tr("PlusEVCoin") + " - " + tr("Wallet"));
 #ifndef Q_WS_MAC
     qApp->setWindowIcon(QIcon(":icons/bitcoin"));
     setWindowIcon(QIcon(":icons/bitcoin"));
@@ -200,7 +200,7 @@ void BitcoinGUI::createActions()
     QActionGroup *tabGroup = new QActionGroup(this);
 
     overviewAction = new QAction(QIcon(":/icons/overview"), tr("&FoxDen"), this);
-    overviewAction->setToolTip(tr("Show general overview of your FoxHole"));
+    overviewAction->setToolTip(tr("Show general overview of your Wallet"));
     overviewAction->setCheckable(true);
     overviewAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_1));
     tabGroup->addAction(overviewAction);
@@ -287,13 +287,13 @@ void BitcoinGUI::createActions()
     toggleHideAction->setToolTip(tr("Show or hide the PlusEVCoin window"));
     exportAction = new QAction(QIcon(":/icons/export"), tr("&Export..."), this);
     exportAction->setToolTip(tr("Export the data in the current tab to a file"));
-    encryptWalletAction = new QAction(QIcon(":/icons/lock_closed"), tr("&Barricade FoxHole..."), this);
-    encryptWalletAction->setToolTip(tr("Barricade or de-barricade FoxHole"));
+    encryptWalletAction = new QAction(QIcon(":/icons/lock_closed"), tr("&Barricade Wallet..."), this);
+    encryptWalletAction->setToolTip(tr("Barricade or de-barricade Wallet"));
     encryptWalletAction->setCheckable(true);
-    backupWalletAction = new QAction(QIcon(":/icons/filesave"), tr("&Backup FoxHole..."), this);
-    backupWalletAction->setToolTip(tr("Backup FoxHole to another location"));
+    backupWalletAction = new QAction(QIcon(":/icons/filesave"), tr("&Backup Wallet..."), this);
+    backupWalletAction->setToolTip(tr("Backup Wallet to another location"));
     changePassphraseAction = new QAction(QIcon(":/icons/key"), tr("&Reinforce Barricade..."), this);
-    changePassphraseAction->setToolTip(tr("Change the passphrase used for FoxHole barricade"));
+    changePassphraseAction->setToolTip(tr("Change the passphrase used for Wallet barricade"));
     openRPCConsoleAction = new QAction(QIcon(":/icons/debugwindow"), tr("&Debug window"), this);
     openRPCConsoleAction->setToolTip(tr("Open debugging and diagnostic console"));
     beginnerToPlusEVCoinAction = new QAction(QIcon(":/icons/bitcoin"), tr("&What is PlusEVCoin?"), this);
@@ -306,7 +306,7 @@ void BitcoinGUI::createActions()
     transactionTutorialAction->setToolTip(tr("A beginners guide transactions with crypto."));
     transactionTutorialAction->setMenuRole(QAction::AboutRole);
     protectionTutorialAction = new QAction(QIcon(":/icons/lock_closed"), tr("&How to protect your PlusEVCoins"), this);
-    protectionTutorialAction->setToolTip(tr("A beginners guide to barricading FoxHoles."));
+    protectionTutorialAction->setToolTip(tr("A beginners guide to barricading Wallets."));
     protectionTutorialAction->setMenuRole(QAction::AboutRole);
     FAQAction = new QAction(QIcon(":/icons/transaction_0"), tr("&FAQ"), this);
     FAQAction->setToolTip(tr("Frequently asked questions about PlusEVCoin."));
@@ -468,7 +468,7 @@ void BitcoinGUI::createTrayIcon()
     trayIcon = new QSystemTrayIcon(this);
     trayIconMenu = new QMenu(this);
     trayIcon->setContextMenu(trayIconMenu);
-    trayIcon->setToolTip(tr("FoxHole client"));
+    trayIcon->setToolTip(tr("Wallet client"));
     trayIcon->setIcon(QIcon(":/icons/toolbar"));
     connect(trayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)),
             this, SLOT(trayIconActivated(QSystemTrayIcon::ActivationReason)));
@@ -949,7 +949,7 @@ void BitcoinGUI::setEncryptionStatus(int status)
     case WalletModel::Locked:
         labelEncryptionIcon->show();
         labelEncryptionIcon->setPixmap(QIcon(":/icons/lock_closed").pixmap(STATUSBAR_ICONSIZE,STATUSBAR_ICONSIZE));
-        labelEncryptionIcon->setToolTip(tr("FoxHole is <b>barricaded</b> and currently <b>locked</b>"));
+        labelEncryptionIcon->setToolTip(tr("Wallet is <b>barricaded</b> and currently <b>locked</b>"));
         encryptWalletAction->setChecked(true);
         changePassphraseAction->setEnabled(true);
         encryptWalletAction->setEnabled(false); // TODO: decrypt currently not supported
@@ -972,10 +972,10 @@ void BitcoinGUI::encryptWallet(bool status)
 void BitcoinGUI::backupWallet()
 {
     QString saveDir = QDesktopServices::storageLocation(QDesktopServices::DocumentsLocation);
-    QString filename = QFileDialog::getSaveFileName(this, tr("Backup FoxHole"), saveDir, tr("FoxHole Data (*.dat)"));
+    QString filename = QFileDialog::getSaveFileName(this, tr("Backup Wallet"), saveDir, tr("Wallet Data (*.dat)"));
     if(!filename.isEmpty()) {
         if(!walletModel->backupWallet(filename)) {
-            QMessageBox::warning(this, tr("Backup Failed"), tr("There was an error trying to save the FoxHole data to the new location."));
+            QMessageBox::warning(this, tr("Backup Failed"), tr("There was an error trying to save the Wallet data to the new location."));
         }
     }
 }

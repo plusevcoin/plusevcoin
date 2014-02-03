@@ -20,7 +20,7 @@ public:
         Encrypt,    /**< Ask passphrase twice and encrypt */
         Unlock,     /**< Ask passphrase and unlock */
         ChangePass, /**< Ask old passphrase + new passphrase twice */
-        Decrypt     /**< Ask passphrase and decrypt FoxHole */
+        Decrypt     /**< Ask passphrase and decrypt Wallet */
     };
 
     explicit AskPassphraseDialog(Mode mode, QWidget *parent = 0);

@@ -96,7 +96,7 @@ bool static IsFromMe(CTransaction& tx)
     return false;
 }
 
-// get the FoxHole transaction with the given hash (if it exists)
+// get the Wallet transaction with the given hash (if it exists)
 bool static GetTransaction(const uint256& hashTx, CWalletTx& wtx)
 {
     BOOST_FOREACH(CWallet* pwallet, setpwalletRegistered)
@@ -105,7 +105,7 @@ bool static GetTransaction(const uint256& hashTx, CWalletTx& wtx)
     return false;
 }
 
-// erases transaction with the given hash from all FoxHoles
+// erases transaction with the given hash from all Wallets
 void static EraseFromWallets(uint256 hash)
 {
     BOOST_FOREACH(CWallet* pwallet, setpwalletRegistered)
@@ -119,7 +119,7 @@ void SyncWithWallets(const CTransaction& tx, const CBlock* pblock, bool fUpdate)
         pwallet->AddToWalletIfInvolvingMe(tx, pblock, fUpdate);
 }
 
-// notify FoxHoles about a new best chain
+// notify Wallets about a new best chain
 void static SetBestChain(const CBlockLocator& loc)
 {
     BOOST_FOREACH(CWallet* pwallet, setpwalletRegistered)

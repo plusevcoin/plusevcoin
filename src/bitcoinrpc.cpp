@@ -166,7 +166,7 @@ std::string
 HelpRequiringPassphrase()
 {
     return pwalletMain->IsCrypted()
-        ? "\nrequires FoxHole passphrase to be set with FoxHolepassphrase first"
+        ? "\nrequires Wallet passphrase to be set with Walletpassphrase first"
         : "";
 }
 
@@ -174,7 +174,7 @@ void
 EnsureWalletIsUnlocked()
 {
     if (pwalletMain->IsLocked())
-        throw JSONRPCError(-13, "Error: Please enter the FoxHole passphrase with FoxHolepassphrase first.");
+        throw JSONRPCError(-13, "Error: Please enter the Wallet passphrase with Walletpassphrase first.");
 }
 
 void WalletTxToJSON(const CWalletTx& wtx, Object& entry)
@@ -923,7 +923,7 @@ Value movecmd(const Array& params, bool fHelp)
     if (fHelp || params.size() < 3 || params.size() > 5)
         throw runtime_error(
             "move <fromaccount> <toaccount> <amount> [minconf=1] [comment]\n"
-            "Move from one account in your FoxHole to another.");
+            "Move from one account in your Wallet to another.");
 
     string strFrom = AccountFromValue(params[0]);
     string strTo = AccountFromValue(params[1]);
@@ -1075,7 +1075,7 @@ Value addmultisigaddress(const Array& params, bool fHelp)
     if (fHelp || params.size() < 2 || params.size() > 3)
     {
         string msg = "addmultisigaddress <nrequired> <'[\"key\",\"key\"]'> [account]\n"
-            "Add a nrequired-to-sign multisignature address to the FoxHole\"\n"
+            "Add a nrequired-to-sign multisignature address to the Wallet\"\n"
             "each key is a PlusEVCoin Opening or hex-encoded public key\n"
             "If [account] is specified, assign address to [account].";
         throw runtime_error(msg);
@@ -1554,14 +1554,14 @@ Value gettransaction(const Array& params, bool fHelp)
     if (fHelp || params.size() != 1)
         throw runtime_error(
             "gettransaction <txid>\n"
-            "Get detailed information about in-FoxHole transaction <txid>");
+            "Get detailed information about in-Wallet transaction <txid>");
 
     uint256 hash;
     hash.SetHex(params[0].get_str());
 
     Object entry;
     if (!pwalletMain->mapWallet.count(hash))
-        throw JSONRPCError(-5, "Invalid or non-FoxHole transaction id");
+        throw JSONRPCError(-5, "Invalid or non-Wallet transaction id");
     const CWalletTx& wtx = pwalletMain->mapWallet[hash];
 
     int64 nCredit = wtx.GetCredit();
@@ -1588,7 +1588,7 @@ Value backupwallet(const Array& params, bool fHelp)
     if (fHelp || params.size() != 1)
         throw runtime_error(
             "backupwallet <destination>\n"
-            "Safely copies foxhole.dat to destination, which can be a directory or a path with filename.");
+            "Safely copies wallet.dat to destination, which can be a directory or a path with filename.");
 
     string strDest = params[0].get_str();
     BackupWallet(*pwalletMain, strDest);
@@ -1672,15 +1672,15 @@ Value walletpassphrase(const Array& params, bool fHelp)
 {
     if (pwalletMain->IsCrypted() && (fHelp || params.size() != 2))
         throw runtime_error(
-            "foxholepassphrase <passphrase> <timeout>\n"
-            "Stores the FoxHole decryption key in memory for <timeout> seconds.");
+            "walletpassphrase <passphrase> <timeout>\n"
+            "Stores the Wallet decryption key in memory for <timeout> seconds.");
     if (fHelp)
         return true;
     if (!pwalletMain->IsCrypted())
-        throw JSONRPCError(-15, "Error: running with an unbarricaded FoxHole, but walletpassphrase was called.");
+        throw JSONRPCError(-15, "Error: running with an unbarricaded Wallet, but walletpassphrase was called.");
 
     if (!pwalletMain->IsLocked())
-        throw JSONRPCError(-17, "Error: FoxHole is already unlocked.");
+        throw JSONRPCError(-17, "Error: Wallet is already unlocked.");
 
     // Note that the walletpassphrase is stored in params[0] which is not mlock()ed
     SecureString strWalletPass;
@@ -1692,12 +1692,12 @@ Value walletpassphrase(const Array& params, bool fHelp)
     if (strWalletPass.length() > 0)
     {
         if (!pwalletMain->Unlock(strWalletPass))
-            throw JSONRPCError(-14, "Error: The FoxHole passphrase entered was incorrect.");
+            throw JSONRPCError(-14, "Error: The Wallet passphrase entered was incorrect.");
     }
     else
         throw runtime_error(
-            "FoxHolepassphrase <passphrase> <timeout>\n"
-            "Stores the FoxHole decryption key in memory for <timeout> seconds.");
+            "Walletpassphrase <passphrase> <timeout>\n"
+            "Stores the Wallet decryption key in memory for <timeout> seconds.");
 
     CreateThread(ThreadTopUpKeyPool, NULL);
     int64* pnSleepTime = new int64(params[1].get_int64());
@@ -1712,11 +1712,11 @@ Value walletpassphrasechange(const Array& params, bool fHelp)
     if (pwalletMain->IsCrypted() && (fHelp || params.size() != 2))
         throw runtime_error(
             "walletpassphrasechange <oldpassphrase> <newpassphrase>\n"
-            "Changes the FoxHole passphrase from <oldpassphrase> to <newpassphrase>.");
+            "Changes the Wallet passphrase from <oldpassphrase> to <newpassphrase>.");
     if (fHelp)
         return true;
     if (!pwalletMain->IsCrypted())
-        throw JSONRPCError(-15, "Error: running with an unbarricaded FoxHole, but FoxHolepassphrasechange was called.");
+        throw JSONRPCError(-15, "Error: running with an unbarricaded Wallet, but Walletpassphrasechange was called.");
 
     // TODO: get rid of these .c_str() calls by implementing SecureString::operator=(std::string)
     // Alternately, find a way to make params[0] mlock()'d to begin with.
@@ -1730,11 +1730,11 @@ Value walletpassphrasechange(const Array& params, bool fHelp)
 
     if (strOldWalletPass.length() < 1 || strNewWalletPass.length() < 1)
         throw runtime_error(
-            "FoxHolepassphrasechange <oldpassphrase> <newpassphrase>\n"
-            "Changes the FoxHole passphrase from <oldpassphrase> to <newpassphrase>.");
+            "Walletpassphrasechange <oldpassphrase> <newpassphrase>\n"
+            "Changes the Wallet passphrase from <oldpassphrase> to <newpassphrase>.");
 
     if (!pwalletMain->ChangeWalletPassphrase(strOldWalletPass, strNewWalletPass))
-        throw JSONRPCError(-14, "Error: The FoxHole passphrase entered was incorrect.");
+        throw JSONRPCError(-14, "Error: The Wallet passphrase entered was incorrect.");
 
     return Value::null;
 }
@@ -1745,13 +1745,13 @@ Value walletlock(const Array& params, bool fHelp)
     if (pwalletMain->IsCrypted() && (fHelp || params.size() != 0))
         throw runtime_error(
             "walletlock\n"
-            "Removes the FoxHole barricade key from memory, locking the FoxHole.\n"
-            "After calling this method, you will need to call FoxHolepassphrase again\n"
-            "before being able to call any methods which require the FoxHole to be unlocked.");
+            "Removes the Wallet barricade key from memory, locking the Wallet.\n"
+            "After calling this method, you will need to call Walletpassphrase again\n"
+            "before being able to call any methods which require the Wallet to be unlocked.");
     if (fHelp)
         return true;
     if (!pwalletMain->IsCrypted())
-        throw JSONRPCError(-15, "Error: running with an unbarricaded FoxHole, but walletlock was called.");
+        throw JSONRPCError(-15, "Error: running with an unbarricaded Wallet, but walletlock was called.");
 
     {
         LOCK(cs_nWalletUnlockTime);
@@ -1767,12 +1767,12 @@ Value encryptwallet(const Array& params, bool fHelp)
 {
     if (!pwalletMain->IsCrypted() && (fHelp || params.size() != 1))
         throw runtime_error(
-            "encryptFoxHole <passphrase>\n"
-            "barricades the FoxHole with <passphrase>.");
+            "encryptWallet <passphrase>\n"
+            "barricades the Wallet with <passphrase>.");
     if (fHelp)
         return true;
     if (pwalletMain->IsCrypted())
-        throw JSONRPCError(-15, "Error: running with an barricaded FoxHole, but encryptwallet was called.");
+        throw JSONRPCError(-15, "Error: running with an barricaded Wallet, but encryptwallet was called.");
 
     // TODO: get rid of this .c_str() by implementing SecureString::operator=(std::string)
     // Alternately, find a way to make params[0] mlock()'d to begin with.
@@ -1783,16 +1783,16 @@ Value encryptwallet(const Array& params, bool fHelp)
     if (strWalletPass.length() < 1)
         throw runtime_error(
             "encryptwallet <passphrase>\n"
-            "Barricades the FoxHole with <passphrase>.");
+            "Barricades the Wallet with <passphrase>.");
 
     if (!pwalletMain->EncryptWallet(strWalletPass))
-        throw JSONRPCError(-16, "Error: Failed to barricade the FoxHole.");
+        throw JSONRPCError(-16, "Error: Failed to barricade the Wallet.");
 
     // BDB seems to have a bad habit of writing old data into
     // slack space in .dat files; that is bad if the old data is
     // unencrypted private keys.  So:
     StartShutdown();
-    return "FoxHole barricaded; PlusEVCoin server stopping, restart to run with barricaded FoxHole";
+    return "Wallet barricaded; PlusEVCoin server stopping, restart to run with barricaded Wallet";
 }
 
 class DescribeAddressVisitor : public boost::static_visitor<Object>
