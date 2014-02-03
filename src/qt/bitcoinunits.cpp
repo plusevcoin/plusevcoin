@@ -11,13 +11,13 @@ BitcoinUnits::BitcoinUnits(QObject *parent):
 QList<BitcoinUnits::Unit> BitcoinUnits::availableUnits()
 {
     QList<BitcoinUnits::Unit> unitlist;
-    unitlist.append(BTC);
-    unitlist.append(mBTC);
-    unitlist.append(uBTC);
-    unitlist.append(nBTC);
-    unitlist.append(KBTC);
-    unitlist.append(MBTC);
-    unitlist.append(GBTC);
+    unitlist.append(PEVC);
+    unitlist.append(mPEVC);
+    unitlist.append(uPEVC);
+    unitlist.append(nPEVC);
+    unitlist.append(KPEVC);
+    unitlist.append(MPEVC);
+    unitlist.append(GPEVC);
     return unitlist;
 }
 
@@ -25,13 +25,13 @@ bool BitcoinUnits::valid(int unit)
 {
     switch(unit)
     {
-    case BTC:
-    case mBTC:
-    case uBTC:
-    case nBTC:
-    case KBTC:
-    case MBTC:
-    case GBTC:
+    case PEVC:
+    case mPEVC:
+    case uPEVC:
+    case nPEVC:
+    case KPEVC:
+    case MPEVC:
+    case GPEVC:
         return true;
     default:
         return false;
@@ -42,13 +42,13 @@ QString BitcoinUnits::name(int unit)
 {
     switch(unit)
     {
-    case BTC: return QString("FOX");
-    case mBTC: return QString("mFOX");
-    case uBTC: return QString::fromUtf8("μFOX");
-    case nBTC: return QString("nFOX");
-    case KBTC: return QString("KFOX");
-    case MBTC: return QString("MFOX");
-    case GBTC: return QString("GFOX");
+    case PEVC: return QString("PEVC");
+    case mPEVC: return QString("mPEVC");
+    case uPEVC: return QString::fromUtf8("μPEVC");
+    case nPEVC: return QString("nPEVC");
+    case KPEVC: return QString("KPEVC");
+    case MPEVC: return QString("MPEVC");
+    case GPEVC: return QString("GPEVC");
     default: return QString("???");
     }
 }
@@ -57,13 +57,13 @@ QString BitcoinUnits::description(int unit)
 {
     switch(unit)
     {
-    case BTC: return QString("PlusEVCoin");
-    case mBTC: return QString("milliPlusEVCoin (1 / 1,000)");
-    case uBTC: return QString("microPlusEVCoin (1 / 1,000,000)");
-    case nBTC: return QString("nanoPlusEVCoin (1 / 100,000,000)");
-    case KBTC: return QString("KiloPlusEVCoin (1 * 1,000)");
-    case MBTC: return QString("MegaPlusEVCoin (1 * 1,000,000)");
-    case GBTC: return QString("GigaPlusEVCoin (1 * 1,000,000,000)");
+    case PEVC: return QString("PlusEVCoin");
+    case mPEVC: return QString("milliPlusEVCoin (1 / 1,000)");
+    case uPEVC: return QString("microPlusEVCoin (1 / 1,000,000)");
+    case nPEVC: return QString("nanoPlusEVCoin (1 / 100,000,000)");
+    case KPEVC: return QString("KiloPlusEVCoin (1 * 1,000)");
+    case MPEVC: return QString("MegaPlusEVCoin (1 * 1,000,000)");
+    case GPEVC: return QString("GigaPlusEVCoin (1 * 1,000,000,000)");
     default: return QString("???");
     }
 }
@@ -72,13 +72,13 @@ qint64 BitcoinUnits::factor(int unit)
 {
     switch(unit)
     {
-    case BTC:  return 100000000;
-    case mBTC: return 100000;
-    case uBTC: return 100;
-    case nBTC: return 1;
-    case KBTC: return 100000000000;
-    case MBTC: return 100000000000000;
-    case GBTC: return 100000000000000000;
+    case PEVC:  return 100000000;
+    case mPEVC: return 100000;
+    case uPEVC: return 100;
+    case nPEVC: return 1;
+    case KPEVC: return 100000000000;
+    case MPEVC: return 100000000000000;
+    case GPEVC: return 100000000000000000;
     default:   return 100000000;
     }
 }
@@ -87,13 +87,13 @@ int BitcoinUnits::amountDigits(int unit)
 {
     switch(unit)
     {
-    case BTC: return 11; // 1,000,000,000 (# digits, without commas)
-    case mBTC: return 13; // 1,000,000,000,000
-    case uBTC: return 16; // 1,000,000,000,000,000
-    case nBTC: return 18; // 100,000,000,000,000,000 
-    case KBTC: return 7; // 1,000,000
-    case MBTC: return 4; // 1,000
-    case GBTC: return 1; // 1
+    case PEVC: return 11; // 1,000,000,000 (# digits, without commas)
+    case mPEVC: return 13; // 1,000,000,000,000
+    case uPEVC: return 16; // 1,000,000,000,000,000
+    case nPEVC: return 18; // 100,000,000,000,000,000 
+    case KPEVC: return 7; // 1,000,000
+    case MPEVC: return 4; // 1,000
+    case GPEVC: return 1; // 1
     default: return 0;
     }
 }
@@ -102,13 +102,13 @@ int BitcoinUnits::decimals(int unit)
 {
     switch(unit)
     {
-    case BTC: return 8;
-    case mBTC: return 5;
-    case uBTC: return 2;
-    case nBTC: return 0;
-    case KBTC: return 11;
-    case MBTC: return 14;
-    case GBTC: return 17;
+    case PEVC: return 8;
+    case mPEVC: return 5;
+    case uPEVC: return 2;
+    case nPEVC: return 0;
+    case KPEVC: return 11;
+    case MPEVC: return 14;
+    case GPEVC: return 17;
     default: return 0;
     }
 }

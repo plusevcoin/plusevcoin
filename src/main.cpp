@@ -842,25 +842,25 @@ int64 static GetBlockValue(int nHeight, int64 nFees)
     }
     
     /* Expected block values according to approximate block time.
-     * Genesis Block:          250        FOX || Total Volume: 0              FOX
-     * 10 Minutes post-launch: 249.99875 FOX || Total Volume: 2,499.9375     FOX
-     * 1 Hour post-launch:     249.9925   FOX || Total Volume: 14,999.775     FOX
-     * 12 Hours post-launch:   249.91     FOX || Total Volume: 179,969.60     FOX
-     * 1 Day post-launch:      249.82     FOX || Total Volume: 359,870.40     FOX
-     * 1 Week post-launch:     248.74     FOX || Total Volume: 2,513,649.60   FOX
-     * 2 Weeks post-launch:    247.48     FOX || Total Volume: 5,014,598.40   FOX
-     * 30 Days post-launch:    244.60     FOX || Total Volume: 10,683,360.00  FOX
-     * 60 Days post-launch:    239.20     FOX || Total Volume: 21,133,440.00  FOX
-     * 120 Days post-launch:   228.40     FOX || Total Volume: 41,333,760.00  FOX
-     * 0.5 Years post-launch:  217.15     FOX || Total Volume: 60,023,520.00  FOX
-     * 1.0 Years post-launch:  184.30     FOX || Total Volume: 114,134,040.00 FOX
-     * 1.5 Years post-launch:  151.45     FOX || Total Volume: 158,251,590.00 FOX
-     * 2.0 Years post-launch:  119.60     FOX || Total Volume: 193,736,160.00 FOX
-     * 2.5 Years post-launch:  85.75      FOX || Total Volume: 220,587,750.00 FOX
-     * 3.0 Years post-launch:  52.90      FOX || Total Volume: 238,806,360.00 FOX
-     * 3.5 Years post-launch:  21.05      FOX || Total Volume: 248,391,990.00 FOX
-     * Approx ~1400 Days:      5.00       FOX || Total Volume: 257,040,000.00 FOX
-     * Onwards:                5.00       FOX || Total Volume: 257,040,000.00 + (5 * (Height in Blocks - 1960000))
+     * Genesis Block:          250        PEVC || Total Volume: 0              PEVC
+     * 10 Minutes post-launch: 249.99875 PEVC || Total Volume: 2,499.9375     PEVC
+     * 1 Hour post-launch:     249.9925   PEVC || Total Volume: 14,999.775     PEVC
+     * 12 Hours post-launch:   249.91     PEVC || Total Volume: 179,969.60     PEVC
+     * 1 Day post-launch:      249.82     PEVC || Total Volume: 359,870.40     PEVC
+     * 1 Week post-launch:     248.74     PEVC || Total Volume: 2,513,649.60   PEVC
+     * 2 Weeks post-launch:    247.48     PEVC || Total Volume: 5,014,598.40   PEVC
+     * 30 Days post-launch:    244.60     PEVC || Total Volume: 10,683,360.00  PEVC
+     * 60 Days post-launch:    239.20     PEVC || Total Volume: 21,133,440.00  PEVC
+     * 120 Days post-launch:   228.40     PEVC || Total Volume: 41,333,760.00  PEVC
+     * 0.5 Years post-launch:  217.15     PEVC || Total Volume: 60,023,520.00  PEVC
+     * 1.0 Years post-launch:  184.30     PEVC || Total Volume: 114,134,040.00 PEVC
+     * 1.5 Years post-launch:  151.45     PEVC || Total Volume: 158,251,590.00 PEVC
+     * 2.0 Years post-launch:  119.60     PEVC || Total Volume: 193,736,160.00 PEVC
+     * 2.5 Years post-launch:  85.75      PEVC || Total Volume: 220,587,750.00 PEVC
+     * 3.0 Years post-launch:  52.90      PEVC || Total Volume: 238,806,360.00 PEVC
+     * 3.5 Years post-launch:  21.05      PEVC || Total Volume: 248,391,990.00 PEVC
+     * Approx ~1400 Days:      5.00       PEVC || Total Volume: 257,040,000.00 PEVC
+     * Onwards:                5.00       PEVC || Total Volume: 257,040,000.00 + (5 * (Height in Blocks - 1960000))
      */
     
     return nSubsidy + nFees;

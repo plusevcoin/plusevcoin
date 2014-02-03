@@ -17,13 +17,13 @@ public:
      */
     enum Unit
     {
-        BTC,
-        mBTC,
-        uBTC,
-        nBTC,
-        KBTC,
-        MBTC,
-        GBTC
+        PEVC,
+        mPEVC,
+        uPEVC,
+        nPEVC,
+        KPEVC,
+        MPEVC,
+        GPEVC
     };
 
     //! @name Static API
