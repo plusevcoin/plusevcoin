@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Opening Map</string>
+   <string>Address Book</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -63,7 +63,7 @@
         <string>Create a new address</string>
        </property>
        <property name="text">
-        <string>&amp;New Opening</string>
+        <string>&amp;New Address</string>
        </property>
        <property name="icon">
         <iconset resource="../bitcoin.qrc">
@@ -77,7 +77,7 @@
         <string>Copy the currently selected address to the system clipboard</string>
        </property>
        <property name="text">
-        <string>&amp;Copy Opening</string>
+        <string>&amp;Copy Address</string>
        </property>
        <property name="icon">
         <iconset resource="../bitcoin.qrc">

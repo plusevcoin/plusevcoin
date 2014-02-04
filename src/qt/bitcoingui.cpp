@@ -307,7 +307,7 @@ void BitcoinGUI::createActions()
     transactionTutorialAction->setToolTip(tr("A beginners guide transactions with crypto."));
     transactionTutorialAction->setMenuRole(QAction::AboutRole);
     protectionTutorialAction = new QAction(QIcon(":/icons/lock_closed"), tr("&How to protect your PlusEVCoins"), this);
-    protectionTutorialAction->setToolTip(tr("A beginners guide to barricading Wallets."));
+    protectionTutorialAction->setToolTip(tr("A beginners guide to encrypting Wallets."));
     protectionTutorialAction->setMenuRole(QAction::AboutRole);
     FAQAction = new QAction(QIcon(":/icons/transaction_0"), tr("&FAQ"), this);
     FAQAction->setToolTip(tr("Frequently asked questions about PlusEVCoin."));

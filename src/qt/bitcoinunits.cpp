@@ -67,9 +67,9 @@ int BitcoinUnits::amountDigits(int unit)
 {
     switch(unit)
     {
-    case PEVC: return 11; // 1,000,000,000 (# digits, without commas)
-    case mPEVC: return 13; // 1,000,000,000,000
-    case uPEVC: return 16; // 1,000,000,000,000,000
+    case PEVC: return 9;   // 520,000,000 (# digits, without commas)
+    case mPEVC: return 12; // 520,000,000,000
+    case uPEVC: return 15; // 520,000,000,000,000
     default: return 0;
     }
 }

@@ -108,7 +108,7 @@ void AskPassphraseDialog::accept()
                 if(model->setWalletEncrypted(true, newpass1))
                 {
                     QMessageBox::warning(this, tr("Wallet encrypted"),
-                                         tr("PlusEVCoin will close now to finish the encryption process. Remember that barricading your Wallet cannot fully protect your PlusEVCoin from being stolen by malware infecting your computer."));
+                                         tr("PlusEVCoin will close now to finish the encryption process. Remember that encrypting your Wallet cannot fully protect your PlusEVCoin from being stolen by malware infecting your computer."));
                     QApplication::quit();
                 }
                 else

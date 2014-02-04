@@ -593,7 +593,7 @@ Value getaddressesbyaccount(const Array& params, bool fHelp)
     if (fHelp || params.size() != 1)
         throw runtime_error(
             "getaddressesbyaccount <account>\n"
-            "Returns the list of address for the given account.");
+            "Returns the list of addresses for the given account.");
 
     string strAccount = AccountFromValue(params[0]);
 
@@ -664,7 +664,7 @@ Value sendtoaddress(const Array& params, bool fHelp)
         wtx.mapValue["to"]      = params[3].get_str();
 
     if (pwalletMain->IsLocked())
-        throw JSONRPCError(-13, "Error: Please enter the PlusEVCoin passphrase with PlusEVCoinpassphrase first.");
+        throw JSONRPCError(-13, "Error: Please enter the Wallet passphrase with Walletpassphrase first.");
 
     string strError = pwalletMain->SendMoneyToDestination(address.Get(), nAmount, wtx);
     if (strError != "")
@@ -691,7 +691,7 @@ Value signmessage(const Array& params, bool fHelp)
 
     CKeyID keyID;
     if (!addr.GetKeyID(keyID))
-        throw JSONRPCError(-3, "Opening does not refer to key");
+        throw JSONRPCError(-3, "Address does not refer to key");
 
     CKey key;
     if (!pwalletMain->GetKey(keyID, key))
@@ -725,7 +725,7 @@ Value verifymessage(const Array& params, bool fHelp)
 
     CKeyID keyID;
     if (!addr.GetKeyID(keyID))
-        throw JSONRPCError(-3, "Opening does not refer to key");
+        throw JSONRPCError(-3, "Address does not refer to key");
 
     bool fInvalid = false;
     vector<unsigned char> vchSig = DecodeBase64(strSign.c_str(), &fInvalid);
@@ -970,14 +970,14 @@ Value sendfrom(const Array& params, bool fHelp)
 {
     if (fHelp || params.size() < 3 || params.size() > 6)
         throw runtime_error(
-            "sendfrom <fromaccount> <to PlusEVCoin Opening> <amount> [minconf=1] [comment] [comment-to]\n"
+            "sendfrom <fromaccount> <to PlusEVCoin Address> <amount> [minconf=1] [comment] [comment-to]\n"
             "<amount> is a real and is rounded to the nearest 0.00000001"
             + HelpRequiringPassphrase());
 
     string strAccount = AccountFromValue(params[0]);
     CBitcoinAddress address(params[1].get_str());
     if (!address.IsValid())
-        throw JSONRPCError(-5, "Invalid PlusEVCoin Opening");
+        throw JSONRPCError(-5, "Invalid PlusEVCoin Address");
     int64 nAmount = AmountFromValue(params[2]);
     int nMinDepth = 1;
     if (params.size() > 3)
@@ -1033,7 +1033,7 @@ Value sendmany(const Array& params, bool fHelp)
     {
         CBitcoinAddress address(s.name_);
         if (!address.IsValid())
-            throw JSONRPCError(-5, string("Invalid PlusEVCoin Opening:")+s.name_);
+            throw JSONRPCError(-5, string("Invalid PlusEVCoin Address:")+s.name_);
 
         if (setAddress.count(address))
             throw JSONRPCError(-8, string("Invalid parameter, duplicated address: ")+s.name_);
@@ -1076,7 +1076,7 @@ Value addmultisigaddress(const Array& params, bool fHelp)
     {
         string msg = "addmultisigaddress <nrequired> <'[\"key\",\"key\"]'> [account]\n"
             "Add a nrequired-to-sign multisignature address to the Wallet\"\n"
-            "each key is a PlusEVCoin Opening or hex-encoded public key\n"
+            "each key is a PlusEVCoin Address or hex-encoded public key\n"
             "If [account] is specified, assign address to [account].";
         throw runtime_error(msg);
     }
@@ -1834,8 +1834,8 @@ Value validateaddress(const Array& params, bool fHelp)
 {
     if (fHelp || params.size() != 1)
         throw runtime_error(
-            "validateaddress <PlusEVCoin Opening>\n"
-            "Return information about <PlusEVCoin Opening>.");
+            "validateaddress <PlusEVCoin Address>\n"
+            "Return information about <PlusEVCoin Address>.");
 
     CBitcoinAddress address(params[0].get_str());
     bool isValid = address.IsValid();

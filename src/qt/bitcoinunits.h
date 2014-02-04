@@ -19,11 +19,7 @@ public:
     {
         PEVC,
         mPEVC,
-        uPEVC,
-        nPEVC,
-        KPEVC,
-        MPEVC,
-        GPEVC
+        uPEVC
     };
 
     //! @name Static API

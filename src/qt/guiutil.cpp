@@ -185,7 +185,7 @@ QString getSaveFileName(QWidget *parent, const QString &caption,
     }
     QString result = QFileDialog::getSaveFileName(parent, caption, myDir, filter, &selectedFilter);
 
-    /* Extract first suffix from filter pattern "Description (*.PEVC)" or "Description (*.PEVC *.fox ...) */
+    /* Extract first suffix from filter pattern "Description (*.PEVC)" or "Description (*.PEVC *.pevc ...) */
     QRegExp filter_re(".* \\(\\*\\.(.*)[ \\)]");
     QString selectedSuffix;
     if(filter_re.exactMatch(selectedFilter))
