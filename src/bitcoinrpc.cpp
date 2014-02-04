@@ -1677,7 +1677,7 @@ Value walletpassphrase(const Array& params, bool fHelp)
     if (fHelp)
         return true;
     if (!pwalletMain->IsCrypted())
-        throw JSONRPCError(-15, "Error: running with an unencryptd Wallet, but walletpassphrase was called.");
+        throw JSONRPCError(-15, "Error: running with an unencrypted Wallet, but walletpassphrase was called.");
 
     if (!pwalletMain->IsLocked())
         throw JSONRPCError(-17, "Error: Wallet is already unlocked.");
@@ -1716,7 +1716,7 @@ Value walletpassphrasechange(const Array& params, bool fHelp)
     if (fHelp)
         return true;
     if (!pwalletMain->IsCrypted())
-        throw JSONRPCError(-15, "Error: running with an unencryptd Wallet, but Walletpassphrasechange was called.");
+        throw JSONRPCError(-15, "Error: running with an unencrypted Wallet, but Walletpassphrasechange was called.");
 
     // TODO: get rid of these .c_str() calls by implementing SecureString::operator=(std::string)
     // Alternately, find a way to make params[0] mlock()'d to begin with.
@@ -1751,7 +1751,7 @@ Value walletlock(const Array& params, bool fHelp)
     if (fHelp)
         return true;
     if (!pwalletMain->IsCrypted())
-        throw JSONRPCError(-15, "Error: running with an unencryptd Wallet, but walletlock was called.");
+        throw JSONRPCError(-15, "Error: running with an unencrypted Wallet, but walletlock was called.");
 
     {
         LOCK(cs_nWalletUnlockTime);
@@ -1772,7 +1772,7 @@ Value encryptwallet(const Array& params, bool fHelp)
     if (fHelp)
         return true;
     if (pwalletMain->IsCrypted())
-        throw JSONRPCError(-15, "Error: running with an encryptd Wallet, but encryptwallet was called.");
+        throw JSONRPCError(-15, "Error: running with an encrypted Wallet, but encryptwallet was called.");
 
     // TODO: get rid of this .c_str() by implementing SecureString::operator=(std::string)
     // Alternately, find a way to make params[0] mlock()'d to begin with.
@@ -1792,7 +1792,7 @@ Value encryptwallet(const Array& params, bool fHelp)
     // slack space in .dat files; that is bad if the old data is
     // unencrypted private keys.  So:
     StartShutdown();
-    return "Wallet encryptd; PlusEVCoin server stopping, restart to run with encryptd Wallet";
+    return "Wallet encrypted; PlusEVCoin server stopping, restart to run with encrypted Wallet";
 }
 
 class DescribeAddressVisitor : public boost::static_visitor<Object>

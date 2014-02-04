@@ -47,7 +47,7 @@ AskPassphraseDialog::AskPassphraseDialog(Mode mode, QWidget *parent) :
             ui->passEdit2->hide();
             ui->passLabel3->hide();
             ui->passEdit3->hide();
-            setWindowTitle(tr("De-encrypt Wallet"));
+            setWindowTitle(tr("Decrypt Wallet"));
             break;
         case ChangePass: // Ask old passphrase + new passphrase x2
             setWindowTitle(tr("Change passphrase"));
@@ -97,8 +97,8 @@ void AskPassphraseDialog::accept()
             // Cannot encrypt with empty passphrase
             break;
         }
-        QMessageBox::StandardButton retval = QMessageBox::question(this, tr("Confirm Wallet encrypt"),
-                 tr("WARNING: If you encrypt your Wallet and lose your passphrase, you will <b>LOSE ALL OF YOUR PlusEVCoins!!!!</b>!\nAre you sure you wish to encrypt your Wallet?"),
+        QMessageBox::StandardButton retval = QMessageBox::question(this, tr("Confirm Wallet encryption"),
+                 tr("WARNING: If you encrypt your Wallet and lose your passphrase, you will <b>LOSE ALL OF YOUR PlusEVCoins</b>!\nAre you sure you wish to encrypt your Wallet?"),
                  QMessageBox::Yes|QMessageBox::Cancel,
                  QMessageBox::Cancel);
         if(retval == QMessageBox::Yes)
@@ -107,20 +107,20 @@ void AskPassphraseDialog::accept()
             {
                 if(model->setWalletEncrypted(true, newpass1))
                 {
-                    QMessageBox::warning(this, tr("Wallet encryptd"),
-                                         tr("PlusEVCoin will close now to finish the encrypt process. Remember that barricading your Wallet cannot fully protect your PlusEVCoin from being stolen by malware infecting your computer."));
+                    QMessageBox::warning(this, tr("Wallet encrypted"),
+                                         tr("PlusEVCoin will close now to finish the encryption process. Remember that barricading your Wallet cannot fully protect your PlusEVCoin from being stolen by malware infecting your computer."));
                     QApplication::quit();
                 }
                 else
                 {
-                    QMessageBox::critical(this, tr("Wallet encrypt fell apart"),
-                                         tr("Wallet encrypt failed due to an internal error. Your Wallet was not encryptd."));
+                    QMessageBox::critical(this, tr("Wallet encryption failed"),
+                                         tr("Wallet encryption failed due to an internal error. Your Wallet was not encrypted."));
                 }
                 QDialog::accept(); // Success
             }
             else
             {
-                QMessageBox::critical(this, tr("Wallet encrypt failed"),
+                QMessageBox::critical(this, tr("Wallet encryption failed"),
                                      tr("The supplied passphrases do not match."));
             }
         }
@@ -132,8 +132,8 @@ void AskPassphraseDialog::accept()
     case Unlock:
         if(!model->setWalletLocked(false, oldpass))
         {
-            QMessageBox::critical(this, tr("Wallet decrypt failed"),
-                                  tr("The battering ram entered for the Wallet de-barricading wasn't good enough."));
+            QMessageBox::critical(this, tr("Wallet unlock failed"),
+                                  tr("The passphrase entered for the Wallet decryption was incorrect."));
         }
         else
         {
@@ -143,8 +143,8 @@ void AskPassphraseDialog::accept()
     case Decrypt:
         if(!model->setWalletEncrypted(false, oldpass))
         {
-            QMessageBox::critical(this, tr("Wallet decrypt failed"),
-                                  tr("The battering ram entered for the Wallet de-barricading wasn't good enough."));
+            QMessageBox::critical(this, tr("Wallet decryption failed"),
+                                  tr("The passphrase entered for the Wallet decryption was incorrect."));
         }
         else
         {
@@ -156,19 +156,19 @@ void AskPassphraseDialog::accept()
         {
             if(model->changePassphrase(oldpass, newpass1))
             {
-                QMessageBox::information(this, tr("Wallet encryptd"),
-                                     tr("Wallet encrypt was successfully reinforced."));
+                QMessageBox::information(this, tr("Wallet encrypted"),
+                                     tr("Wallet passphrase was successfully changed."));
                 QDialog::accept(); // Success
             }
             else
             {
-                QMessageBox::critical(this, tr("Wallet encrypt failed"),
-                                     tr("The battering ram entered for the Wallet de-barricading wasn't good enough."));
+                QMessageBox::critical(this, tr("Wallet encryption failed"),
+                                     tr("The passphrase entered for the Wallet decryption was incorrect."));
             }
         }
         else
         {
-            QMessageBox::critical(this, tr("Wallet encrypt failed"),
+            QMessageBox::critical(this, tr("Wallet encryption failed"),
                                  tr("The supplied passphrases do not match."));
         }
         break;

@@ -98,7 +98,7 @@ void EditAddressDialog::accept()
             return;
         case AddressTableModel::WALLET_UNLOCK_FAILURE:
             QMessageBox::critical(this, windowTitle(),
-                tr("Could not break open encrypt."),
+                tr("Could not unlock Wallet."),
                 QMessageBox::Ok, QMessageBox::Ok);
             return;
         case AddressTableModel::KEY_GENERATION_FAILURE:

@@ -575,7 +575,7 @@ bool AppInit2()
         return false;
     }
 
-    uiInterface.InitMessage(_("Loading block map..."));
+    uiInterface.InitMessage(_("Loading block index..."));
     printf("Loading block index...\n");
     nStart = GetTimeMillis();
     if (!LoadBlockIndex())
