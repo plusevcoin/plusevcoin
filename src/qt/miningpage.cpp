@@ -176,10 +176,10 @@ void MiningPage::readProcessOutput()
                 reportToList("Share accepted", SHARE_SUCCESS, getTime(line));
             else if (line.contains("(Lost the game)"))
                 reportToList("Share DENIED", SHARE_FAIL, getTime(line));
-            else if (line.contains("LONGPOLL detected new acre"))
-                reportToList("LONGPOLL detected a new acre", LONGPOLL, getTime(line));
+            else if (line.contains("LONGPOLL detected new block"))
+                reportToList("LONGPOLL detected a new block", LONGPOLL, getTime(line));
             else if (line.contains("Supported options:"))
-                reportToList("Digger didn't start properly. Try checking your settings.", ERROR, NULL);
+                reportToList("Miner didn't start properly. Try checking your settings.", ERROR, NULL);
             else if (line.contains("The requested URL returned error: 403"))
                 reportToList("Couldn't connect. Please check your username and password.", ERROR, NULL);
             else if (line.contains("HTTP request failed"))
@@ -212,16 +212,16 @@ void MiningPage::minerError(QProcess::ProcessError error)
 {
     if (error == QProcess::FailedToStart)
     {
-        reportToList("Digger failed to start. Make sure you have the minerd executable and libraries in the same directory as PlusEVCoin-qt.", ERROR, NULL);
+        reportToList("Miner failed to start. Make sure you have the minerd executable and libraries in the same directory as PlusEVCoin-qt.", ERROR, NULL);
     }
 }
 
 void MiningPage::minerFinished()
 {
     if (getMiningType() == ClientModel::SoloMining)
-        reportToList("Solo digging stopped.", ERROR, NULL);
+        reportToList("Solo mining stopped.", ERROR, NULL);
     else
-        reportToList("Digger exited.", ERROR, NULL);
+        reportToList("Miner exited.", ERROR, NULL);
     ui->list->addItem("");
     minerActive = false;
     resetMiningButton();
@@ -232,9 +232,9 @@ void MiningPage::minerStarted()
 {
     if (!minerActive)
         if (getMiningType() == ClientModel::SoloMining)
-            reportToList("Solo digging started.", ERROR, NULL);
+            reportToList("Solo mining started.", ERROR, NULL);
         else
-            reportToList("Digger started. You might not see any output for a few minutes.", STARTED, NULL);
+            reportToList("Miner started. You might not see any output for a few minutes.", STARTED, NULL);
     minerActive = true;
     resetMiningButton();
     model->setMining(getMiningType(), true, initThreads, 0);
@@ -381,6 +381,6 @@ void MiningPage::debugToggled(bool checked)
 
 void MiningPage::resetMiningButton()
 {
-    ui->startButton->setText(minerActive ? "Stop Digging" : "Start Digging");
+    ui->startButton->setText(minerActive ? "Stop Mining" : "Start Mining");
     enableMiningControls(!minerActive);
 }

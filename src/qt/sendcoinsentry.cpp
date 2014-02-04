@@ -22,8 +22,8 @@ SendCoinsEntry::SendCoinsEntry(QWidget *parent) :
 #endif
 #if QT_VERSION >= 0x040700
     /* Do not move this to the XML file, Qt before 4.7 will choke on it */
-    ui->addAsLabel->setPlaceholderText(tr("Enter a label for this opening to add it to your opening map"));
-    ui->payTo->setPlaceholderText(tr("Enter a PlusEVCoin opening (they start with an 'm')"));
+    ui->addAsLabel->setPlaceholderText(tr("Enter a label for this address to add it to your Address Book"));
+    ui->payTo->setPlaceholderText(tr("Enter a PlusEVCoin address (they start with a 'P')"));
 #endif
     setFocusPolicy(Qt::TabFocus);
     setFocusProxy(ui->payTo);

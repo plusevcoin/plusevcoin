@@ -575,7 +575,7 @@ bool AppInit2()
         return false;
     }
 
-    uiInterface.InitMessage(_("Loading acre map..."));
+    uiInterface.InitMessage(_("Loading block map..."));
     printf("Loading block index...\n");
     nStart = GetTimeMillis();
     if (!LoadBlockIndex())
@@ -737,8 +737,8 @@ bool AppInit2()
 
     // ********************************************************* Step 9: load peers
 
-    uiInterface.InitMessage(_("Loading openings..."));
-    printf("Loading openings...\n");
+    uiInterface.InitMessage(_("Loading addresses..."));
+    printf("Loading addresses...\n");
     nStart = GetTimeMillis();
 
     {

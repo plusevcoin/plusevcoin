@@ -101,7 +101,7 @@ bool CDBEnv::Open(boost::filesystem::path pathEnv_)
                      nEnvFlags,
                      S_IRUSR | S_IWUSR);
     if (ret > 0)
-        return error("CDB() : error %d opening database environment", ret);
+        return error("CDB() : error %d address database environment", ret);
 
     fDbEnvInit = true;
     return true;

@@ -1118,7 +1118,7 @@ void ThreadOpenConnections(void* parg)
 {
     IMPLEMENT_RANDOMIZE_STACK(ThreadOpenConnections(parg));
 
-    // Make this thread recognisable as the connection opening thread
+    // Make this thread recognisable as the connection address thread
     RenameThread("bitcoin-opencon");
 
     try
@@ -1275,7 +1275,7 @@ void ThreadOpenAddedConnections(void* parg)
 {
     IMPLEMENT_RANDOMIZE_STACK(ThreadOpenAddedConnections(parg));
 
-    // Make this thread recognisable as the connection opening thread
+    // Make this thread recognisable as the connection address thread
     RenameThread("bitcoin-opencon");
 
     try

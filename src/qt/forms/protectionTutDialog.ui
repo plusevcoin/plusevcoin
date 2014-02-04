@@ -115,12 +115,12 @@
        <property name="text">
         <string>Before you begin, please note that encrypting your wallet will NOT fully protect your coins (but it will help significantly)
 
-To start, in the top left corner, click 'settings', navigate with your mouse down to  'Barricade wallet' the one with the lock icon, and click on it.
+To start, in the top left corner, click 'settings', navigate with your mouse down to  'Encrypt wallet' the one with the lock icon, and click on it.
 A menu should appear, enter in a passphrase that contains around 4 words with at least one deviation (e.g b4tterystaplehorsecorrect) and
 enter it in both fields, make sure to memorize or write down this password (try to avoid storing it elecronically if you want to be as secure as
 possible, but that isn't necassery) Enter in the same passphrase in both fields, click OK and then confirm.
 
-Changing your passphrase can be done easily via the 'Reinforce Barricade' button under settings, but it requires your current passphrase.
+Changing your passphrase can be done easily via the 'Reinforce Encrypt' button under settings, but it requires your current passphrase.
 
 The next thing you want to do is backup your Wallet, now this is optional. Navigate to your plusevcoin directory %APPDATA%/roaming for
 Windows, Application Support for OSX, and your /plusevcoin directory on *nix systems. Find your wallet.dat and copy it to secure location.</string>

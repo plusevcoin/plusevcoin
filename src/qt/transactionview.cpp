@@ -82,7 +82,7 @@ TransactionView::TransactionView(QWidget *parent) :
     addressWidget = new QLineEdit(this);
 #if QT_VERSION >= 0x040700
     /* Do not move this to the XML file, Qt before 4.7 will choke on it */
-    addressWidget->setPlaceholderText(tr("Enter opening or label to search"));
+    addressWidget->setPlaceholderText(tr("Enter address or label to search"));
 #endif
     hlayout->addWidget(addressWidget);
 
@@ -123,7 +123,7 @@ TransactionView::TransactionView(QWidget *parent) :
     transactionView = view;
 
     // Actions
-    QAction *copyAddressAction = new QAction(tr("Copy opening"), this);
+    QAction *copyAddressAction = new QAction(tr("Copy address"), this);
     QAction *copyLabelAction = new QAction(tr("Copy label"), this);
     QAction *copyAmountAction = new QAction(tr("Copy amount"), this);
     QAction *editLabelAction = new QAction(tr("Edit label"), this);

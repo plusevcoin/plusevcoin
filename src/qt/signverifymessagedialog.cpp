@@ -110,7 +110,7 @@ void SignVerifyMessageDialog::on_signMessageButton_SM_clicked()
     {
         ui->addressIn_SM->setValid(false);
         ui->statusLabel_SM->setStyleSheet("QLabel { color: red; }");
-        ui->statusLabel_SM->setText(tr("The entered opening is invalid.") + QString(" ") + tr("Please check the opening and try again."));
+        ui->statusLabel_SM->setText(tr("The entered address is invalid.") + QString(" ") + tr("Please check the address and try again."));
         return;
     }
     CKeyID keyID;
@@ -118,7 +118,7 @@ void SignVerifyMessageDialog::on_signMessageButton_SM_clicked()
     {
         ui->addressIn_SM->setValid(false);
         ui->statusLabel_SM->setStyleSheet("QLabel { color: red; }");
-        ui->statusLabel_SM->setText(tr("The entered opening does not refer to a key.") + QString(" ") + tr("Please check the opening and try again."));
+        ui->statusLabel_SM->setText(tr("The entered address does not refer to a key.") + QString(" ") + tr("Please check the address and try again."));
         return;
     }
 
@@ -134,7 +134,7 @@ void SignVerifyMessageDialog::on_signMessageButton_SM_clicked()
     if (!pwalletMain->GetKey(keyID, key))
     {
         ui->statusLabel_SM->setStyleSheet("QLabel { color: red; }");
-        ui->statusLabel_SM->setText(tr("Private key for the entered opening is not available."));
+        ui->statusLabel_SM->setText(tr("Private key for the entered address is not available."));
         return;
     }
 
@@ -191,7 +191,7 @@ void SignVerifyMessageDialog::on_verifyMessageButton_VM_clicked()
     {
         ui->addressIn_VM->setValid(false);
         ui->statusLabel_VM->setStyleSheet("QLabel { color: red; }");
-        ui->statusLabel_VM->setText(tr("The entered opening is invalid.") + QString(" ") + tr("Please check the opening and try again."));
+        ui->statusLabel_VM->setText(tr("The entered address is invalid.") + QString(" ") + tr("Please check the address and try again."));
         return;
     }
     CKeyID keyID;
@@ -199,7 +199,7 @@ void SignVerifyMessageDialog::on_verifyMessageButton_VM_clicked()
     {
         ui->addressIn_VM->setValid(false);
         ui->statusLabel_VM->setStyleSheet("QLabel { color: red; }");
-        ui->statusLabel_VM->setText(tr("The entered opening does not refer to a key.") + QString(" ") + tr("Please check the opening and try again."));
+        ui->statusLabel_VM->setText(tr("The entered address does not refer to a key.") + QString(" ") + tr("Please check the address and try again."));
         return;
     }
 

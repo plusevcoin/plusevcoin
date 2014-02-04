@@ -342,8 +342,8 @@ Value getnetworkhashps(const Array& params, bool fHelp)
     if (fHelp || params.size() > 1)
         throw runtime_error(
             "getnetworkhashps [blocks]\n"
-            "Returns the estimated network paws per second based on the last 120 blocks.\n"
-            "Pass in [blocks] to override # of acres, -1 specifies since last difficulty change.");
+            "Returns the estimated network hashes per second based on the last 120 blocks.\n"
+            "Pass in [blocks] to override # of blocks, -1 specifies since last difficulty change.");
 
     return GetNetworkHashPS(params.size() > 0 ? params[0].get_int() : 120);
 }
@@ -458,9 +458,9 @@ Value getnewaddress(const Array& params, bool fHelp)
     if (fHelp || params.size() > 1)
         throw runtime_error(
             "getnewaddress [account]\n"
-            "Returns a new PlusEVCoin opening for receiving payments.  "
-            "If [account] is specified (recommended), it is added to the opening book "
-            "so payments received with the opening will be credited to [account].");
+            "Returns a new PlusEVCoin address for receiving payments.  "
+            "If [account] is specified (recommended), it is added to the address book "
+            "so payments received with the address will be credited to [account].");
 
     // Parse the account first so we don't generate a key if there's an error
     string strAccount;
@@ -525,7 +525,7 @@ Value getaccountaddress(const Array& params, bool fHelp)
     if (fHelp || params.size() != 1)
         throw runtime_error(
             "getaccountaddress <account>\n"
-            "Returns the current PlusEVCoin opening for receiving payments to this account.");
+            "Returns the current PlusEVCoin address for receiving payments to this account.");
 
     // Parse the account first so we don't generate a key if there's an error
     string strAccount = AccountFromValue(params[0]);
@@ -543,12 +543,12 @@ Value setaccount(const Array& params, bool fHelp)
 {
     if (fHelp || params.size() < 1 || params.size() > 2)
         throw runtime_error(
-            "setaccount <PlusEVCoin opening> <account>\n"
+            "setaccount <PlusEVCoin address> <account>\n"
             "Sets the account associated with the given address.");
 
     CBitcoinAddress address(params[0].get_str());
     if (!address.IsValid())
-        throw JSONRPCError(-5, "Invalid PlusEVCoin opening");
+        throw JSONRPCError(-5, "Invalid PlusEVCoin address");
 
 
     string strAccount;
@@ -573,12 +573,12 @@ Value getaccount(const Array& params, bool fHelp)
 {
     if (fHelp || params.size() != 1)
         throw runtime_error(
-            "getaccount <PlusEVCoin opening>\n"
-            "Returns the account associated with the given opening.");
+            "getaccount <PlusEVCoin address>\n"
+            "Returns the account associated with the given address.");
 
     CBitcoinAddress address(params[0].get_str());
     if (!address.IsValid())
-        throw JSONRPCError(-5, "Invalid PlusEVCoin opening");
+        throw JSONRPCError(-5, "Invalid PlusEVCoin address");
 
     string strAccount;
     map<CTxDestination, string>::iterator mi = pwalletMain->mapAddressBook.find(address.Get());
@@ -593,7 +593,7 @@ Value getaddressesbyaccount(const Array& params, bool fHelp)
     if (fHelp || params.size() != 1)
         throw runtime_error(
             "getaddressesbyaccount <account>\n"
-            "Returns the list of opening for the given account.");
+            "Returns the list of address for the given account.");
 
     string strAccount = AccountFromValue(params[0]);
 
@@ -645,13 +645,13 @@ Value sendtoaddress(const Array& params, bool fHelp)
 {
     if (fHelp || params.size() < 2 || params.size() > 4)
         throw runtime_error(
-            "sendtoaddress <PlusEVCoin opening> <amount> [comment] [comment-to]\n"
+            "sendtoaddress <PlusEVCoin address> <amount> [comment] [comment-to]\n"
             "<amount> is a real and is rounded to the nearest 0.00000001"
             + HelpRequiringPassphrase());
 
     CBitcoinAddress address(params[0].get_str());
     if (!address.IsValid())
-        throw JSONRPCError(-5, "Invalid PlusEVCoin opening");
+        throw JSONRPCError(-5, "Invalid PlusEVCoin address");
 
     // Amount
     int64 nAmount = AmountFromValue(params[1]);
@@ -677,7 +677,7 @@ Value signmessage(const Array& params, bool fHelp)
 {
     if (fHelp || params.size() != 2)
         throw runtime_error(
-            "signmessage <PlusEVCoin opening> <message>\n"
+            "signmessage <PlusEVCoin address> <message>\n"
             "Sign a message with the private key of an address");
 
     EnsureWalletIsUnlocked();
@@ -687,7 +687,7 @@ Value signmessage(const Array& params, bool fHelp)
 
     CBitcoinAddress addr(strAddress);
     if (!addr.IsValid())
-        throw JSONRPCError(-3, "Invalid opening");
+        throw JSONRPCError(-3, "Invalid address");
 
     CKeyID keyID;
     if (!addr.GetKeyID(keyID))
@@ -712,7 +712,7 @@ Value verifymessage(const Array& params, bool fHelp)
 {
     if (fHelp || params.size() != 3)
         throw runtime_error(
-            "verifymessage <PlusEVCoin opening> <signature> <message>\n"
+            "verifymessage <PlusEVCoin address> <signature> <message>\n"
             "Verify a signed message");
 
     string strAddress  = params[0].get_str();
@@ -721,7 +721,7 @@ Value verifymessage(const Array& params, bool fHelp)
 
     CBitcoinAddress addr(strAddress);
     if (!addr.IsValid())
-        throw JSONRPCError(-3, "Invalid opening");
+        throw JSONRPCError(-3, "Invalid address");
 
     CKeyID keyID;
     if (!addr.GetKeyID(keyID))
@@ -749,14 +749,14 @@ Value getreceivedbyaddress(const Array& params, bool fHelp)
 {
     if (fHelp || params.size() < 1 || params.size() > 2)
         throw runtime_error(
-            "getreceivedbyaddress <PlusEVCoin opening> [minconf=1]\n"
-            "Returns the total amount received by <PlusEVCoin opening> in transactions with at least [minconf] confirmations.");
+            "getreceivedbyaddress <PlusEVCoin address> [minconf=1]\n"
+            "Returns the total amount received by <PlusEVCoin address> in transactions with at least [minconf] confirmations.");
 
-    // PlusEVCoin opening
+    // PlusEVCoin address
     CBitcoinAddress address = CBitcoinAddress(params[0].get_str());
     CScript scriptPubKey;
     if (!address.IsValid())
-        throw JSONRPCError(-5, "Invalid PlusEVCoin opening");
+        throw JSONRPCError(-5, "Invalid PlusEVCoin address");
     scriptPubKey.SetDestination(address.Get());
     if (!IsMine(*pwalletMain,scriptPubKey))
         return (double)0.0;
@@ -800,7 +800,7 @@ Value getreceivedbyaccount(const Array& params, bool fHelp)
     if (fHelp || params.size() < 1 || params.size() > 2)
         throw runtime_error(
             "getreceivedbyaccount <account> [minconf=1]\n"
-            "Returns the total amount received by openings with <account> in transactions with at least [minconf] confirmations.");
+            "Returns the total amount received by addresses with <account> in transactions with at least [minconf] confirmations.");
 
     // Minimum confirmations
     int nMinDepth = 1;
@@ -1089,7 +1089,7 @@ Value addmultisigaddress(const Array& params, bool fHelp)
 
     // Gather public keys
     if (nRequired < 1)
-        throw runtime_error("a multisignature opening must require at least one key to redeem");
+        throw runtime_error("a multisignature address must require at least one key to redeem");
     if ((int)keys.size() < nRequired)
         throw runtime_error(
             strprintf("not enough keys supplied "
@@ -1100,7 +1100,7 @@ Value addmultisigaddress(const Array& params, bool fHelp)
     {
         const std::string& ks = keys[i].get_str();
 
-        // Case 1: PlusEVCoin opening and we have full public key:
+        // Case 1: PlusEVCoin address and we have full public key:
         CBitcoinAddress address(ks);
         if (address.IsValid())
         {
@@ -1111,7 +1111,7 @@ Value addmultisigaddress(const Array& params, bool fHelp)
             CPubKey vchPubKey;
             if (!pwalletMain->GetPubKey(keyID, vchPubKey))
                 throw runtime_error(
-                    strprintf("no full public key for opening %s",ks.c_str()));
+                    strprintf("no full public key for address %s",ks.c_str()));
             if (!vchPubKey.IsValid() || !pubkeys[i].SetPubKey(vchPubKey))
                 throw runtime_error(" Invalid public key: "+ks);
         }
@@ -1677,7 +1677,7 @@ Value walletpassphrase(const Array& params, bool fHelp)
     if (fHelp)
         return true;
     if (!pwalletMain->IsCrypted())
-        throw JSONRPCError(-15, "Error: running with an unbarricaded Wallet, but walletpassphrase was called.");
+        throw JSONRPCError(-15, "Error: running with an unencryptd Wallet, but walletpassphrase was called.");
 
     if (!pwalletMain->IsLocked())
         throw JSONRPCError(-17, "Error: Wallet is already unlocked.");
@@ -1716,7 +1716,7 @@ Value walletpassphrasechange(const Array& params, bool fHelp)
     if (fHelp)
         return true;
     if (!pwalletMain->IsCrypted())
-        throw JSONRPCError(-15, "Error: running with an unbarricaded Wallet, but Walletpassphrasechange was called.");
+        throw JSONRPCError(-15, "Error: running with an unencryptd Wallet, but Walletpassphrasechange was called.");
 
     // TODO: get rid of these .c_str() calls by implementing SecureString::operator=(std::string)
     // Alternately, find a way to make params[0] mlock()'d to begin with.
@@ -1745,13 +1745,13 @@ Value walletlock(const Array& params, bool fHelp)
     if (pwalletMain->IsCrypted() && (fHelp || params.size() != 0))
         throw runtime_error(
             "walletlock\n"
-            "Removes the Wallet barricade key from memory, locking the Wallet.\n"
+            "Removes the Wallet encrypt key from memory, locking the Wallet.\n"
             "After calling this method, you will need to call Walletpassphrase again\n"
             "before being able to call any methods which require the Wallet to be unlocked.");
     if (fHelp)
         return true;
     if (!pwalletMain->IsCrypted())
-        throw JSONRPCError(-15, "Error: running with an unbarricaded Wallet, but walletlock was called.");
+        throw JSONRPCError(-15, "Error: running with an unencryptd Wallet, but walletlock was called.");
 
     {
         LOCK(cs_nWalletUnlockTime);
@@ -1768,11 +1768,11 @@ Value encryptwallet(const Array& params, bool fHelp)
     if (!pwalletMain->IsCrypted() && (fHelp || params.size() != 1))
         throw runtime_error(
             "encryptWallet <passphrase>\n"
-            "barricades the Wallet with <passphrase>.");
+            "encrypts the Wallet with <passphrase>.");
     if (fHelp)
         return true;
     if (pwalletMain->IsCrypted())
-        throw JSONRPCError(-15, "Error: running with an barricaded Wallet, but encryptwallet was called.");
+        throw JSONRPCError(-15, "Error: running with an encryptd Wallet, but encryptwallet was called.");
 
     // TODO: get rid of this .c_str() by implementing SecureString::operator=(std::string)
     // Alternately, find a way to make params[0] mlock()'d to begin with.
@@ -1783,16 +1783,16 @@ Value encryptwallet(const Array& params, bool fHelp)
     if (strWalletPass.length() < 1)
         throw runtime_error(
             "encryptwallet <passphrase>\n"
-            "Barricades the Wallet with <passphrase>.");
+            "Encrypts the Wallet with <passphrase>.");
 
     if (!pwalletMain->EncryptWallet(strWalletPass))
-        throw JSONRPCError(-16, "Error: Failed to barricade the Wallet.");
+        throw JSONRPCError(-16, "Error: Failed to encrypt the Wallet.");
 
     // BDB seems to have a bad habit of writing old data into
     // slack space in .dat files; that is bad if the old data is
     // unencrypted private keys.  So:
     StartShutdown();
-    return "Wallet barricaded; PlusEVCoin server stopping, restart to run with barricaded Wallet";
+    return "Wallet encryptd; PlusEVCoin server stopping, restart to run with encryptd Wallet";
 }
 
 class DescribeAddressVisitor : public boost::static_visitor<Object>
@@ -1871,7 +1871,7 @@ Value getworkex(const Array& params, bool fHelp)
         throw JSONRPCError(-9, "PlusEVCoin server is not connected!");
 
     if (IsInitialBlockDownload())
-        throw JSONRPCError(-10, "PlusEVCoin server is downloading acres...");
+        throw JSONRPCError(-10, "PlusEVCoin server is downloading blocks...");
 
     typedef map<uint256, pair<CBlock*, CScript> > mapNewBlock_t;
     static mapNewBlock_t mapNewBlock;
@@ -1997,13 +1997,13 @@ Value getwork(const Array& params, bool fHelp)
             "  \"data\" : block data\n"
             "  \"hash1\" : formatted hash buffer for second hash (DEPRECATED)\n" // deprecated
             "  \"target\" : little endian hash target\n"
-            "If [data] is specified, tries to solve the acre and returns true if it was successful.");
+            "If [data] is specified, tries to solve the block and returns true if it was successful.");
 
     if (vNodes.empty())
         throw JSONRPCError(-9, "PlusEVCoin server is not connected!");
 
     if (IsInitialBlockDownload())
-        throw JSONRPCError(-10, "PlusEVCoin server is downloading acres...");
+        throw JSONRPCError(-10, "PlusEVCoin server is downloading blocks...");
 
     typedef map<uint256, pair<CBlock*, CScript> > mapNewBlock_t;
     static mapNewBlock_t mapNewBlock;    // FIXME: thread safety
@@ -2135,7 +2135,7 @@ Value getblocktemplate(const Array& params, bool fHelp)
             throw JSONRPCError(-9, "PlusEVCoin server is not connected!");
 
         if (IsInitialBlockDownload())
-            throw JSONRPCError(-10, "PlusEVCoin server is downloading acres...");
+            throw JSONRPCError(-10, "PlusEVCoin server is downloading blocks...");
 
         static CReserveKey reservekey(pwalletMain);
 
@@ -2275,11 +2275,11 @@ Value getblockhash(const Array& params, bool fHelp)
     if (fHelp || params.size() != 1)
         throw runtime_error(
             "getblockhash <index>\n"
-            "Returns hash of acre in best-block-chain at <index>.");
+            "Returns hash of block in best-block-chain at <index>.");
 
     int nHeight = params[0].get_int();
     if (nHeight < 0 || nHeight > nBestHeight)
-        throw runtime_error("Acre number out of range.");
+        throw runtime_error("Block number out of range.");
 
     CBlock block;
     CBlockIndex* pblockindex = mapBlockIndex[hashBestChain];
@@ -2293,13 +2293,13 @@ Value getblock(const Array& params, bool fHelp)
     if (fHelp || params.size() != 1)
         throw runtime_error(
             "getblock <hash>\n"
-            "Returns details of a acre with given block-hash.");
+            "Returns details of a block with given block-hash.");
 
     std::string strHash = params[0].get_str();
     uint256 hash(strHash);
 
     if (mapBlockIndex.count(hash) == 0)
-        throw JSONRPCError(-5, "Acre not found");
+        throw JSONRPCError(-5, "Block not found");
 
     CBlock block;
     CBlockIndex* pblockindex = mapBlockIndex[hash];
@@ -2914,7 +2914,7 @@ void ThreadRPCServer2(void* parg)
                     static_cast<void (ip::tcp::acceptor::*)()>(&ip::tcp::acceptor::close), acceptor.get())
                 .track(acceptor));
 
-        // If dual IPv6/IPv4 failed (or we're opening loopback interfaces only), open IPv4 separately
+        // If dual IPv6/IPv4 failed (or we're address loopback interfaces only), open IPv4 separately
         if (loopback || v6_only_error)
         {
             bindAddress = loopback ? asio::ip::address_v4::loopback() : asio::ip::address_v4::any();

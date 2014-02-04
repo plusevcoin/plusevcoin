@@ -603,7 +603,7 @@ QVariant TransactionTableModel::headerData(int section, Qt::Orientation orientat
             case Type:
                 return tr("Type of transaction.");
             case ToAddress:
-                return tr("Destination opening of transaction.");
+                return tr("Destination address of transaction.");
             case Amount:
                 return tr("Amount removed from or added to balance.");
             }

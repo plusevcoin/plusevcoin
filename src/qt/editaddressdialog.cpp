@@ -17,18 +17,18 @@ EditAddressDialog::EditAddressDialog(Mode mode, QWidget *parent) :
     switch(mode)
     {
     case NewReceivingAddress:
-        setWindowTitle(tr("New receiving opening"));
+        setWindowTitle(tr("New receiving address"));
         ui->addressEdit->setEnabled(false);
         break;
     case NewSendingAddress:
-        setWindowTitle(tr("New sending opening"));
+        setWindowTitle(tr("New sending address"));
         break;
     case EditReceivingAddress:
         setWindowTitle(tr("Edit receiving address"));
         ui->addressEdit->setDisabled(true);
         break;
     case EditSendingAddress:
-        setWindowTitle(tr("Edit sending opening"));
+        setWindowTitle(tr("Edit sending address"));
         break;
     }
 
@@ -88,17 +88,17 @@ void EditAddressDialog::accept()
         {
         case AddressTableModel::DUPLICATE_ADDRESS:
             QMessageBox::warning(this, windowTitle(),
-                tr("The entered opening \"%1\" is already in the opening map.").arg(ui->addressEdit->text()),
+                tr("The entered address \"%1\" is already in the Address Book.").arg(ui->addressEdit->text()),
                 QMessageBox::Ok, QMessageBox::Ok);
             break;
         case AddressTableModel::INVALID_ADDRESS:
             QMessageBox::warning(this, windowTitle(),
-                tr("The entered address \"%1\" is not a valid PlusEVCoin opening.").arg(ui->addressEdit->text()),
+                tr("The entered address \"%1\" is not a valid PlusEVCoin address.").arg(ui->addressEdit->text()),
                 QMessageBox::Ok, QMessageBox::Ok);
             return;
         case AddressTableModel::WALLET_UNLOCK_FAILURE:
             QMessageBox::critical(this, windowTitle(),
-                tr("Could not break open barricade."),
+                tr("Could not break open encrypt."),
                 QMessageBox::Ok, QMessageBox::Ok);
             return;
         case AddressTableModel::KEY_GENERATION_FAILURE:
