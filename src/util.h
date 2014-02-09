@@ -552,9 +552,9 @@ public:
 // Note: It turns out we might have been able to use boost::thread
 // by using TerminateThread(boost::thread.native_handle(), 0);
 #ifdef WIN32
-typedef HANDLE pthread_t;
+typedef HANDLE pthread_snafu_t;
 
-inline pthread_t CreateThread(void(*pfn)(void*), void* parg, bool fWantHandle=false)
+inline pthread_snafu_t CreateThread(void(*pfn)(void*), void* parg, bool fWantHandle=false)
 {
     DWORD nUnused = 0;
     HANDLE hthread =
@@ -568,12 +568,12 @@ inline pthread_t CreateThread(void(*pfn)(void*), void* parg, bool fWantHandle=fa
     if (hthread == NULL)
     {
         printf("Error: CreateThread() returned %d\n", GetLastError());
-        return (pthread_t)0;
+        return (pthread_snafu_t)0;
     }
     if (!fWantHandle)
     {
         CloseHandle(hthread);
-        return (pthread_t)-1;
+        return (pthread_snafu_t)-1;
     }
     return hthread;
 }
