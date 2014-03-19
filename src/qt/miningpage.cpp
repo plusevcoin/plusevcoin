@@ -36,6 +36,8 @@ MiningPage::MiningPage(QWidget *parent) :
     connect(minerProcess, SIGNAL(error(QProcess::ProcessError)), this, SLOT(minerError(QProcess::ProcessError)));
     connect(minerProcess, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(minerFinished()));
     connect(minerProcess, SIGNAL(readyRead()), this, SLOT(readProcessOutput()));
+
+    typeChanged(-1);
 }
 
 MiningPage::~MiningPage()
@@ -50,10 +52,11 @@ void MiningPage::setModel(ClientModel *model)
     this->model = model;
 
     loadSettings();
+    setDefaults();
 
-    bool pool = model->getMiningType() == ClientModel::PoolMining;
-    ui->threadsBox->setValue(model->getMiningThreads());
-    ui->typeBox->setCurrentIndex(pool ? 1 : 0);
+//    bool pool = model->getMiningType() == ClientModel::PoolMining;
+//    ui->threadsBox->setValue(model->getMiningThreads());
+//    ui->typeBox->setCurrentIndex(pool ? 1 : 0);
 //    if (model->getMiningStarted())
 //        startPressed();
 }
@@ -456,25 +459,52 @@ QString MiningPage::getTime(QString time)
         return NULL;
 }
 
-void MiningPage::enableMiningControls(bool enable)
+void MiningPage::enableBaseControls(bool enable)
 {
-    ui->typeBox->setEnabled(enable);
-    ui->threadsBox->setEnabled(enable);
-    ui->scantimeBox->setEnabled(enable);
+    //ui->typeBox->setEnabled(enable);
+    //ui->threadsBox->setEnabled(enable);
+    //ui->scantimeBox->setEnabled(enable);
     ui->serverLine->setEnabled(enable);
     ui->portLine->setEnabled(enable);
     ui->usernameLine->setEnabled(enable);
     ui->passwordLine->setEnabled(enable);
 }
 
-void MiningPage::enablePoolMiningControls(bool enable)
+void MiningPage::enableMinerdControls(bool enable)
+{
+    ui->threadsBox->setEnabled(enable);
+    ui->scantimeBox->setEnabled(enable);
+}
+
+void MiningPage::enableCUDAMinerControls(bool enable)
 {
     ui->scantimeBox->setEnabled(enable);
-    ui->serverLine->setEnabled(enable);
-    ui->portLine->setEnabled(enable);
-    ui->usernameLine->setEnabled(enable);
-    ui->passwordLine->setEnabled(enable);
+    ui->kernel->setEnabled(enable);
+    ui->textureCache->setEnabled(enable);
+    ui->offloadSHA->setEnabled(enable);
+    ui->memoryBlock->setEnabled(enable);
+    ui->autotune->setEnabled(enable);
 }
+
+void MiningPage::enableCGMinerControls(bool enable)
+{
+    ui->threadsBox->setEnabled(enable);
+    ui->intensity->setEnabled(enable);
+    ui->concurrency->setEnabled(enable);
+    ui->workload->setEnabled(enable);
+}
+
+void MiningPage::setDefaults()
+{
+    ui->threadsBox->setValue(2);
+    ui->scantimeBox->setValue(8);
+    ui->serverLine->setText("127.0.0.1");
+    ui->portLine->setText("5252");
+    ui->usernameLine->setText("pevcoin");
+    ui->passwordLine->setText("pevc");
+    ui->debugCheckBox->setChecked(true);
+}
+
 
 ClientModel::MiningType MiningPage::getMiningType()
 {
@@ -518,19 +548,29 @@ void MiningPage::typeChanged(int index)
 {
     if (ui->typeBox->currentIndex() == 0) // Solo2 Mining
     {
-        enablePoolMiningControls(true);
+        ui->minerBox->setEnabled(true);
+        enableBaseControls(true);
+        minerChanged(-1);
     }
     else if (ui->typeBox->currentIndex() == 1) // Poool Mining
     {
-        enablePoolMiningControls(true);
+        ui->minerBox->setEnabled(true);
+        enableBaseControls(true);
+        minerChanged(-1);
     }
     else if (ui->typeBox->currentIndex() == 2)  // P2P Mining
     {
-        enablePoolMiningControls(true);
+        ui->minerBox->setEnabled(true);
+        enableBaseControls(true);
+        minerChanged(-1);
     }
     if (ui->typeBox->currentIndex() == 3)  // Internal Mining
     {
-        enablePoolMiningControls(false);
+        ui->minerBox->setEnabled(false);
+        enableBaseControls(false);
+        enableMinerdControls(false);
+        enableCUDAMinerControls(false);
+        enableCGMinerControls(false);
     }
 }
 
@@ -538,15 +578,45 @@ void MiningPage::minerChanged(int index)
 {
     if(ui->minerBox->currentIndex() == 0) // Minerd [CPU]
     {
-	;
+        enableCUDAMinerControls(false);
+        enableCGMinerControls(false);
+        enableMinerdControls(true);
     } 
     else if(ui->minerBox->currentIndex() == 1) // CUDA Miner [nVidia]
     {
-	;
+        enableMinerdControls(false);
+        enableCGMinerControls(false);
+        enableCUDAMinerControls(true);
     }
     else if(ui->minerBox->currentIndex() == 2) // CGMiner [AMD]
     {
-	;
+        enableMinerdControls(false);
+        enableCUDAMinerControls(false);
+        enableCGMinerControls(true);
+    }
+}
+
+void MiningPage::debugToggled(bool checked)
+{
+    model->setMiningDebug(checked);
+}
+
+void MiningPage::resetMiningButton()
+{
+    ui->startButton->setText(minerActive ? "Stop Mining" : "Start Mining");
+    if(minerActive)
+    {
+        ui->typeBox->setEnabled(false);
+        ui->minerBox->setEnabled(false);
+        enableBaseControls(false);
+        enableMinerdControls(false);
+        enableCUDAMinerControls(false);
+        enableCGMinerControls(false);
+    }
+    else
+    {
+        ui->typeBox->setEnabled(true);
+        typeChanged(-1);
     }
 }
 
@@ -682,14 +752,3 @@ const char* MiningPage::getIntensity()
     }
 }
 
-
-void MiningPage::debugToggled(bool checked)
-{
-    model->setMiningDebug(checked);
-}
-
-void MiningPage::resetMiningButton()
-{
-    ui->startButton->setText(minerActive ? "Stop Mining" : "Start Mining");
-    enableMiningControls(!minerActive);
-}
