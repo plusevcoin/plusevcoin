@@ -84,6 +84,7 @@ public slots:
     ClientModel::MiningType getMiningType();
     ClientModel::MinerType getMinerType();
     void typeChanged(int index);
+    void minerChanged(int index);
     void debugToggled(bool checked);
 
 private slots:

@@ -38,7 +38,7 @@ ClientModel::ClientModel(OptionsModel *optionsModel, QObject *parent) :
 //    if (fGenerateBitcoins)
 //    {
         miningType = InternalMining;
-	minerType = Minerd;
+        minerType = Minerd;
         miningStarted = false;
 //    }
 //    else

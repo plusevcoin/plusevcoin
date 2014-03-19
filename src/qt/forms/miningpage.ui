@@ -236,12 +236,12 @@
      </property>
      <item>
       <property name="text">
-       <string>Internal Mining</string>
+       <string>Solo Mining</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>Solo Mining</string>
+       <string>Pool Mining</string>
       </property>
      </item>
      <item>
@@ -251,7 +251,7 @@
      </item>
      <item>
       <property name="text">
-       <string>Pool Mining</string>
+       <string>Internal Mining</string>
       </property>
      </item>
     </widget>

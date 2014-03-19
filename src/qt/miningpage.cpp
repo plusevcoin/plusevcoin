@@ -30,6 +30,7 @@ MiningPage::MiningPage(QWidget *parent) :
 //    connect(ui->pondMining, SIGNAL(pressed()), this, SLOT(pondPressed()));
 //    connect(ui->NOPE, SIGNAL(pressed()), this, SLOT(pondUnPressed()));
     connect(ui->typeBox, SIGNAL(currentIndexChanged(int)), this, SLOT(typeChanged(int)));
+    connect(ui->minerBox, SIGNAL(currentIndexChanged(int)), this, SLOT(minerChanged(int)));
     connect(ui->debugCheckBox, SIGNAL(toggled(bool)), this, SLOT(debugToggled(bool)));
     connect(minerProcess, SIGNAL(started()), this, SLOT(minerStarted()));
     connect(minerProcess, SIGNAL(error(QProcess::ProcessError)), this, SLOT(minerError(QProcess::ProcessError)));
@@ -477,21 +478,21 @@ void MiningPage::enablePoolMiningControls(bool enable)
 
 ClientModel::MiningType MiningPage::getMiningType()
 {
-    if (ui->typeBox->currentIndex() == 0)  // Internal Mining
-    {
-        return ClientModel::InternalMining;
-    }
-    else if (ui->typeBox->currentIndex() == 1) // Solo2 Mining
+    if (ui->typeBox->currentIndex() == 0) // Solo2 Mining
     {
         return ClientModel::Solo2Mining;
+    }
+    else if (ui->typeBox->currentIndex() == 1) // Poool Mining
+    {
+        return ClientModel::PoolMining;
     }
     else if (ui->typeBox->currentIndex() == 2)  // P2P Mining
     {
         return ClientModel::P2PMining;
     }
-    else if (ui->typeBox->currentIndex() == 3) // Poool Mining
+    if (ui->typeBox->currentIndex() == 3)  // Internal Mining
     {
-        return ClientModel::PoolMining;
+        return ClientModel::InternalMining;
     }
     return ClientModel::InternalMining;
 }
@@ -511,6 +512,42 @@ ClientModel::MinerType MiningPage::getMinerType()
         return ClientModel::CGMiner;
     }
     return ClientModel::Minerd;
+}
+
+void MiningPage::typeChanged(int index)
+{
+    if (ui->typeBox->currentIndex() == 0) // Solo2 Mining
+    {
+        enablePoolMiningControls(true);
+    }
+    else if (ui->typeBox->currentIndex() == 1) // Poool Mining
+    {
+        enablePoolMiningControls(true);
+    }
+    else if (ui->typeBox->currentIndex() == 2)  // P2P Mining
+    {
+        enablePoolMiningControls(true);
+    }
+    if (ui->typeBox->currentIndex() == 3)  // Internal Mining
+    {
+        enablePoolMiningControls(false);
+    }
+}
+
+void MiningPage::minerChanged(int index)
+{
+    if(ui->minerBox->currentIndex() == 0) // Minerd [CPU]
+    {
+	;
+    } 
+    else if(ui->minerBox->currentIndex() == 1) // CUDA Miner [nVidia]
+    {
+	;
+    }
+    else if(ui->minerBox->currentIndex() == 2) // CGMiner [AMD]
+    {
+	;
+    }
 }
 
 const char* MiningPage::getTextureCache()
@@ -645,17 +682,6 @@ const char* MiningPage::getIntensity()
     }
 }
 
-void MiningPage::typeChanged(int index)
-{
-    if (index == 0)  // Solo Mining
-    {
-        enablePoolMiningControls(false);
-    }
-    else if (index == 1)  // Pool Mining
-    {
-        enablePoolMiningControls(true);
-    }
-}
 
 void MiningPage::debugToggled(bool checked)
 {
