@@ -65,14 +65,9 @@ public slots:
     void minerError(QProcess::ProcessError);
     void minerFinished();
 
-    void startSolo2Mining();
-    void stopSolo2Mining();
+    void startExtMining();
+    void stopExtMining();
 
-    void startP2PMining();
-    void stopP2PMining();
-    
-    void startPoolMining();
-    void stopPoolMining();
     void updateSpeed();
 
     void loadSettings();
@@ -87,6 +82,7 @@ public slots:
     void enableMiningControls(bool enable);
     void enablePoolMiningControls(bool enable);
     ClientModel::MiningType getMiningType();
+    ClientModel::MinerType getMinerType();
     void typeChanged(int index);
     void debugToggled(bool checked);
 

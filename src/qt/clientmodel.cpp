@@ -38,6 +38,7 @@ ClientModel::ClientModel(OptionsModel *optionsModel, QObject *parent) :
 //    if (fGenerateBitcoins)
 //    {
         miningType = InternalMining;
+	minerType = Minerd;
         miningStarted = false;
 //    }
 //    else
@@ -78,6 +79,11 @@ int ClientModel::getNumBlocksAtStartup()
 ClientModel::MiningType ClientModel::getMiningType() const
 {
     return miningType;
+}
+
+ClientModel::MinerType ClientModel::getMinerType() const
+{
+    return minerType;
 }
 
 int ClientModel::getMiningThreads() const
@@ -280,13 +286,14 @@ int ClientModel::getNumBlocksOfPeers() const
     return GetNumBlocksOfPeers();
 }
 
-void ClientModel::setMining(MiningType type, bool mining, int threads, int hashrate)
+void ClientModel::setMining(MiningType type, MinerType rtype, bool mining, int threads, int hashrate)
 {
     if (type == InternalMining && mining != miningStarted)
     {
         GenerateBitcoins(mining ? 1 : 0, pwalletMain);
     }
     miningType = type;
+    minerType = rtype;
     miningStarted = mining;
 //    WriteSetting("miningStarted", mining);
 //    WriteSetting("fLimitProcessors", 1);

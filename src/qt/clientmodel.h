@@ -29,12 +29,20 @@ public:
         PoolMining
     };
 
+    enum MinerType
+    {
+	Minerd,
+	CUDAMiner,
+	CGMiner
+    };
+
     OptionsModel *getOptionsModel();
 
     int getNumConnections() const;
     int getNumBlocks() const;
     int getNumBlocksAtStartup();
     MiningType getMiningType() const;
+    MinerType getMinerType() const;
     int getMiningThreads() const;
     bool getMiningStarted() const;
 
@@ -66,7 +74,7 @@ public:
     //! Return warnings to be displayed in status bar
     QString getStatusBarWarnings() const;
 
-    void setMining(MiningType type, bool mining, int threads, int hashrate);
+    void setMining(MiningType type, MinerType rtype, bool mining, int threads, int hashrate);
 
     QString formatFullVersion() const;
     QString formatBuildDate() const;
@@ -81,6 +89,7 @@ private:
     int cachedHashrate;
 
     MiningType miningType;
+    MinerType minerType;
     int miningThreads;
     bool miningStarted;
     bool miningDebug;

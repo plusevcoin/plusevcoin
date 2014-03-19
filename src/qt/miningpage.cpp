@@ -68,433 +68,176 @@ void MiningPage::startPressed()
         if (getMiningType() == ClientModel::InternalMining)
             minerStarted();
         else if (getMiningType() == ClientModel::Solo2Mining)
-            startSolo2Mining();
+            startExtMining();
         else if (getMiningType() == ClientModel::P2PMining)
-            startP2PMining();
+            startExtMining();
         else if (getMiningType() == ClientModel::PoolMining)
-            startPoolMining();
+            startExtMining();
     }
     else
     {
         if (getMiningType() == ClientModel::InternalMining)
             minerFinished();
         else if (getMiningType() == ClientModel::Solo2Mining)
-            stopSolo2Mining();
+            stopExtMining();
         else if (getMiningType() == ClientModel::P2PMining)
-            stopP2PMining();
+            stopExtMining();
         else if (getMiningType() == ClientModel::PoolMining)
-            stopPoolMining();
+            stopExtMining();
     }
 }
 
-void MiningPage::startPoolMining()
+void MiningPage::startExtMining()
 {
-    if(getMiner() == 1)
+    if(getMinerType() == ClientModel::Minerd)
     {
-    QStringList args;
-    QString url = ui->serverLine->text();
-    if (!url.contains("stratum+tcp://"))
-        url.prepend("stratum+tcp://");
-    QString urlLine = QString("%1:%2").arg(url, ui->portLine->text());
-    QString userpassLine = QString("%1:%2").arg(ui->usernameLine->text(), ui->passwordLine->text());
-    args << "--algo" << "scrypt";
-    args << "--scantime" << ui->scantimeBox->text().toAscii();
-    args << "--url" << urlLine.toAscii();
-    args << "--userpass" << userpassLine.toAscii();
-    args << "--threads" << ui->threadsBox->text().toAscii();
-    args << "--retries" << "-1"; // Retry forever.
-    args << "-P"; // This is needed for this to work correctly on Windows. Extra protocol dump helps flush the buffer quicker.
+        QStringList args;
+        QString url = ui->serverLine->text();
+        if (!url.contains("stratum+tcp://") && !url.contains("http://"))
+	{
+	    if(getMiningType() == ClientModel::P2PMining)
+            	url.prepend("http://");
+	    else if (getMiningType() == ClientModel::PoolMining)
+            	url.prepend("stratum+tcp://");
+	}
+        QString urlLine = QString("%1:%2").arg(url, ui->portLine->text());
+        QString userpassLine = QString("%1:%2").arg(ui->usernameLine->text(), ui->passwordLine->text());
+        args << "--algo" << "scrypt";
+        args << "--scantime" << ui->scantimeBox->text().toAscii();
+        args << "--url" << urlLine.toAscii();
+        args << "--userpass" << userpassLine.toAscii();
+        args << "--threads" << ui->threadsBox->text().toAscii();
+        args << "--retries" << "-1"; // Retry forever.
+        args << "-P"; // This is needed for this to work correctly on Windows. Extra protocol dump helps flush the buffer quicker.
 
-    threadSpeed.clear();
+        threadSpeed.clear();
 
-    acceptedShares = 0;
-    rejectedShares = 0;
+        acceptedShares = 0;
+        rejectedShares = 0;
 
-    roundAcceptedShares = 0;
-    roundRejectedShares = 0;
+        roundAcceptedShares = 0;
+        roundRejectedShares = 0;
 
-    // If minerd is in current path, then use that. Otherwise, assume minerd is in the path somewhere.
-    QString program = QDir::current().filePath("minerd");
-    if (!QFile::exists(program))
-        program = "minerd";
+        // If minerd is in current path, then use that. Otherwise, assume minerd is in the path somewhere.
+        QString program = QDir::current().filePath("minerd");
+        if (!QFile::exists(program))
+            program = "minerd";
 
-    if (ui->debugCheckBox->isChecked())
-        ui->list->addItem(args.join(" ").prepend(" ").prepend(program));
+        if (ui->debugCheckBox->isChecked())
+            ui->list->addItem(args.join(" ").prepend(" ").prepend(program));
 
-    ui->mineSpeedLabel->setText("Speed: N/A");
-    ui->shareCount->setText("Accepted: 0 - Rejected: 0");
-    minerProcess->start(program,args);
-    minerProcess->waitForStarted(-1);
+        ui->mineSpeedLabel->setText("Speed: N/A");
+        ui->shareCount->setText("Accepted: 0 - Rejected: 0");
+        minerProcess->start(program,args);
+        minerProcess->waitForStarted(-1);
 
-    readTimer->start(500);
+        readTimer->start(500);
     }
-    else if (getMiner() == 2)
+
+    else if (getMinerType() == ClientModel::CUDAMiner)
     {
-    QStringList args;
-    QString url = ui->serverLine->text();
-    if (!url.contains("stratum+tcp://"))
-        url.prepend("stratum+tcp://");
-    QString urlLine = QString("%1:%2").arg(url, ui->portLine->text());
-    QString kernel = ui->kernel->text();
-    QString userpassLine = QString("%1:%2").arg(ui->usernameLine->text(), ui->passwordLine->text());
-    QString textureCache = getTextureCache();
-    QString offloadSHA = getOffloadSHA();
-    QString memoryBlock = getMemoryBlock();
-    args << "--launch-config" << kernel.toAscii();
-    if(ui->autotune->currentIndex() == 0)
-    {
-        args << "--no-autotune";
-    }
-    args << "--texture-cache" << textureCache.toAscii();
-    args << "--hash-parallel" << offloadSHA.toAscii();
-    args << "--single-memory" << memoryBlock.toAscii();
-    args << "--scantime" << ui->scantimeBox->text().toAscii();
-    args << "--url" << urlLine.toAscii();
-    args << "--userpass" << userpassLine.toAscii();
-    args << "--retries" << "-1"; // Retry forever.
+        QStringList args;
+        QString url = ui->serverLine->text();
+        if (!url.contains("stratum+tcp://") && !url.contains("http://"))
+	{
+	    if(getMiningType() == ClientModel::P2PMining)
+            	url.prepend("http://");
+	    else if (getMiningType() == ClientModel::PoolMining)
+            	url.prepend("stratum+tcp://");
+	}
+        QString urlLine = QString("%1:%2").arg(url, ui->portLine->text());
+        QString kernel = ui->kernel->text();
+        QString userpassLine = QString("%1:%2").arg(ui->usernameLine->text(), ui->passwordLine->text());
+        QString textureCache = getTextureCache();
+        QString offloadSHA = getOffloadSHA();
+        QString memoryBlock = getMemoryBlock();
+        args << "--launch-config" << kernel.toAscii();
+        if(ui->autotune->currentIndex() == 0)
+        {
+            args << "--no-autotune";
+        }
+        args << "--texture-cache" << textureCache.toAscii();
+        args << "--hash-parallel" << offloadSHA.toAscii();
+        args << "--single-memory" << memoryBlock.toAscii();
+        args << "--scantime" << ui->scantimeBox->text().toAscii();
+        args << "--url" << urlLine.toAscii();
+        args << "--userpass" << userpassLine.toAscii();
+        args << "--retries" << "-1"; // Retry forever.
     
-    threadSpeed.clear();
+        threadSpeed.clear();
 
-    acceptedShares = 0;
-    rejectedShares = 0;
+        acceptedShares = 0;
+        rejectedShares = 0;
 
-    roundAcceptedShares = 0;
-    roundRejectedShares = 0;
+        roundAcceptedShares = 0;
+        roundRejectedShares = 0;
 
-    // If minerd is in current path, then use that. Otherwise, assume minerd is in the path somewhere.
-    QString program = QDir::current().filePath("cudaminer");
-    if (!QFile::exists(program))
-        program = "cudaminer";
+        // If minerd is in current path, then use that. Otherwise, assume minerd is in the path somewhere.
+        QString program = QDir::current().filePath("cudaminer");
+        if (!QFile::exists(program))
+            program = "cudaminer";
 
-    if (ui->debugCheckBox->isChecked())
-        ui->list->addItem(args.join(" ").prepend(" ").prepend(program));
+        if (ui->debugCheckBox->isChecked())
+            ui->list->addItem(args.join(" ").prepend(" ").prepend(program));
 
-    ui->mineSpeedLabel->setText("Speed: N/A");
-    ui->shareCount->setText("Accepted: 0 - Rejected: 0");
-    minerProcess->start(program,args);
-    minerProcess->waitForStarted(-1);
+        ui->mineSpeedLabel->setText("Speed: N/A");
+        ui->shareCount->setText("Accepted: 0 - Rejected: 0");
+        minerProcess->start(program,args);
+        minerProcess->waitForStarted(-1);
 
-    readTimer->start(500);        
+        readTimer->start(500);        
     }
-    else
+
+    else //if (getMinerType() == ClientModel::CUDAMiner)
     {
-    QStringList args;
-    QString url = ui->serverLine->text();
-    if (!url.contains("stratum+tcp://"))
-        url.prepend("stratum+tcp://");
-    QString urlLine = QString("%1:%2").arg(url, ui->portLine->text());
-    QString userpassLine = QString("%1:%2").arg(ui->usernameLine->text(), ui->passwordLine->text());
-    QString intensity = getIntensity();
-    QString concurrency = ui->concurrency->text();
-    QString workload = ui->workload->text();
-    args << "--scrypt";
-    args << "--url" << urlLine.toAscii();
-    args << "--userpass" << userpassLine.toAscii();
-    args << "--intensity" << intensity.toAscii();
-    args << "--thread-concurrency" << concurrency.toAscii();
-    args << "--worksize" << workload.toAscii();
-    args << "--gpu-threads" << ui->threadsBox->text().toAscii();
+        QStringList args;
+        QString url = ui->serverLine->text();
+        if (!url.contains("stratum+tcp://") && !url.contains("http://"))
+	{
+	    if(getMiningType() == ClientModel::P2PMining)
+            	url.prepend("http://");
+	    else if (getMiningType() == ClientModel::PoolMining)
+            	url.prepend("stratum+tcp://");
+	}
+        QString urlLine = QString("%1:%2").arg(url, ui->portLine->text());
+        QString userpassLine = QString("%1:%2").arg(ui->usernameLine->text(), ui->passwordLine->text());
+        QString intensity = getIntensity();
+        QString concurrency = ui->concurrency->text();
+        QString workload = ui->workload->text();
+        args << "--scrypt";
+        args << "--url" << urlLine.toAscii();
+        args << "--userpass" << userpassLine.toAscii();
+        args << "--intensity" << intensity.toAscii();
+        args << "--thread-concurrency" << concurrency.toAscii();
+        args << "--worksize" << workload.toAscii();
+        args << "--gpu-threads" << ui->threadsBox->text().toAscii();
 
-    threadSpeed.clear();
+        threadSpeed.clear();
 
-    acceptedShares = 0;
-    rejectedShares = 0;
+        acceptedShares = 0;
+        rejectedShares = 0;
 
-    roundAcceptedShares = 0;
-    roundRejectedShares = 0;
+        roundAcceptedShares = 0;
+        roundRejectedShares = 0;
 
-    // If minerd is in current path, then use that. Otherwise, assume minerd is in the path somewhere.
-    QString program = QDir::current().filePath("cgminer");
-    if (!QFile::exists(program))
-        program = "cgminer";
+        // If minerd is in current path, then use that. Otherwise, assume minerd is in the path somewhere.
+        QString program = QDir::current().filePath("cgminer");
+        if (!QFile::exists(program))
+            program = "cgminer";
 
-    if (ui->debugCheckBox->isChecked())
-        ui->list->addItem(args.join(" ").prepend(" ").prepend(program));
+        if (ui->debugCheckBox->isChecked())
+            ui->list->addItem(args.join(" ").prepend(" ").prepend(program));
 
-    ui->mineSpeedLabel->setText("Speed: N/A");
-    ui->shareCount->setText("Accepted: 0 - Rejected: 0");
-    minerProcess->start(program,args);
-    minerProcess->waitForStarted(-1);
+        ui->mineSpeedLabel->setText("Speed: N/A");
+        ui->shareCount->setText("Accepted: 0 - Rejected: 0");
+        minerProcess->start(program,args);
+        minerProcess->waitForStarted(-1);
 
-    readTimer->start(500);
+        readTimer->start(500);
     }
 }
 
-void MiningPage::startP2PMining()
-{
-    if(getMiner() == 1)
-    {
-    QStringList args;
-    QString url = ui->serverLine->text();
-    if (!url.contains("http://"))
-        url.prepend("http://");
-    QString urlLine = QString("%1:%2").arg(url, ui->portLine->text());
-    QString userpassLine = QString("%1:%2").arg(ui->usernameLine->text(), ui->passwordLine->text());
-    args << "--algo" << "scrypt";
-    args << "--scantime" << ui->scantimeBox->text().toAscii();
-    args << "--url" << urlLine.toAscii();
-    args << "--userpass" << userpassLine.toAscii();
-    args << "--threads" << ui->threadsBox->text().toAscii();
-    args << "--retries" << "-1"; // Retry forever.
-    args << "-P"; // This is needed for this to work correctly on Windows. Extra protocol dump helps flush the buffer quicker.
-
-    threadSpeed.clear();
-
-    acceptedShares = 0;
-    rejectedShares = 0;
-
-    roundAcceptedShares = 0;
-    roundRejectedShares = 0;
-
-    // If minerd is in current path, then use that. Otherwise, assume minerd is in the path somewhere.
-    QString program = QDir::current().filePath("minerd");
-    if (!QFile::exists(program))
-        program = "minerd";
-
-    if (ui->debugCheckBox->isChecked())
-        ui->list->addItem(args.join(" ").prepend(" ").prepend(program));
-
-    ui->mineSpeedLabel->setText("Speed: N/A");
-    ui->shareCount->setText("Accepted: 0 - Rejected: 0");
-    minerProcess->start(program,args);
-    minerProcess->waitForStarted(-1);
-
-    readTimer->start(500);
-    }
-    else if (getMiner() == 2)
-    {
-    QStringList args;
-    QString url = ui->serverLine->text();
-    if (!url.contains("http://"))
-        url.prepend("http://");
-    QString urlLine = QString("%1:%2").arg(url, ui->portLine->text());
-    QString kernel = ui->kernel->text();
-    QString userpassLine = QString("%1:%2").arg(ui->usernameLine->text(), ui->passwordLine->text());
-    QString textureCache = getTextureCache();
-    QString offloadSHA = getOffloadSHA();
-    QString memoryBlock = getMemoryBlock();
-    args << "--launch-config" << kernel.toAscii();
-    if(ui->autotune->currentIndex() == 0)
-    {
-        args << "--no-autotune";
-    }
-    args << "--texture-cache" << textureCache.toAscii();
-    args << "--hash-parallel" << offloadSHA.toAscii();
-    args << "--single-memory" << memoryBlock.toAscii();
-    args << "--scantime" << ui->scantimeBox->text().toAscii();
-    args << "--url" << urlLine.toAscii();
-    args << "--userpass" << userpassLine.toAscii();
-    args << "--retries" << "-1"; // Retry forever.
-    
-    threadSpeed.clear();
-
-    acceptedShares = 0;
-    rejectedShares = 0;
-
-    roundAcceptedShares = 0;
-    roundRejectedShares = 0;
-
-    // If minerd is in current path, then use that. Otherwise, assume minerd is in the path somewhere.
-    QString program = QDir::current().filePath("cudaminer");
-    if (!QFile::exists(program))
-        program = "cudaminer";
-
-    if (ui->debugCheckBox->isChecked())
-        ui->list->addItem(args.join(" ").prepend(" ").prepend(program));
-
-    ui->mineSpeedLabel->setText("Speed: N/A");
-    ui->shareCount->setText("Accepted: 0 - Rejected: 0");
-    minerProcess->start(program,args);
-    minerProcess->waitForStarted(-1);
-
-    readTimer->start(500);        
-    }
-    else
-    {
-    QStringList args;
-    QString url = ui->serverLine->text();
-    if (!url.contains("http://"))
-        url.prepend("http://");
-    QString urlLine = QString("%1:%2").arg(url, ui->portLine->text());
-    QString userpassLine = QString("%1:%2").arg(ui->usernameLine->text(), ui->passwordLine->text());
-    QString intensity = getIntensity();
-    QString concurrency = ui->concurrency->text();
-    QString workload = ui->workload->text();
-    args << "--scrypt";
-    args << "--url" << urlLine.toAscii();
-    args << "--userpass" << userpassLine.toAscii();
-    args << "--intensity" << intensity.toAscii();
-    args << "--thread-concurrency" << concurrency.toAscii();
-    args << "--worksize" << workload.toAscii();
-    args << "--gpu-threads" << ui->threadsBox->text().toAscii();
-
-    threadSpeed.clear();
-
-    acceptedShares = 0;
-    rejectedShares = 0;
-
-    roundAcceptedShares = 0;
-    roundRejectedShares = 0;
-
-    // If minerd is in current path, then use that. Otherwise, assume minerd is in the path somewhere.
-    QString program = QDir::current().filePath("cgminer");
-    if (!QFile::exists(program))
-        program = "cgminer";
-
-    if (ui->debugCheckBox->isChecked())
-        ui->list->addItem(args.join(" ").prepend(" ").prepend(program));
-
-    ui->mineSpeedLabel->setText("Speed: N/A");
-    ui->shareCount->setText("Accepted: 0 - Rejected: 0");
-    minerProcess->start(program,args);
-    minerProcess->waitForStarted(-1);
-
-    readTimer->start(500);
-    }
-}
-
-void MiningPage::startSolo2Mining()
-{
-    if(getMiner() == 1)
-    {
-    QStringList args;
-    QString url = ui->serverLine->text();
-    QString urlLine = QString("%1:%2").arg(url, ui->portLine->text());
-    QString userpassLine = QString("%1:%2").arg(ui->usernameLine->text(), ui->passwordLine->text());
-    args << "--algo" << "scrypt";
-    args << "--scantime" << ui->scantimeBox->text().toAscii();
-    args << "--url" << urlLine.toAscii();
-    args << "--userpass" << userpassLine.toAscii();
-    args << "--threads" << ui->threadsBox->text().toAscii();
-    args << "--retries" << "-1"; // Retry forever.
-    args << "-P"; // This is needed for this to work correctly on Windows. Extra protocol dump helps flush the buffer quicker.
-
-    threadSpeed.clear();
-
-    acceptedShares = 0;
-    rejectedShares = 0;
-
-    roundAcceptedShares = 0;
-    roundRejectedShares = 0;
-
-    // If minerd is in current path, then use that. Otherwise, assume minerd is in the path somewhere.
-    QString program = QDir::current().filePath("minerd");
-    if (!QFile::exists(program))
-        program = "minerd";
-
-    if (ui->debugCheckBox->isChecked())
-        ui->list->addItem(args.join(" ").prepend(" ").prepend(program));
-
-    ui->mineSpeedLabel->setText("Speed: N/A");
-    ui->shareCount->setText("Accepted: 0 - Rejected: 0");
-    minerProcess->start(program,args);
-    minerProcess->waitForStarted(-1);
-
-    readTimer->start(500);
-    }
-    else if (getMiner() == 2)
-    {
-    QStringList args;
-    QString url = ui->serverLine->text();
-    QString urlLine = QString("%1:%2").arg(url, ui->portLine->text());
-    QString kernel = ui->kernel->text();
-    QString userpassLine = QString("%1:%2").arg(ui->usernameLine->text(), ui->passwordLine->text());
-    QString textureCache = getTextureCache();
-    QString offloadSHA = getOffloadSHA();
-    QString memoryBlock = getMemoryBlock();
-    args << "--launch-config" << kernel.toAscii();
-    if(ui->autotune->currentIndex() == 0)
-    {
-        args << "--no-autotune";
-    }
-    args << "--texture-cache" << textureCache.toAscii();
-    args << "--hash-parallel" << offloadSHA.toAscii();
-    args << "--single-memory" << memoryBlock.toAscii();
-    args << "--scantime" << ui->scantimeBox->text().toAscii();
-    args << "--url" << urlLine.toAscii();
-    args << "--userpass" << userpassLine.toAscii();
-    args << "--retries" << "-1"; // Retry forever.
-    
-    threadSpeed.clear();
-
-    acceptedShares = 0;
-    rejectedShares = 0;
-
-    roundAcceptedShares = 0;
-    roundRejectedShares = 0;
-
-    // If minerd is in current path, then use that. Otherwise, assume minerd is in the path somewhere.
-    QString program = QDir::current().filePath("cudaminer");
-    if (!QFile::exists(program))
-        program = "cudaminer";
-
-    if (ui->debugCheckBox->isChecked())
-        ui->list->addItem(args.join(" ").prepend(" ").prepend(program));
-
-    ui->mineSpeedLabel->setText("Speed: N/A");
-    ui->shareCount->setText("Accepted: 0 - Rejected: 0");
-    minerProcess->start(program,args);
-    minerProcess->waitForStarted(-1);
-
-    readTimer->start(500);        
-    }
-    else
-    {
-    QStringList args;
-    QString url = ui->serverLine->text();
-    QString urlLine = QString("%1:%2").arg(url, ui->portLine->text());
-    QString userpassLine = QString("%1:%2").arg(ui->usernameLine->text(), ui->passwordLine->text());
-    QString intensity = getIntensity();
-    QString concurrency = ui->concurrency->text();
-    QString workload = ui->workload->text();
-    args << "--scrypt";
-    args << "--url" << urlLine.toAscii();
-    args << "--userpass" << userpassLine.toAscii();
-    args << "--intensity" << intensity.toAscii();
-    args << "--thread-concurrency" << concurrency.toAscii();
-    args << "--worksize" << workload.toAscii();
-    args << "--gpu-threads" << ui->threadsBox->text().toAscii();
-
-    threadSpeed.clear();
-
-    acceptedShares = 0;
-    rejectedShares = 0;
-
-    roundAcceptedShares = 0;
-    roundRejectedShares = 0;
-
-    // If minerd is in current path, then use that. Otherwise, assume minerd is in the path somewhere.
-    QString program = QDir::current().filePath("cgminer");
-    if (!QFile::exists(program))
-        program = "cgminer";
-
-    if (ui->debugCheckBox->isChecked())
-        ui->list->addItem(args.join(" ").prepend(" ").prepend(program));
-
-    ui->mineSpeedLabel->setText("Speed: N/A");
-    ui->shareCount->setText("Accepted: 0 - Rejected: 0");
-    minerProcess->start(program,args);
-    minerProcess->waitForStarted(-1);
-
-    readTimer->start(500);
-    }
-}
-
-void MiningPage::stopSolo2Mining()
-{
-    ui->mineSpeedLabel->setText("");
-    minerProcess->kill();
-    readTimer->stop();
-}
-
-void MiningPage::stopP2PMining()
-{
-    ui->mineSpeedLabel->setText("");
-    minerProcess->kill();
-    readTimer->stop();
-}
-
-void MiningPage::stopPoolMining()
+void MiningPage::stopExtMining()
 {
     ui->mineSpeedLabel->setText("");
     minerProcess->kill();
@@ -550,11 +293,11 @@ void MiningPage::readProcessOutput()
             }
 
             if (line.contains("(yay!!!)"))
-                reportToList("Success", SHARE_SUCCESS, getTime(line));
-            else if (line.contains("(Lost the game)"))
-                reportToList("Lost the game", SHARE_FAIL, getTime(line));
-            else if (line.contains("LONGPOLL detected new acre"))
-                reportToList("LONGPOLL detected a new acre", LONGPOLL, getTime(line));
+                reportToList("Success! PlusEVCoin block mined :)", SHARE_SUCCESS, getTime(line));
+            else if (line.contains("(booooo)"))
+                reportToList("Block rejected, keep mining.", SHARE_FAIL, getTime(line));
+            else if (line.contains("LONGPOLL detected new block"))
+                reportToList("LONGPOLL detected a new block", LONGPOLL, getTime(line));
             else if (line.contains("Supported options:"))
                 reportToList("Miner didn't start properly. Try checking your settings.", ERROR, NULL);
             else if (line.contains("The requested URL returned error: 403"))
@@ -589,7 +332,7 @@ void MiningPage::minerError(QProcess::ProcessError error)
 {
     if (error == QProcess::FailedToStart)
     {
-        reportToList("Miner failed to start. Make sure you have the minerd executable and libraries in the same directory as PlusEVCoin-qt.", ERROR, NULL);
+        reportToList("Miner failed to start. Make sure you have the minerd executable and libraries in the same directory as PlusEVCoin-qt.\n", ERROR, NULL);
     }
 }
 
@@ -602,7 +345,7 @@ void MiningPage::minerFinished()
     ui->list->addItem("");
     minerActive = false;
     resetMiningButton();
-    model->setMining(getMiningType(), false, initThreads, 0);
+    model->setMining(getMiningType(), getMinerType(), false, initThreads, 0);
 }
 
 void MiningPage::minerStarted()
@@ -620,7 +363,7 @@ void MiningPage::minerStarted()
     }
     minerActive = true;
     resetMiningButton();
-    model->setMining(getMiningType(), true, initThreads, 0);
+    model->setMining(getMiningType(), getMinerType(), true, initThreads, 0);
 }
 
 void MiningPage::updateSpeed()
@@ -658,7 +401,7 @@ void MiningPage::updateSpeed()
 
     ui->shareCount->setText(QString("Accepted: %1 (%3) - Rejected: %2 (%4)").arg(acceptedString, rejectedString, roundAcceptedString, roundRejectedString));
 
-    model->setMining(getMiningType(), true, initThreads, totalSpeed*1000);
+    model->setMining(getMiningType(), getMinerType(), true, initThreads, totalSpeed*1000);
 }
 
 void MiningPage::reportToList(QString msg, int type, QString time)
@@ -753,20 +496,21 @@ ClientModel::MiningType MiningPage::getMiningType()
     return ClientModel::InternalMining;
 }
 
-int MiningPage::getMiner()
+ClientModel::MinerType MiningPage::getMinerType()
 {
     if(ui->minerBox->currentIndex() == 0) // Minerd [CPU]
     {
-        return 1;
+        return ClientModel::Minerd;
     } 
     else if(ui->minerBox->currentIndex() == 1) // CUDA Miner [nVidia]
     {
-        return 2;
+        return ClientModel::CUDAMiner;
     }
-    else  // CGMiner [AMD]
+    else   if(ui->minerBox->currentIndex() == 2) // CGMiner [AMD]
     {
-        return 3;
+        return ClientModel::CGMiner;
     }
+    return ClientModel::Minerd;
 }
 
 const char* MiningPage::getTextureCache()

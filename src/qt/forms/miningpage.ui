@@ -90,6 +90,9 @@
      <property name="text">
       <string>Debug Logging</string>
      </property>
+     <property name="Checked">
+      <bool>true</bool>
+     </property>
     </widget>
    </item>
    <item row="13" column="3">
@@ -168,7 +171,7 @@
    <item row="3" column="2">
     <widget class="QLabel" name="minerLabel">
      <property name="text">
-      <string>Miner used:</string>
+      <string>Miner used</string>
      </property>
     </widget>
    </item>
@@ -219,7 +222,7 @@
    <item row="3" column="1">
     <widget class="QLabel" name="typeLabel">
      <property name="text">
-      <string>Type</string>
+      <string>Mining Type</string>
      </property>
     </widget>
    </item>
@@ -258,7 +261,7 @@
      <property name="enabled">
       <bool>true</bool>
      </property>
-     <property name="text">
+     <property name="Text">
       <string>5253</string>
      </property>
      <property name="value" stdset="0">
@@ -461,7 +464,7 @@
    <item row="15" column="4">
     <widget class="QLabel" name="autotuneLabel">
      <property name="text">
-      <string>Autotune</string>
+      <string>Autotune:</string>
      </property>
     </widget>
    </item>
