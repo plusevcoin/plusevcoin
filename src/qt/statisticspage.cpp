@@ -1,200 +1,69 @@
 #include "statisticspage.h"
 #include "ui_statisticspage.h"
+#include "main.h"
+#include "wallet.h"
+#include "base58.h"
+#include "clientmodel.h"
+#include "bitcoinrpc.h"
+#include <sstream>
+#include <string>
 
-#include "walletmodel.h"
-#include "bitcoinunits.h"
-#include "optionsmodel.h"
-#include "transactiontablemodel.h"
-#include "transactionfilterproxy.h"
-#include "guiutil.h"
-#include "guiconstants.h"
-
-#include <QAbstractItemDelegate>
-#include <QPainter>
-
-#define DECORATION_SIZE 64
-#define NUM_ITEMS 3
-
-class TxViewDelegate : public QAbstractItemDelegate
-{
-    Q_OBJECT
-public:
-    TxViewDelegate(): QAbstractItemDelegate(), unit(BitcoinUnits::PEVC)
-    {
-
-    }
-
-    inline void paint(QPainter *painter, const QStyleOptionViewItem &option,
-                      const QModelIndex &index ) const
-    {
-        painter->save();
-
-        QIcon icon = qvariant_cast<QIcon>(index.data(Qt::DecorationRole));
-        QRect mainRect = option.rect;
-        QRect decorationRect(mainRect.topLeft(), QSize(DECORATION_SIZE, DECORATION_SIZE));
-        int xspace = DECORATION_SIZE + 8;
-        int ypad = 6;
-        int halfheight = (mainRect.height() - 2*ypad)/2;
-        QRect amountRect(mainRect.left() + xspace, mainRect.top()+ypad, mainRect.width() - xspace, halfheight);
-        QRect addressRect(mainRect.left() + xspace, mainRect.top()+ypad+halfheight, mainRect.width() - xspace, halfheight);
-        icon.paint(painter, decorationRect);
-
-        QDateTime date = index.data(TransactionTableModel::DateRole).toDateTime();
-        QString address = index.data(Qt::DisplayRole).toString();
-        qint64 amount = index.data(TransactionTableModel::AmountRole).toLongLong();
-        bool confirmed = index.data(TransactionTableModel::ConfirmedRole).toBool();
-        QVariant value = index.data(Qt::ForegroundRole);
-        QColor foreground = option.palette.color(QPalette::Text);
-        if(qVariantCanConvert<QColor>(value))
-        {
-            foreground = qvariant_cast<QColor>(value);
-        }
-
-        painter->setPen(foreground);
-        painter->drawText(addressRect, Qt::AlignLeft|Qt::AlignVCenter, address);
-
-        if(amount < 0)
-        {
-            foreground = COLOR_NEGATIVE;
-        }
-        else if(!confirmed)
-        {
-            foreground = COLOR_UNCONFIRMED;
-        }
-        else
-        {
-            foreground = option.palette.color(QPalette::Text);
-        }
-        painter->setPen(foreground);
-        QString amountText = BitcoinUnits::formatWithUnit(unit, amount, true);
-        if(!confirmed)
-        {
-            amountText = QString("[") + amountText + QString("]");
-        }
-        painter->drawText(amountRect, Qt::AlignRight|Qt::AlignVCenter, amountText);
-
-        painter->setPen(option.palette.color(QPalette::Text));
-        painter->drawText(amountRect, Qt::AlignLeft|Qt::AlignVCenter, GUIUtil::dateTimeStr(date));
-
-        painter->restore();
-    }
-
-    inline QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const
-    {
-        return QSize(DECORATION_SIZE, DECORATION_SIZE);
-    }
-
-    int unit;
-
-};
-#include "statisticspage.moc"
+using namespace json_spirit;
 
 StatisticsPage::StatisticsPage(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::StatisticsPage),
-    currentBalance(-1),
-    currentUnconfirmedBalance(-1),
-    currentImmatureBalance(-1),
-    txdelegate(new TxViewDelegate()),
-    filter(0)
+    ui(new Ui::StatisticsPage)
 {
     ui->setupUi(this);
-
-    // Recent transactions
-    ui->listTransactions->setItemDelegate(txdelegate);
-    ui->listTransactions->setIconSize(QSize(DECORATION_SIZE, DECORATION_SIZE));
-    ui->listTransactions->setMinimumHeight(NUM_ITEMS * (DECORATION_SIZE + 2));
-    ui->listTransactions->setAttribute(Qt::WA_MacShowFocusRect, false);
-
-    connect(ui->listTransactions, SIGNAL(clicked(QModelIndex)), this, SLOT(handleTransactionClicked(QModelIndex)));
-
-    // init "out of sync" warning labels
-    ui->labelWalletStatus->setText("(" + tr("Not synchronized") + ")");
-    ui->labelTransactionsStatus->setText("(" + tr("Not synchronized") + ")");
-
-    // start with displaying the "out of sync" warnings
-    showOutOfSyncWarning(true);
+    
+    setFixedSize(400, 420);
+    
+    connect(ui->startButton, SIGNAL(pressed()), this, SLOT(updateStatistics()));
 }
 
-void StatisticsPage::handleTransactionClicked(const QModelIndex &index)
+void StatisticsPage::updateStatistics()
+{    
+    double pDifficulty = this->model->GetDifficulty();
+    int pPawrate = this->model->GetNetworkHashPS(-1);
+    double pPawrate2 = 0.000;
+    int nHeight = pindexBest->nHeight;
+    int lPawrate = this->model->getHashrate();
+    double lPawrate2 = 0.000;
+    double nSubsidy = 0;
+    int volume = getTotalVolume();
+    int peers = this->model->getNumConnections();
+    if(nHeight < 1960000)
+    {
+        nSubsidy = 250.000000 - ((double)nHeight * 0.000125);
+    }
+    else
+    {
+        nSubsidy = 5;
+    }
+    lPawrate2 = ((double)lPawrate / 1000);
+    pPawrate2 = ((double)pPawrate / 1000);  
+    QString height = QString::number(nHeight);
+    QString subsidy = QString::number(nSubsidy, 'f', 6);
+    QString difficulty = QString::number(pDifficulty, 'f', 6);
+    QString pawrate = QString::number(pPawrate2, 'f', 3);
+    QString Qlpawrate = QString::number(lPawrate2, 'f', 3);
+    QString QPeers = QString::number(peers);
+    QString qVolume = QString::number(volume);
+    ui->heightBox->setText(height);
+    ui->rewardBox->setText(subsidy);
+    ui->diffBox->setText(difficulty);
+    ui->pawrateBox->setText(pawrate + " KH/s");
+    ui->localBox->setText(Qlpawrate + " KH/s");
+    ui->connectionBox->setText(QPeers);
+    ui->volumeBox->setText(qVolume + " FOX");
+}
+
+void StatisticsPage::setModel(ClientModel *model)
 {
-    if(filter)
-        emit transactionClicked(filter->mapToSource(index));
+    this->model = model;
 }
 
 StatisticsPage::~StatisticsPage()
 {
     delete ui;
-}
-
-void StatisticsPage::setBalance(qint64 balance, qint64 unconfirmedBalance, qint64 immatureBalance)
-{
-    int unit = model->getOptionsModel()->getDisplayUnit();
-    currentBalance = balance;
-    currentUnconfirmedBalance = unconfirmedBalance;
-    currentImmatureBalance = immatureBalance;
-    ui->labelBalance->setText(BitcoinUnits::formatWithUnit(unit, balance));
-    ui->labelUnconfirmed->setText(BitcoinUnits::formatWithUnit(unit, unconfirmedBalance));
-    ui->labelImmature->setText(BitcoinUnits::formatWithUnit(unit, immatureBalance));
-
-    // only show immature (newly mined) balance if it's non-zero, so as not to complicate things
-    // for the non-mining users
-    bool showImmature = immatureBalance != 0;
-    ui->labelImmature->setVisible(showImmature);
-    ui->labelImmatureText->setVisible(showImmature);
-}
-
-void StatisticsPage::setNumTransactions(int count)
-{
-    ui->labelNumTransactions->setText(QLocale::system().toString(count));
-}
-
-void StatisticsPage::setModel(WalletModel *model)
-{
-    this->model = model;
-    if(model && model->getOptionsModel())
-    {
-        // Set up transaction list
-        filter = new TransactionFilterProxy();
-        filter->setSourceModel(model->getTransactionTableModel());
-        filter->setLimit(NUM_ITEMS);
-        filter->setDynamicSortFilter(true);
-        filter->setSortRole(Qt::EditRole);
-        filter->sort(TransactionTableModel::Status, Qt::DescendingOrder);
-
-        ui->listTransactions->setModel(filter);
-        ui->listTransactions->setModelColumn(TransactionTableModel::ToAddress);
-
-        // Keep up to date with wallet
-        setBalance(model->getBalance(), model->getUnconfirmedBalance(), model->getImmatureBalance());
-        connect(model, SIGNAL(balanceChanged(qint64, qint64, qint64)), this, SLOT(setBalance(qint64, qint64, qint64)));
-
-        setNumTransactions(model->getNumTransactions());
-        connect(model, SIGNAL(numTransactionsChanged(int)), this, SLOT(setNumTransactions(int)));
-
-        connect(model->getOptionsModel(), SIGNAL(displayUnitChanged(int)), this, SLOT(updateDisplayUnit()));
-    }
-
-    // update the display unit, to not use the default ("PEVC")
-    updateDisplayUnit();
-}
-
-void StatisticsPage::updateDisplayUnit()
-{
-    if(model && model->getOptionsModel())
-    {
-        if(currentBalance != -1)
-            setBalance(currentBalance, currentUnconfirmedBalance, currentImmatureBalance);
-
-        // Update txdelegate->unit with the current unit
-        txdelegate->unit = model->getOptionsModel()->getDisplayUnit();
-
-        ui->listTransactions->update();
-    }
-}
-
-void StatisticsPage::showOutOfSyncWarning(bool fShow)
-{
-    ui->labelWalletStatus->setVisible(fShow);
-    ui->labelTransactionsStatus->setVisible(fShow);
 }

@@ -13,6 +13,7 @@
 #include <QStringList>
 #include <QMap>
 #include <QSettings>
+#include <QSlider>
 
 // Log types
 #define STARTED 0
@@ -49,15 +50,29 @@ public:
     int roundRejectedShares;
 
     int initThreads;
-
+    
+    int getMiner();
+    const char* getTextureCache();
+    const char* getOffloadSHA();
+    const char* getMemoryBlock();
+    const char* getIntensity();
     void setModel(ClientModel *model);
 
 public slots:
     void startPressed();
 
+    void minerStarted();
+    void minerError(QProcess::ProcessError);
+    void minerFinished();
+
+    void startSolo2Mining();
+    void stopSolo2Mining();
+
+    void startP2PMining();
+    void stopP2PMining();
+    
     void startPoolMining();
     void stopPoolMining();
-
     void updateSpeed();
 
     void loadSettings();
@@ -65,10 +80,6 @@ public slots:
 
     void reportToList(QString, int, QString);
 
-    void minerStarted();
-
-    void minerError(QProcess::ProcessError);
-    void minerFinished();
 
     void readProcessOutput();
 

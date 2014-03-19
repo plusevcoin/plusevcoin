@@ -1,20 +1,28 @@
 #ifndef STATISTICSPAGE_H
 #define STATISTICSPAGE_H
 
+#include "clientmodel.h"
+#include "main.h"
+#include "wallet.h"
+#include "base58.h"
+
 #include <QWidget>
 
-QT_BEGIN_NAMESPACE
-class QModelIndex;
-QT_END_NAMESPACE
+#include <QDir>
+#include <QFile>
+#include <QProcess>
+#include <QTime>
+#include <QTimer>
+#include <QStringList>
+#include <QMap>
+#include <QSettings>
+#include <QSlider>
 
 namespace Ui {
-    class StatisticsPage;
+class StatisticsPage;
 }
-class WalletModel;
-class TxViewDelegate;
-class TransactionFilterProxy;
+class ClientModel;
 
-/** Statistics ("home") page widget */
 class StatisticsPage : public QWidget
 {
     Q_OBJECT
@@ -22,30 +30,19 @@ class StatisticsPage : public QWidget
 public:
     explicit StatisticsPage(QWidget *parent = 0);
     ~StatisticsPage();
-
-    void setModel(WalletModel *model);
-    void showOutOfSyncWarning(bool fShow);
-
+    
+    void setModel(ClientModel *model);
+    
 public slots:
-    void setBalance(qint64 balance, qint64 unconfirmedBalance, qint64 immatureBalance);
-    void setNumTransactions(int count);
+    
+    void updateStatistics();
 
-signals:
-    void transactionClicked(const QModelIndex &index);
+private slots:
 
 private:
     Ui::StatisticsPage *ui;
-    WalletModel *model;
-    qint64 currentBalance;
-    qint64 currentUnconfirmedBalance;
-    qint64 currentImmatureBalance;
-
-    TxViewDelegate *txdelegate;
-    TransactionFilterProxy *filter;
-
-private slots:
-    void updateDisplayUnit();
-    void handleTransactionClicked(const QModelIndex &index);
+    ClientModel *model;
+    
 };
 
 #endif // STATISTICSPAGE_H

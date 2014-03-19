@@ -128,6 +128,7 @@ TransactionView::TransactionView(QWidget *parent) :
     QAction *copyAmountAction = new QAction(tr("Copy amount"), this);
     QAction *editLabelAction = new QAction(tr("Edit label"), this);
     QAction *showDetailsAction = new QAction(tr("Show transaction details"), this);
+    QAction *copyTxIdAction = new QAction(tr("Copy Transaction ID"), this);
 
     contextMenu = new QMenu();
     contextMenu->addAction(copyAddressAction);
@@ -135,6 +136,7 @@ TransactionView::TransactionView(QWidget *parent) :
     contextMenu->addAction(copyAmountAction);
     contextMenu->addAction(editLabelAction);
     contextMenu->addAction(showDetailsAction);
+    contextMenu->addAction(copyTxIdAction);
 
     // Connect actions
     connect(dateWidget, SIGNAL(activated(int)), this, SLOT(chooseDate(int)));
@@ -150,6 +152,7 @@ TransactionView::TransactionView(QWidget *parent) :
     connect(copyAmountAction, SIGNAL(triggered()), this, SLOT(copyAmount()));
     connect(editLabelAction, SIGNAL(triggered()), this, SLOT(editLabel()));
     connect(showDetailsAction, SIGNAL(triggered()), this, SLOT(showDetails()));
+    connect(copyTxIdAction, SIGNAL(triggered()), this, SLOT(copyTxId()));
 }
 
 void TransactionView::setModel(WalletModel *model)
@@ -305,6 +308,11 @@ void TransactionView::contextualMenu(const QPoint &point)
 void TransactionView::copyAddress()
 {
     GUIUtil::copyEntryData(transactionView, 0, TransactionTableModel::AddressRole);
+}
+
+void TransactionView::copyTxId()
+{
+    GUIUtil::copyEntryData(transactionView, 0, TransactionTableModel::TxIDRole);
 }
 
 void TransactionView::copyLabel()

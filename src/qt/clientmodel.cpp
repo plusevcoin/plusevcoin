@@ -37,8 +37,8 @@ ClientModel::ClientModel(OptionsModel *optionsModel, QObject *parent) :
     */
 //    if (fGenerateBitcoins)
 //    {
-        miningType = SoloMining;
-        miningStarted = true;
+        miningType = InternalMining;
+        miningStarted = false;
 //    }
 //    else
 //    {
@@ -163,6 +163,29 @@ int ClientModel::getHashrate() const
     return (boost::int64_t)dHashesPerSec;
 }
 
+int ClientModel::GetNetworkHashPS(int lookup) const
+{
+    if (pindexBest == NULL)
+        return 0;
+
+    // If lookup is -1, then use blocks since last difficulty change.
+    if (lookup <= 0)
+        lookup = pindexBest->nHeight;
+
+    // If lookup is larger than chain, then set it to chain length.
+    if (lookup > pindexBest->nHeight)
+        lookup = pindexBest->nHeight;
+
+    CBlockIndex* pindexPrev = pindexBest;
+    for (int i = 0; i < lookup; i++)
+        pindexPrev = pindexPrev->pprev;
+
+    double timeDiff = pindexBest->GetBlockTime() - pindexPrev->GetBlockTime();
+    double timePerBlock = timeDiff / lookup;
+
+    return (boost::int64_t)(((double)GetDifficulty() * pow(2.0, 32)) / timePerBlock);
+}
+
 // Litecoin: copied from bitcoinrpc.cpp.
 double ClientModel::GetDifficulty() const
 {
@@ -209,7 +232,7 @@ void ClientModel::updateTimer()
     cachedNumBlocksOfPeers = newNumBlocksOfPeers;
 
     // Only need to update if solo mining. When pool mining, stats are pushed.
-    if (miningType == SoloMining)
+    if (miningType == InternalMining)
     {
         int newHashrate = getHashrate();
         if (cachedHashrate != newHashrate)
@@ -259,7 +282,7 @@ int ClientModel::getNumBlocksOfPeers() const
 
 void ClientModel::setMining(MiningType type, bool mining, int threads, int hashrate)
 {
-    if (type == SoloMining && mining != miningStarted)
+    if (type == InternalMining && mining != miningStarted)
     {
         GenerateBitcoins(mining ? 1 : 0, pwalletMain);
     }

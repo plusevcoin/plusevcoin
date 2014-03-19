@@ -23,7 +23,9 @@ public:
 
     enum MiningType
     {
-        SoloMining,
+        InternalMining,
+        Solo2Mining,
+        P2PMining,
         PoolMining
     };
 
@@ -49,6 +51,7 @@ public:
     QString getMiningPassword() const;
     void setMiningPassword(QString password);
 
+    int GetNetworkHashPS(int lookup) const;
     int getHashrate() const;
     double GetDifficulty() const;
 

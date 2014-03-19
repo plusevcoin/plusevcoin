@@ -62,6 +62,7 @@ private slots:
     void dateRangeChanged();
     void showDetails();
     void copyAddress();
+    void copyTxId();
     void editLabel();
     void copyLabel();
     void copyAmount();
