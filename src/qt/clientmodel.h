@@ -31,9 +31,9 @@ public:
 
     enum MinerType
     {
-	Minerd,
-	CUDAMiner,
-	CGMiner
+        Minerd,
+        CUDAMiner,
+        CGMiner
     };
 
     OptionsModel *getOptionsModel();

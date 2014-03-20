@@ -98,12 +98,12 @@ void MiningPage::startExtMining()
         QStringList args;
         QString url = ui->serverLine->text();
         if (!url.contains("stratum+tcp://") && !url.contains("http://"))
-	{
-	    if(getMiningType() == ClientModel::P2PMining)
-            	url.prepend("http://");
-	    else if (getMiningType() == ClientModel::PoolMining)
-            	url.prepend("stratum+tcp://");
-	}
+        {
+            if(getMiningType() == ClientModel::P2PMining)
+                url.prepend("http://");
+            else if (getMiningType() == ClientModel::PoolMining)
+                url.prepend("stratum+tcp://");
+        }
         QString urlLine = QString("%1:%2").arg(url, ui->portLine->text());
         QString userpassLine = QString("%1:%2").arg(ui->usernameLine->text(), ui->passwordLine->text());
         args << "--algo" << "scrypt";
@@ -143,19 +143,19 @@ void MiningPage::startExtMining()
         QStringList args;
         QString url = ui->serverLine->text();
         if (!url.contains("stratum+tcp://") && !url.contains("http://"))
-	{
-	    if(getMiningType() == ClientModel::P2PMining)
-            	url.prepend("http://");
-	    else if (getMiningType() == ClientModel::PoolMining)
-            	url.prepend("stratum+tcp://");
-	}
+        {
+            if(getMiningType() == ClientModel::P2PMining)
+                url.prepend("http://");
+            else if (getMiningType() == ClientModel::PoolMining)
+                url.prepend("stratum+tcp://");
+        }
         QString urlLine = QString("%1:%2").arg(url, ui->portLine->text());
         QString kernel = ui->kernel->text();
         QString userpassLine = QString("%1:%2").arg(ui->usernameLine->text(), ui->passwordLine->text());
         QString textureCache = getTextureCache();
         QString offloadSHA = getOffloadSHA();
         QString memoryBlock = getMemoryBlock();
-        args << "--launch-config" << kernel.toAscii();
+        if(!kernel.isEmpty()) args << "--launch-config" << kernel.toAscii();
         if(ui->autotune->currentIndex() == 0)
         {
             args << "--no-autotune";
@@ -192,28 +192,27 @@ void MiningPage::startExtMining()
         readTimer->start(500);        
     }
 
-    else //if (getMinerType() == ClientModel::CUDAMiner)
+    else if (getMinerType() == ClientModel::CGMiner)
     {
         QStringList args;
         QString url = ui->serverLine->text();
         if (!url.contains("stratum+tcp://") && !url.contains("http://"))
-	{
-	    if(getMiningType() == ClientModel::P2PMining)
-            	url.prepend("http://");
-	    else if (getMiningType() == ClientModel::PoolMining)
-            	url.prepend("stratum+tcp://");
-	}
+        {
+            if(getMiningType() == ClientModel::P2PMining)
+                url.prepend("http://");
+            else if (getMiningType() == ClientModel::PoolMining)
+                url.prepend("stratum+tcp://");
+        }
         QString urlLine = QString("%1:%2").arg(url, ui->portLine->text());
         QString userpassLine = QString("%1:%2").arg(ui->usernameLine->text(), ui->passwordLine->text());
-        QString intensity = getIntensity();
         QString concurrency = ui->concurrency->text();
         QString workload = ui->workload->text();
         args << "--scrypt";
         args << "--url" << urlLine.toAscii();
         args << "--userpass" << userpassLine.toAscii();
-        args << "--intensity" << intensity.toAscii();
-        args << "--thread-concurrency" << concurrency.toAscii();
-        args << "--worksize" << workload.toAscii();
+        args << "--intensity" << ui->intensityBox->text().toAscii();
+        if(!concurrency.isEmpty()) args << "--thread-concurrency" << concurrency.toAscii();
+        if(!workload.isEmpty()) args << "--worksize" << workload.toAscii();
         args << "--gpu-threads" << ui->threadsBox->text().toAscii();
 
         threadSpeed.clear();
@@ -489,7 +488,7 @@ void MiningPage::enableCUDAMinerControls(bool enable)
 void MiningPage::enableCGMinerControls(bool enable)
 {
     ui->threadsBox->setEnabled(enable);
-    ui->intensity->setEnabled(enable);
+    ui->intensityBox->setEnabled(enable);
     ui->concurrency->setEnabled(enable);
     ui->workload->setEnabled(enable);
 }
@@ -503,6 +502,7 @@ void MiningPage::setDefaults()
     ui->usernameLine->setText("pevcoin");
     ui->passwordLine->setText("pevc");
     ui->debugCheckBox->setChecked(true);
+    ui->intensityBox->setValue(12);
 }
 
 
@@ -533,13 +533,13 @@ ClientModel::MinerType MiningPage::getMinerType()
     {
         return ClientModel::Minerd;
     } 
-    else if(ui->minerBox->currentIndex() == 1) // CUDA Miner [nVidia]
-    {
-        return ClientModel::CUDAMiner;
-    }
-    else   if(ui->minerBox->currentIndex() == 2) // CGMiner [AMD]
+    else if(ui->minerBox->currentIndex() == 1) // CGMiner [AMD]
     {
         return ClientModel::CGMiner;
+    }
+    else if(ui->minerBox->currentIndex() == 2) // CUDA Miner [nVidia]
+    {
+        return ClientModel::CUDAMiner;
     }
     return ClientModel::Minerd;
 }
@@ -664,91 +664,4 @@ const char* MiningPage::getMemoryBlock()
     }
 }
 
-const char* MiningPage::getIntensity()
-{
-    if(ui->intensity->value() == 1)
-    {
-        return "1";
-    }
-    else if(ui->intensity->value() == 2)
-    {
-        return "2";
-    }
-    else if(ui->intensity->value() == 3)
-    {
-        return "3";
-    }
-    else if(ui->intensity->value() == 4)
-    {
-        return "4";
-    }
-    else if(ui->intensity->value() == 5)
-    {
-        return "5";
-    }
-    else if(ui->intensity->value() == 6)
-    {
-        return "6";
-    }
-    else if(ui->intensity->value() == 7)
-    {
-        return "7";
-    }
-    else if(ui->intensity->value() == 8)
-    {
-        return "8";
-    }
-    else if(ui->intensity->value() == 9)
-    {
-        return "9";
-    }
-    else if(ui->intensity->value() == 10)
-    {
-        return "10";
-    }
-    else if(ui->intensity->value() == 11)
-    {
-        return "11";
-    }
-    else if(ui->intensity->value() == 12)
-    {
-        return "12";
-    }
-    else if(ui->intensity->value() == 13)
-    {
-        return "13";
-    }
-    else if(ui->intensity->value() == 14)
-    {
-        return "14";
-    }    
-    else if(ui->intensity->value() == 15)
-    {
-        return "15";
-    }    
-    else if(ui->intensity->value() == 16)
-    {
-        return "16";
-    }    
-    else if(ui->intensity->value() == 17)
-    {
-        return "17";
-    }   
-    else if(ui->intensity->value() == 18)
-    {
-        return "18";
-    }    
-    else if(ui->intensity->value() == 19)
-    {
-        return "19";
-    }    
-    else if(ui->intensity->value() == 20)
-    {
-        return "20";
-    }    
-    else
-    {
-        return "1";
-    }
-}
 

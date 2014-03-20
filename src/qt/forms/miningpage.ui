@@ -20,7 +20,7 @@
    <item row="15" column="2">
     <widget class="QLabel" name="hashLabel">
      <property name="text">
-      <string>Hash-Parallel:</string>
+      <string>Hash-Parallel (H)</string>
      </property>
     </widget>
    </item>
@@ -38,17 +38,17 @@
     <widget class="QComboBox" name="offloadSHA">
      <item>
       <property name="text">
-       <string>Offload to 1 thread.</string>
+       <string>Offload to 1 thread [0]</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>Offload to all threads.</string>
+       <string>Offload to all threads [1]</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>All hashing to GPU.</string>
+       <string>All hashing to GPU [2]</string>
       </property>
      </item>
     </widget>
@@ -57,17 +57,17 @@
     <widget class="QComboBox" name="textureCache">
      <item>
       <property name="text">
-       <string>No Cache</string>
+       <string>No Cache [0]</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>1D Cache</string>
+       <string>1D Cache [1]</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>2D Cache</string>
+       <string>2D Cache [2]</string>
       </property>
      </item>
     </widget>
@@ -98,7 +98,7 @@
    <item row="13" column="3">
     <widget class="QLabel" name="workloadLabel">
      <property name="text">
-      <string>Worksize:</string>
+      <string>Worksize (w)</string>
      </property>
     </widget>
    </item>
@@ -141,7 +141,7 @@
    <item row="13" column="4">
     <widget class="QLabel" name="kernelLabel">
      <property name="text">
-      <string>Kernel:</string>
+      <string>Launch config (l)</string>
      </property>
     </widget>
    </item>
@@ -151,7 +151,7 @@
    <item row="15" column="1">
     <widget class="QLabel" name="cacheLabel">
      <property name="text">
-      <string>Texture Cache:</string>
+      <string>Texture Cach (C)</string>
      </property>
     </widget>
    </item>
@@ -180,14 +180,8 @@
      <property name="enabled">
       <bool>true</bool>
      </property>
-     <property name="suffix">
-      <string/>
-     </property>
-     <property name="prefix">
-      <string/>
-     </property>
      <property name="minimum">
-      <number>1</number>
+      <number>-1</number>
      </property>
      <property name="maximum">
       <number>99</number>
@@ -368,18 +362,21 @@
     </widget>
    </item>
    <item row="14" column="1">
-    <widget class="QSlider" name="intensity">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
+    <widget class="QSpinBox" name="intensityBox">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="minimum">
+      <number>-1</number>
      </property>
      <property name="maximum">
-      <number>20</number>
+      <number>99</number>
      </property>
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
+     <property name="singleStep">
+      <number>1</number>
+     </property>
+     <property name="value">
+      <number>12</number>
      </property>
     </widget>
    </item>
@@ -413,12 +410,12 @@
      </item>
      <item>
       <property name="text">
-       <string>CUDAMiner [nVIDIA GPU]</string>
+       <string>CGMiner [AMD GPU]</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>CGMiner [AMD GPU]</string>
+       <string>CUDAMiner [nVIDIA GPU]</string>
       </property>
      </item>
     </widget>
@@ -433,14 +430,14 @@
    <item row="13" column="1">
     <widget class="QLabel" name="intensityLabel">
      <property name="text">
-      <string>Intensity:</string>
+      <string>Intensity (I)</string>
      </property>
     </widget>
    </item>
    <item row="15" column="3">
     <widget class="QLabel" name="memoryLabel">
      <property name="text">
-      <string>Memory Block:</string>
+      <string>Memory Block (m)</string>
      </property>
     </widget>
    </item>
@@ -448,12 +445,12 @@
     <widget class="QComboBox" name="memoryBlock">
      <item>
       <property name="text">
-       <string>Unlimited Blocks</string>
+       <string>Unlimited Blocks [0]</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>1 Block</string>
+       <string>1 Block [1]</string>
       </property>
      </item>
     </widget>
@@ -461,7 +458,7 @@
    <item row="15" column="4">
     <widget class="QLabel" name="autotuneLabel">
      <property name="text">
-      <string>Autotune:</string>
+      <string>Autotune</string>
      </property>
     </widget>
    </item>
@@ -469,12 +466,12 @@
     <widget class="QComboBox" name="autotune">
      <item>
       <property name="text">
-       <string>Off</string>
+       <string>On</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>On</string>
+       <string>Off</string>
       </property>
      </item>
     </widget>

@@ -55,7 +55,6 @@ public:
     const char* getTextureCache();
     const char* getOffloadSHA();
     const char* getMemoryBlock();
-    const char* getIntensity();
     void setModel(ClientModel *model);
 
 public slots:
