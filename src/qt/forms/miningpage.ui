@@ -141,7 +141,7 @@
    <item row="13" column="4">
     <widget class="QLabel" name="kernelLabel">
      <property name="text">
-      <string>Launch config (l)</string>
+      <string>Launch-Config (l)</string>
      </property>
     </widget>
    </item>
@@ -151,7 +151,7 @@
    <item row="15" column="1">
     <widget class="QLabel" name="cacheLabel">
      <property name="text">
-      <string>Texture Cach (C)</string>
+      <string>Texture-Cache (C)</string>
      </property>
     </widget>
    </item>
@@ -258,9 +258,6 @@
      <property name="Text">
       <string>5252</string>
      </property>
-     <property name="value" stdset="0">
-      <number>5252</number>
-     </property>
     </widget>
    </item>
    <item row="8" column="1">
@@ -270,9 +267,6 @@
      </property>
      <property name="text">
       <string notr="true">example.com</string>
-     </property>
-     <property name="placeholderText">
-      <string notr="true"/>
      </property>
     </widget>
    </item>
@@ -362,21 +356,15 @@
     </widget>
    </item>
    <item row="14" column="1">
-    <widget class="QSpinBox" name="intensityBox">
+    <widget class="QLineEdit" name="intensityBox">
      <property name="enabled">
       <bool>true</bool>
      </property>
-     <property name="minimum">
-      <number>-1</number>
+     <property name="Text">
+      <string />
      </property>
-     <property name="maximum">
-      <number>99</number>
-     </property>
-     <property name="singleStep">
-      <number>1</number>
-     </property>
-     <property name="value">
-      <number>12</number>
+     <property name="placeholderText">
+      <string>TESTgrasiu</string>
      </property>
     </widget>
    </item>
@@ -423,7 +411,7 @@
    <item row="13" column="2">
     <widget class="QLabel" name="concurrencyLabel">
      <property name="text">
-      <string>Thread-Concurrency:</string>
+      <string>Thread-Concurrency</string>
      </property>
     </widget>
    </item>
@@ -437,7 +425,7 @@
    <item row="15" column="3">
     <widget class="QLabel" name="memoryLabel">
      <property name="text">
-      <string>Memory Block (m)</string>
+      <string>Single-Memory (m)</string>
      </property>
     </widget>
    </item>

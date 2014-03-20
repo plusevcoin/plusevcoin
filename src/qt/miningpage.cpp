@@ -156,7 +156,7 @@ void MiningPage::startExtMining()
         QString offloadSHA = getOffloadSHA();
         QString memoryBlock = getMemoryBlock();
         if(!kernel.isEmpty()) args << "--launch-config" << kernel.toAscii();
-        if(ui->autotune->currentIndex() == 0)
+        if(ui->autotune->currentIndex() == 1)
         {
             args << "--no-autotune";
         }
@@ -207,10 +207,11 @@ void MiningPage::startExtMining()
         QString userpassLine = QString("%1:%2").arg(ui->usernameLine->text(), ui->passwordLine->text());
         QString concurrency = ui->concurrency->text();
         QString workload = ui->workload->text();
+        QString intensity = ui->intensityBox->text();
         args << "--scrypt";
         args << "--url" << urlLine.toAscii();
         args << "--userpass" << userpassLine.toAscii();
-        args << "--intensity" << ui->intensityBox->text().toAscii();
+        if(!intensity.isEmpty()) args << "--intensity" << intensity.toAscii();
         if(!concurrency.isEmpty()) args << "--thread-concurrency" << concurrency.toAscii();
         if(!workload.isEmpty()) args << "--worksize" << workload.toAscii();
         args << "--gpu-threads" << ui->threadsBox->text().toAscii();
@@ -402,7 +403,7 @@ void MiningPage::updateSpeed()
     else
         ui->mineSpeedLabel->setText(QString("Speed: ~%1 khash/sec - %2 thread(s)").arg(speedString, threadsString));
 
-    ui->shareCount->setText(QString("Accepted: %1 (%3) - Rejected: %2 (%4)").arg(acceptedString, rejectedString, roundAcceptedString, roundRejectedString));
+    ui->shareCount->setText(QString("Accepted: %1 - Rejected: %2").arg(acceptedString, rejectedString));//, roundAcceptedString, roundRejectedString));
 
     model->setMining(getMiningType(), getMinerType(), true, initThreads, totalSpeed*1000);
 }
@@ -502,7 +503,7 @@ void MiningPage::setDefaults()
     ui->usernameLine->setText("pevcoin");
     ui->passwordLine->setText("pevc");
     ui->debugCheckBox->setChecked(true);
-    ui->intensityBox->setValue(12);
+    //ui->intensityBox->setText("12");
 }
 
 
@@ -546,25 +547,25 @@ ClientModel::MinerType MiningPage::getMinerType()
 
 void MiningPage::typeChanged(int index)
 {
-    if (ui->typeBox->currentIndex() == 0) // Solo2 Mining
+    if (getMiningType() == ClientModel::Solo2Mining) // Solo2 Mining
     {
         ui->minerBox->setEnabled(true);
         enableBaseControls(true);
         minerChanged(-1);
     }
-    else if (ui->typeBox->currentIndex() == 1) // Poool Mining
+    else if (getMiningType() == ClientModel::PoolMining) // Poool Mining
     {
         ui->minerBox->setEnabled(true);
         enableBaseControls(true);
         minerChanged(-1);
     }
-    else if (ui->typeBox->currentIndex() == 2)  // P2P Mining
+    else if (getMiningType() == ClientModel::P2PMining) // P2P Mining
     {
         ui->minerBox->setEnabled(true);
         enableBaseControls(true);
         minerChanged(-1);
     }
-    if (ui->typeBox->currentIndex() == 3)  // Internal Mining
+    else if (getMiningType() == ClientModel::InternalMining) // Internal Mining
     {
         ui->minerBox->setEnabled(false);
         enableBaseControls(false);
@@ -576,23 +577,23 @@ void MiningPage::typeChanged(int index)
 
 void MiningPage::minerChanged(int index)
 {
-    if(ui->minerBox->currentIndex() == 0) // Minerd [CPU]
+    if(getMinerType() == ClientModel::Minerd) // Minerd [CPU]
     {
         enableCUDAMinerControls(false);
         enableCGMinerControls(false);
         enableMinerdControls(true);
     } 
-    else if(ui->minerBox->currentIndex() == 1) // CUDA Miner [nVidia]
-    {
-        enableMinerdControls(false);
-        enableCGMinerControls(false);
-        enableCUDAMinerControls(true);
-    }
-    else if(ui->minerBox->currentIndex() == 2) // CGMiner [AMD]
+    else if(getMinerType() == ClientModel::CGMiner) // CGMiner [AMD]
     {
         enableMinerdControls(false);
         enableCUDAMinerControls(false);
         enableCGMinerControls(true);
+    }
+    else if(getMinerType() == ClientModel::CUDAMiner) // CUDA Miner [nVidia]
+    {
+        enableMinerdControls(false);
+        enableCGMinerControls(false);
+        enableCUDAMinerControls(true);
     }
 }
 
