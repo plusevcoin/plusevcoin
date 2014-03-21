@@ -123,9 +123,9 @@ void MiningPage::startExtMining()
         roundRejectedShares = 0;
 
         // If minerd is in current path, then use that. Otherwise, assume minerd is in the path somewhere.
-        QString program = QDir::current().filePath("minerd");
-        if (!QFile::exists(program))
-            program = "minerd";
+        QString program = QDir::current().filePath("minerd/minerd");
+        //if (!QFile::exists(program))
+        //    program = "minerd";
 
         if (ui->debugCheckBox->isChecked())
             ui->list->addItem(args.join(" ").prepend(" ").prepend(program));
@@ -177,9 +177,9 @@ void MiningPage::startExtMining()
         roundRejectedShares = 0;
 
         // If minerd is in current path, then use that. Otherwise, assume minerd is in the path somewhere.
-        QString program = QDir::current().filePath("cudaminer");
-        if (!QFile::exists(program))
-            program = "cudaminer";
+        QString program = QDir::current().filePath("cudaminer/cudaminer");
+        //if (!QFile::exists(program))
+        //    program = "cudaminer";
 
         if (ui->debugCheckBox->isChecked())
             ui->list->addItem(args.join(" ").prepend(" ").prepend(program));
@@ -225,9 +225,9 @@ void MiningPage::startExtMining()
         roundRejectedShares = 0;
 
         // If minerd is in current path, then use that. Otherwise, assume minerd is in the path somewhere.
-        QString program = QDir::current().filePath("cgminer");
-        if (!QFile::exists(program))
-            program = "cgminer";
+        QString program = QDir::current().filePath("cgminer/cgminer");
+        //if (!QFile::exists(program))
+        //    program = "cgminer";
 
         if (ui->debugCheckBox->isChecked())
             ui->list->addItem(args.join(" ").prepend(" ").prepend(program));
@@ -336,7 +336,7 @@ void MiningPage::minerError(QProcess::ProcessError error)
 {
     if (error == QProcess::FailedToStart)
     {
-        reportToList("Miner failed to start. Make sure you have the minerd executable and libraries in the same directory as PlusEVCoin-qt.\n", ERROR, NULL);
+        reportToList("Miner failed to start. Make sure you have the executable and libraries in the same directory as PlusEVCoin-qt.\n", ERROR, NULL);
     }
 }
 
