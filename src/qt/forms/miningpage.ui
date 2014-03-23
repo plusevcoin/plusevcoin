@@ -103,7 +103,11 @@
     </widget>
    </item>
    <item row="14" column="2">
-    <widget class="QLineEdit" name="concurrency"/>
+    <widget class="QLineEdit" name="concurrency">
+     <property name="placeholderText">
+      <string>default</string>
+     </property>
+    </widget>
    </item>
    <item row="7" column="2">
     <widget class="QLabel" name="portLabel">
@@ -136,7 +140,11 @@
     </widget>
    </item>
    <item row="14" column="4">
-    <widget class="QLineEdit" name="kernel"/>
+    <widget class="QLineEdit" name="kernel">
+     <property name="placeholderText">
+      <string>default</string>
+     </property>
+    </widget>
    </item>
    <item row="13" column="4">
     <widget class="QLabel" name="kernelLabel">
@@ -146,7 +154,11 @@
     </widget>
    </item>
    <item row="14" column="3">
-    <widget class="QLineEdit" name="workload"/>
+    <widget class="QLineEdit" name="workload">
+     <property name="placeholderText">
+      <string>default</string>
+     </property>
+    </widget>
    </item>
    <item row="15" column="1">
     <widget class="QLabel" name="cacheLabel">
@@ -364,7 +376,7 @@
       <string />
      </property>
      <property name="placeholderText">
-      <string>TESTgrasiu</string>
+      <string>default</string>
      </property>
     </widget>
    </item>
