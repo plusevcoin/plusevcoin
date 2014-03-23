@@ -835,7 +835,7 @@ int64 static GetBlockValue(int nHeight, int64 nFees)
     
     if(nHeight < 1000000)
     {
-       nSubsidy = 50 * COIN; //Subsidy is 50 PEVC for first million blocks (~2 years)
+       nSubsidy = 50 * COIN; //Subsidy is 50 PEV for first million blocks (~2 years)
     }
     else if(nHeight < 3450000)
     {
@@ -843,20 +843,20 @@ int64 static GetBlockValue(int nHeight, int64 nFees)
     }
     else
     {
-        nSubsidy = 1 * COIN; // Afterwards subsidy stays at 1 PEVC till 520million coins are mined (~100 years)
+        nSubsidy = 1 * COIN; // Afterwards subsidy stays at 1 PEV till 520million coins are mined (~100 years)
     }
     
     /* Expected block reward values according to approximate block time:
-     * Genesis block:          50     PEVC || Total Volume: 0              PEVC
-     * A year post-launch:     50     PEVC || Total Volume: 26,800,000.00  PEVC
-     * 694 days post-launch:   49.99  PEVC || Total Volume: 50,000,000.00  PEVC
-     * 2 years post-launch:    48.98  PEVC || Total Volume: 52,533,785.60  PEVC
-     * 3 years post-launch:    38.47  PEVC || Total Volume: 75,513,017.60  PEVC
-     * 4 years post-launch:    27.95  PEVC || Total Volume: 92,967,142.40  PEVC
-     * 5 years post-launch:    17.44  PEVC || Total Volume: 104,896,160.00 PEVC
-     * 6 years post-launch:    6.93   PEVC || Total Volume: 111,300,070.40 PEVC
-     * 1700 days post-launch:  5.00   PEVC || Total Volume: 112,475,000.00 PEVC
-     * Afterwards:             5.00   PEVC || Total Volume: 112,475,000.00 + (Height in Blocks - 3.45M) PEVC
+     * Genesis block:          50     PEV || Total Volume: 0              PEV
+     * A year post-launch:     50     PEV || Total Volume: 26,800,000.00  PEV
+     * 694 days post-launch:   49.99  PEV || Total Volume: 50,000,000.00  PEV
+     * 2 years post-launch:    48.98  PEV || Total Volume: 52,533,785.60  PEV
+     * 3 years post-launch:    38.47  PEV || Total Volume: 75,513,017.60  PEV
+     * 4 years post-launch:    27.95  PEV || Total Volume: 92,967,142.40  PEV
+     * 5 years post-launch:    17.44  PEV || Total Volume: 104,896,160.00 PEV
+     * 6 years post-launch:    6.93   PEV || Total Volume: 111,300,070.40 PEV
+     * 1700 days post-launch:  5.00   PEV || Total Volume: 112,475,000.00 PEV
+     * Afterwards:             5.00   PEV || Total Volume: 112,475,000.00 + (Height in Blocks - 3.45M) PEV
      */
     
     return nSubsidy + nFees;

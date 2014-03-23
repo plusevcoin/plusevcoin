@@ -108,7 +108,7 @@ bool parseBitcoinURI(const QUrl &uri, SendCoinsRecipient *out)
         {
             if(!i->second.isEmpty())
             {
-                if(!BitcoinUnits::parse(BitcoinUnits::PEVC, i->second, &rv.amount))
+                if(!BitcoinUnits::parse(BitcoinUnits::PEV, i->second, &rv.amount))
                 {
                     return false;
                 }
@@ -185,7 +185,7 @@ QString getSaveFileName(QWidget *parent, const QString &caption,
     }
     QString result = QFileDialog::getSaveFileName(parent, caption, myDir, filter, &selectedFilter);
 
-    /* Extract first suffix from filter pattern "Description (*.PEVC)" or "Description (*.PEVC *.pevc ...) */
+    /* Extract first suffix from filter pattern "Description (*.PEV)" or "Description (*.PEV *.pev ...) */
     QRegExp filter_re(".* \\(\\*\\.(.*)[ \\)]");
     QString selectedSuffix;
     if(filter_re.exactMatch(selectedFilter))

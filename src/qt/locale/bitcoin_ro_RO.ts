@@ -1069,7 +1069,7 @@ Address: %4
     </message>
     <message>
         <location filename="../forms/qrcodedialog.ui" line="105"/>
-        <source>PEVC</source>
+        <source>PEV</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -1275,8 +1275,8 @@ Address: %4
     </message>
     <message>
         <location filename="../forms/sendcoinsdialog.ui" line="113"/>
-        <source>123.456 PEVC</source>
-        <translation>123.456 PEVC</translation>
+        <source>123.456 PEV</source>
+        <translation>123.456 PEV</translation>
     </message>
     <message>
         <location filename="../forms/sendcoinsdialog.ui" line="144"/>

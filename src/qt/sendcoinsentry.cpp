@@ -86,7 +86,7 @@ void SendCoinsEntry::clear()
     ui->addAsLabel->clear();
     ui->payAmount->clear();
     ui->payTo->setFocus();
-    // update the display unit, to not use the default ("PEVC")
+    // update the display unit, to not use the default ("PEV")
     updateDisplayUnit();
 }
 

@@ -19,7 +19,7 @@ class TxViewDelegate : public QAbstractItemDelegate
 {
     Q_OBJECT
 public:
-    TxViewDelegate(): QAbstractItemDelegate(), unit(BitcoinUnits::PEVC)
+    TxViewDelegate(): QAbstractItemDelegate(), unit(BitcoinUnits::PEV)
     {
 
     }
@@ -175,7 +175,7 @@ void OverviewPage::setModel(WalletModel *model)
         connect(model->getOptionsModel(), SIGNAL(displayUnitChanged(int)), this, SLOT(updateDisplayUnit()));
     }
 
-    // update the display unit, to not use the default ("PEVC")
+    // update the display unit, to not use the default ("PEV")
     updateDisplayUnit();
 }
 

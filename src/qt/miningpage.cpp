@@ -501,7 +501,7 @@ void MiningPage::setDefaults()
     ui->serverLine->setText("127.0.0.1");
     ui->portLine->setText("5252");
     ui->usernameLine->setText("pevcoin");
-    ui->passwordLine->setText("pevc");
+    ui->passwordLine->setText("pev");
     ui->debugCheckBox->setChecked(true);
     //ui->intensityBox->setText("12");
 }

@@ -17,9 +17,9 @@ public:
      */
     enum Unit
     {
-        PEVC,
-        mPEVC,
-        uPEVC
+        PEV,
+        mPEV,
+        uPEV
     };
 
     //! @name Static API

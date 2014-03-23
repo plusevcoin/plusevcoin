@@ -1014,7 +1014,7 @@ Address: %4
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>123.456 PEVC</source>
+        <source>123.456 PEV</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

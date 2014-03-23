@@ -124,7 +124,7 @@ void OptionsDialog::setModel(OptionsModel *model)
         mapper->toFirst();
     }
 
-    // update the display unit, to not use the default ("PEVC")
+    // update the display unit, to not use the default ("PEV")
     updateDisplayUnit();
 }
 

@@ -44,7 +44,7 @@ void QRCodeDialog::setModel(OptionsModel *model)
     if (model)
         connect(model, SIGNAL(displayUnitChanged(int)), this, SLOT(updateDisplayUnit()));
 
-    // update the display unit, to not use the default ("PEVC")
+    // update the display unit, to not use the default ("PEV")
     updateDisplayUnit();
 }
 
@@ -92,8 +92,8 @@ QString QRCodeDialog::getURI()
     {
         if (ui->lnReqAmount->validate())
         {
-            // even if we allow a non PEVC unit input in lnReqAmount, we generate the URI with PEVC as unit (as defined in BIP21)
-            ret += QString("?amount=%1").arg(BitcoinUnits::format(BitcoinUnits::PEVC, ui->lnReqAmount->value()));
+            // even if we allow a non PEV unit input in lnReqAmount, we generate the URI with PEV as unit (as defined in BIP21)
+            ret += QString("?amount=%1").arg(BitcoinUnits::format(BitcoinUnits::PEV, ui->lnReqAmount->value()));
             paramCount++;
         }
         else

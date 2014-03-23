@@ -12,9 +12,9 @@ BitcoinUnits::BitcoinUnits(QObject *parent):
 QList<BitcoinUnits::Unit> BitcoinUnits::availableUnits()
 {
     QList<BitcoinUnits::Unit> unitlist;
-    unitlist.append(PEVC);
-    unitlist.append(mPEVC);
-    unitlist.append(uPEVC);
+    unitlist.append(PEV);
+    unitlist.append(mPEV);
+    unitlist.append(uPEV);
     return unitlist;
 }
 
@@ -22,9 +22,9 @@ bool BitcoinUnits::valid(int unit)
 {
     switch(unit)
     {
-    case PEVC:
-    case mPEVC:
-    case uPEVC:
+    case PEV:
+    case mPEV:
+    case uPEV:
         return true;
     default:
         return false;
@@ -35,9 +35,9 @@ QString BitcoinUnits::name(int unit)
 {
     switch(unit)
     {
-    case PEVC: return QString("PEVC");
-    case mPEVC: return QString("mPEVC");
-    case uPEVC: return QString::fromUtf8("μPEVC");
+    case PEV: return QString("PEV");
+    case mPEV: return QString("mPEV");
+    case uPEV: return QString::fromUtf8("μPEV");
     default: return QString("???");
     }
 }
@@ -46,9 +46,9 @@ QString BitcoinUnits::description(int unit)
 {
     switch(unit)
     {
-    case PEVC: return QString("PlusEVCoin");
-    case mPEVC: return QString("milliPEVCoin (1 / 1,000)");
-    case uPEVC: return QString("microPEVCoin (1 / 1,000,000)");
+    case PEV: return QString("PlusEVCoin");
+    case mPEV: return QString("milliPEVCoin (1 / 1,000)");
+    case uPEV: return QString("microPEVCoin (1 / 1,000,000)");
     default: return QString("???");
     }
 }
@@ -57,9 +57,9 @@ qint64 BitcoinUnits::factor(int unit)
 {
     switch(unit)
     {
-    case PEVC:  return 100000000;
-    case mPEVC: return 100000;
-    case uPEVC: return 100;
+    case PEV:  return 100000000;
+    case mPEV: return 100000;
+    case uPEV: return 100;
     default:   return 100000000;
     }
 }
@@ -68,9 +68,9 @@ int BitcoinUnits::amountDigits(int unit)
 {
     switch(unit)
     {
-    case PEVC: return 9;   // 520,000,000 (# digits, without commas)
-    case mPEVC: return 12; // 520,000,000,000
-    case uPEVC: return 15; // 520,000,000,000,000
+    case PEV: return 9;   // 520,000,000 (# digits, without commas)
+    case mPEV: return 12; // 520,000,000,000
+    case uPEV: return 15; // 520,000,000,000,000
     default: return 0;
     }
 }
@@ -79,9 +79,9 @@ int BitcoinUnits::decimals(int unit)
 {
     switch(unit)
     {
-    case PEVC: return 8;
-    case mPEVC: return 5;
-    case uPEVC: return 2;
+    case PEV: return 8;
+    case mPEV: return 5;
+    case uPEV: return 2;
     default: return 0;
     }
 }
