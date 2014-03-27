@@ -362,7 +362,7 @@ void MiningPage::minerStarted()
         }
         else
         {
-            reportToList("Miner started. You might not see any output for a few minutes.", STARTED, NULL);
+            reportToList("Miner started. You might not see any output for a few moments.", STARTED, NULL);
         }
     }
     minerActive = true;
@@ -500,7 +500,7 @@ void MiningPage::setDefaults()
     ui->scantimeBox->setValue(8);
     ui->serverLine->setText("127.0.0.1");
     ui->portLine->setText("5252");
-    ui->usernameLine->setText("pevcoin");
+    ui->usernameLine->setText("plusevcoin");
     ui->passwordLine->setText("pev");
     ui->debugCheckBox->setChecked(true);
     //ui->intensityBox->setText("12");
