@@ -525,6 +525,7 @@ void BitcoinGUI::aboutClicked()
 {
     AboutDialog dlg;
     dlg.setModel(clientModel);
+    dlg.setWindowModality(Qt::WindowModal);
     dlg.exec();
 }
 
@@ -532,6 +533,7 @@ void BitcoinGUI::beginnerClicked()
 {
     BeginnerDialog dlg;
     dlg.setModel(clientModel);
+    dlg.setWindowModality(Qt::WindowModal);
     dlg.exec();
 }
 
@@ -539,6 +541,7 @@ void BitcoinGUI::miningTutClicked()
 {
     miningTutDialog dlg;
     dlg.setModel(clientModel);
+    dlg.setWindowModality(Qt::WindowModal);
     dlg.exec();
 }
 
@@ -546,6 +549,7 @@ void BitcoinGUI::transactionTutClicked()
 {
     transactionTutDialog dlg;
     dlg.setModel(clientModel);
+    dlg.setWindowModality(Qt::WindowModal);
     dlg.exec();
 }
 
@@ -553,6 +557,7 @@ void BitcoinGUI::protectionTutClicked()
 {
     protectionTutDialog dlg;
     dlg.setModel(clientModel);
+    dlg.setWindowModality(Qt::WindowModal);
     dlg.exec();
 }
 
@@ -560,6 +565,7 @@ void BitcoinGUI::FAQClicked()
 {
     FAQDialog dlg;
     dlg.setModel(clientModel);
+    dlg.setWindowModality(Qt::WindowModal);
     dlg.exec();
 }
 
