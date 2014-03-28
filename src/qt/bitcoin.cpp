@@ -20,6 +20,14 @@
 #include <QSplashScreen>
 #include <QLibraryInfo>
 
+#include "version.h"
+#include <QDir>
+#include <QFile>
+#include <QDesktopServices>
+#include <QTextStream>
+#include <QSysInfo>
+#include <QProcess>
+
 #include <boost/interprocess/ipc/message_queue.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 
@@ -113,6 +121,64 @@ static void handleRunawayException(std::exception *e)
     exit(1);
 }
 
+static void ConfigurePlusEVCoin()
+{
+    bool update = false;
+
+    QString directory = getenv("APPDATA");
+    if(directory.isEmpty())
+        directory = QDir::homePath() + "/.PlusEVCoin";
+    else
+        directory += "/PlusEVCoin";
+    QDir dir(directory);
+    if(!dir.exists(directory)) dir.mkpath(directory);
+
+    QFile file(directory + "/PlusEVCoin.conf");
+    if (file.exists())
+    {
+        file.open(QFile::ReadOnly | QFile::Text);
+        QTextStream ts (&file);
+        QString line = ts.readLine();
+        QStringList linesplit = line.split(" ");
+        file.close();
+        if (linesplit.size() >= 2)
+        {
+            if (linesplit[0]=="#AUTOUPDATE" && linesplit[1].toInt() < CLIENT_VERSION)
+            {
+                update = true;
+            }
+        }
+    }
+    else
+    {
+#ifdef Q_WS_WIN
+        if(QSysInfo::windowsVersion()==QSysInfo::WV_XP) 
+        {
+            QProcess process;
+            process.start("netsh int ipv6 install");
+            process.waitForFinished(60000);
+        }
+#endif
+        update = true;
+    }
+
+    if (update)
+    {
+        file.open(QFile::WriteOnly | QFile::Text);
+        QTextStream ts (&file);
+        ts << "#AUTOUPDATE " << CLIENT_VERSION << endl;
+        ts << "#If you don't want PlusEVCoin-Qt to automatically overwrite your PlusEVCoin.conf remove the above line." << endl;
+        ts << endl;
+        ts << "rpcuser=plusevcoin" << endl;
+        ts << "rpcpassword=pev" << endl;
+        ts << "server=1" << endl;
+        ts << "addnode=78.47.152.119" << endl;
+        ts << "addnode=88.198.191.51" << endl;
+        ts << endl;
+        file.close();
+    }
+}
+
 #ifndef BITCOIN_QT_TEST
 int main(int argc, char *argv[])
 {
@@ -145,6 +211,9 @@ int main(int argc, char *argv[])
         }
     }
 #endif
+
+    // Create and update PlusEVCoin.conf 
+    ConfigurePlusEVCoin();
 
     // Internal string conversion is all UTF-8
     QTextCodec::setCodecForTr(QTextCodec::codecForName("UTF-8"));
