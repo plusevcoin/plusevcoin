@@ -3,6 +3,7 @@ src/plusevcoin
 src/plusevcoind
 src/test_plusevcoin
 .*.swp
+.*.swo
 *.*~*
 *.bak
 *.rej
