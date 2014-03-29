@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>778</width>
-    <height>415</height>
+    <width>200</width>
+    <height>200</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>How to mine PlusEVCoin</string>
+   <string>How to mine PEV Coins?</string>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout_2">
    <item>
@@ -57,15 +57,16 @@
           </property>
           <property name="maximumSize">
            <size>
-            <width>16777215</width>
-            <height>267</height>
+            <width>1600</width>
+            <height>1200</height>
            </size>
           </property>
           <property name="cursor">
            <cursorShape>IBeamCursor</cursorShape>
           </property>
           <property name="text">
-           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;plusevcoin&lt;/span&gt; version: &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           <string>
+&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;plusevcoin&lt;/span&gt; version: &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
           <property name="textInteractionFlags">
            <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
@@ -98,6 +99,19 @@
       </widget>
      </item>
      <item>
+      <widget class="QLabel" name="label_topjump">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Maximum">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string></string>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QLabel" name="label_3">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Minimum" vsizetype="Maximum">
@@ -106,7 +120,10 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;How to solo mine:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;How to mine by Mining Type:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="textInteractionFlags">
+        <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
        </property>
       </widget>
      </item>
@@ -119,51 +136,68 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>With CPU:
+        <string>Solo Mining:
+Mining by yourself is the most simple and straightforward way of getting PEV Coins, suggested for beginner users. Just go to the "Mining"
+tab and press "Start Mining" button. You can edit basic options there, but for your convenience the default values are already set.
 
-Go to help in the top left corner, and then click on 'Debug window' inside that navigate the the console tabe execute the command
-'setgenerate true 16' and to stop mining use the command 'setgenerate false
+Pool and P2P mining:
+Mining with other people does not increase effectiveness (you still mine using only your own computer power), but it reduces variance. It
+works in a way that when anyone from your Pool or your P2P network finds a new block, the reward for it is shared among the people in
+this network, relatively to how much mining power they contributed. You will need a Server, Port, Username and Password provided by the
+Pool or P2P operator.
 
-With GPU:
+Internal mining:
+Ineffective type of mining, that requires no configuration. Used mostly for testing purposes. If for some unlikely reason no other Mining
+Type works you may want to try this option.
 
-Find your the RPC Username and Password in your PlusEVCoin.conf file in appdata (Or OSX/*nix equivalent), then, goto CG/CUDA miner
-directory and create a file called SoloMinePlusEVCoins.bat, right click and click edit, and enter in the following script:
-[Yourminingprogram.exe] --scrypt -o 127.0.0.1:9919 -u [Insert RPC username here] -p [Insert RPC password here]</string>
+</string>
        </property>
        <property name="textInteractionFlags">
-        <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+        <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QLabel" name="label_5">
        <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+        <sizepolicy hsizetype="Minimum" vsizetype="Maximum">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
        <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;How to mine in a pool:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;How to mine by Miner Used:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="textInteractionFlags">
+        <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QLabel" name="label_6">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Maximum">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="text">
-        <string>With CPU:
+           <string>Mining with CPU:
+Mining with your processor is the easiest, but also the least effective way to get PEV Coins. Just go to the "Mining" tab and press "Start
+Mining" button. You can edit mining options there, but for your convenience the default values are already set.
+The first thing you might want do edit is the "Threads" field. To use your CPU full capacity set it to number of cores your processor has.
 
-Download minerd, and place it in any directory. Sign up for a PlusEVCoin-Mining pool, they can be found in the same place where you
-downloaded PlusEVCoin-qt, and create a worker on the pool, the password can be x (it doesn't matter) now create a batch file (sh on
-OSX) and enter in the following command minerd.exe -a scrypt -s 6 -t 16 [Your pools URL:PORT, can be found in getting started]
- -O poolusername.worker.workerpassword
+Mining with GPU:
+Mining with your graphics card is very effective, but it will usually require some configuration. Go to the "Mining tab" and choose "Miner
+Used" appropriate for your GPU (CUDAMiner for nVidia cards and CGMiner for AMD cards) and press "Start Mining" button. For best
+performance you should set the Advanced Options. To find the right values go to https://litecoin.info/Mining_hardware_comparison,
+find your GPU model and input the appropriate values.
 
-With GPU:
 
-Download cg/cuda miner, and place it in any directory. Sign up for a PlusEVCoin-Mining pool, they can be found in the same place where you
-downloaded PlusEVCoin-qt, and create a worker on the pool, the password can be x (it doesn't matter) now create a batch file (sh on
-OSX) and enter in the following command cg/cuda.exe --scrypt [Your pools URL:PORT, can be found in getting started]
- -O poolusername.worker.workerpassword -I 10</string>
+</string>
+       </property>
+       <property name="textInteractionFlags">
+        <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
        </property>
       </widget>
      </item>

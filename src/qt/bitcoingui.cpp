@@ -298,19 +298,19 @@ void BitcoinGUI::createActions()
     openRPCConsoleAction = new QAction(QIcon(":/icons/debugwindow"), tr("&Debug window"), this);
     openRPCConsoleAction->setToolTip(tr("Open debugging and diagnostic console"));
     beginnerToPlusEVCoinAction = new QAction(QIcon(":/icons/bitcoin"), tr("&What is PlusEVCoin?"), this);
-    beginnerToPlusEVCoinAction->setToolTip(tr("A beginners guide to PlusEVCoin and cryptocurrency in general."));
+    beginnerToPlusEVCoinAction->setToolTip(tr("A quick introduction to PlusEVCoin in general."));
     beginnerToPlusEVCoinAction->setMenuRole(QAction::AboutRole);
-    miningTutorialAction = new QAction(QIcon(":/icons/mining_active"), tr("&How to mine PlusEVCoin"), this);
-    miningTutorialAction->setToolTip(tr("A beginners guide to mining."));
+    miningTutorialAction = new QAction(QIcon(":/icons/mining_active"), tr("&How to mine PEV Coins?"), this);
+    miningTutorialAction->setToolTip(tr("A simple guide about more efficient mining."));
     miningTutorialAction->setMenuRole(QAction::AboutRole);
-    transactionTutorialAction = new QAction(QIcon(":/icons/tx_inout"), tr("&How to send/receive PlusEVCoins"), this);
-    transactionTutorialAction->setToolTip(tr("A beginners guide transactions with crypto."));
+    transactionTutorialAction = new QAction(QIcon(":/icons/tx_inout"), tr("&How to send/receive PEV Coins?"), this);
+    transactionTutorialAction->setToolTip(tr("A simple guide about sending and receiving PEV Coins."));
     transactionTutorialAction->setMenuRole(QAction::AboutRole);
-    protectionTutorialAction = new QAction(QIcon(":/icons/lock_closed"), tr("&How to protect your PlusEVCoins"), this);
-    protectionTutorialAction->setToolTip(tr("A beginners guide to encrypting Wallets."));
+    protectionTutorialAction = new QAction(QIcon(":/icons/lock_closed"), tr("&How to protect your PEV Coins?"), this);
+    protectionTutorialAction->setToolTip(tr("A simple guide about encrypting and backuping the wallet."));
     protectionTutorialAction->setMenuRole(QAction::AboutRole);
-    FAQAction = new QAction(QIcon(":/icons/transaction_0"), tr("&FAQ"), this);
-    FAQAction->setToolTip(tr("Frequently asked questions about PlusEVCoin."));
+    FAQAction = new QAction(QIcon(":/icons/transaction_0"), tr("&PlusEVCoin FAQ"), this);
+    FAQAction->setToolTip(tr("Frequently Asked Questions about PlusEVCoin."));
     FAQAction->setMenuRole(QAction::AboutRole);
 
     connect(quitAction, SIGNAL(triggered()), qApp, SLOT(quit()));

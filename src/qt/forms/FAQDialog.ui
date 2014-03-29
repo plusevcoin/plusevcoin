@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>819</width>
-    <height>206</height>
+    <width>200</width>
+    <height>200</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -57,8 +57,8 @@
           </property>
           <property name="maximumSize">
            <size>
-            <width>16777215</width>
-            <height>267</height>
+            <width>1600</width>
+            <height>1200</height>
            </size>
           </property>
           <property name="cursor">
@@ -98,22 +98,6 @@
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="label_2">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Who distributes PlusEVCoins?&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-       </property>
-       <property name="textInteractionFlags">
-        <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
-       </property>
-      </widget>
-     </item>
-     <item>
       <widget class="QLabel" name="label_3">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
@@ -122,55 +106,18 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>You do! If you participate in the network, your computer helps to distribute PlusEVCoins. PlusEVCoin uses a PoW (Proof of Work) which means a bunch
-of computers compete to verify the most transactions. The computer who does is rewarded the block reward.</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;If any question about PlusEVCoin starts to be asked frequently, you will find&lt;br&gt;
+the answer here. In the meantime if you want to ask about anything we&lt;br&gt;
+strongly encourage you to send your questions to &lt;a href="mailto:plusevcoin@gmail.com"&gt;plusevcoin@gmail.com&lt;/a&gt;.&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;/body&gt;&lt;/html&gt;</string>
        </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="label_5">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
+       <property name="textInteractionFlags">
+        <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
        </property>
-       <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;What can I use my PlusEVCoins for?&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="label_6">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="text">
-        <string>At this very moment? Not a lot, but more people will accept them as the currency becomes more recognized. Hang on to your coins!</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="label_7">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;If PlusEVCoins are created by computers then how do they have any value?&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="label_8">
-       <property name="text">
-        <string>Because people believe they do. The more people who use and trade PlusEVCoin the more it is valued. And PlusEVCoins are not 'created out of thin air'
-They are mined by verifying transactions, supporting the network.</string>
+       <property name="openExternalLinks">
+        <set>true</set>
        </property>
       </widget>
      </item>

@@ -19,8 +19,9 @@
 #define STARTED 0
 #define SHARE_SUCCESS 1
 #define SHARE_FAIL 2
-#define ERROR 3
+#define LOGERROR 3
 #define LONGPOLL 4
+#define LOGSIMPLE 5
 
 namespace Ui {
     class MiningPage;
@@ -46,15 +47,9 @@ public:
     int acceptedShares;
     int rejectedShares;
 
-    int roundAcceptedShares;
-    int roundRejectedShares;
-
     int initThreads;
     
-    int getMiner();
-    const char* getTextureCache();
-    const char* getOffloadSHA();
-    const char* getMemoryBlock();
+    //int getMiner();
     void setModel(ClientModel *model);
 
 public slots:

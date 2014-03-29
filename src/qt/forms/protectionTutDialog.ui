@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>801</width>
-    <height>234</height>
+    <width>200</width>
+    <height>200</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Protecting your PlusEVCoins</string>
+   <string>How to protect your PEV Coins?</string>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout_2">
    <item>
@@ -57,8 +57,8 @@
           </property>
           <property name="maximumSize">
            <size>
-            <width>16777215</width>
-            <height>267</height>
+            <width>1600</width>
+            <height>1200</height>
            </size>
           </property>
           <property name="cursor">
@@ -98,7 +98,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="label_3">
+      <widget class="QLabel" name="label_topjump">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Minimum" vsizetype="Maximum">
          <horstretch>0</horstretch>
@@ -106,27 +106,87 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;How to encrypt and backup your PlusEVCoin wallet:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string></string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QLabel" name="label_2">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="text">
-        <string>Before you begin, please note that encrypting your wallet will NOT fully protect your coins (but it will help significantly)
-
-To start, in the top left corner, click 'settings', navigate with your mouse down to  'Encrypt wallet' the one with the lock icon, and click on it.
-A menu should appear, enter in a passphrase that contains around 4 words with at least one deviation (e.g b4tterystaplehorsecorrect) and
-enter it in both fields, make sure to memorize or write down this password (try to avoid storing it elecronically if you want to be as secure as
-possible, but that isn't necassery) Enter in the same passphrase in both fields, click OK and then confirm.
-
-Changing your passphrase can be done easily via the 'Change Passphrase' button under settings, but it requires your current passphrase.
-
-The next thing you want to do is backup your Wallet, now this is optional. Navigate to your plusevcoin directory %APPDATA%/roaming for
-Windows, Application Support for OSX, and your /plusevcoin directory on *nix systems. Find your wallet.dat and copy it to secure location.</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Encrypting your wallet:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
        <property name="textInteractionFlags">
-        <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+        <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_3">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>Before you begin, please note that encrypting your wallet will NOT fully protect your coins (but it will help significantly). Encrypting simply
+means creating a password that will be required to spend any PEV Coins from your wallet. To do it click "Settings"b in the Menu Bar,
+choose "Encrypt Wallet..." and follow the instructions. To change the password, for example if it becomes compromised, go to "Settings"
+and choose "Change passphrase...".
+IMPORTANT: Make sure you will not forget your passphrase. You might want to write it down on a piece of paper and store it somewhere,
+but never save it in any file neither on your computer nor online. If you forget your passphrase, there will be ABSOLUTELY NO WAY to
+gain access to your PEV Coins.
+
+</string>
+       </property>
+       <property name="textInteractionFlags">
+        <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_5">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Maximum">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Backuping your wallet:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="textInteractionFlags">
+        <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_6">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Maximum">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>In the (hopefully unlikely :) case of something happening to your computer's hard drive it is good to have a backup copy of your wallet.
+To backup your wallet click "File" in the Menu Bar and choose "Backup Wallet...". You will be then prompted to choose where to save the
+wallet.dat file, which is the backup. We suggest to move this file to some secure location: external USB Flash Drive or an online file
+storage service (f.e. DropBox.com).
+IMPORTANT: Always encrypt your wallet before making a backup. Anyone who gets hold of your unencrypted copy (or encrypted copy
+with relevant passphrase) will be able to spend all PEV Coins from your wallet!
+
+
+</string>
+       </property>
+       <property name="textInteractionFlags">
+        <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
        </property>
       </widget>
      </item>
@@ -182,3 +242,4 @@ Windows, Application Support for OSX, and your /plusevcoin directory on *nix sys
   </connection>
  </connections>
 </ui>
+

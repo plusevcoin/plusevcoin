@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>460</width>
-    <height>272</height>
+    <width>200</width>
+    <height>200</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>How to send/receive PlusEVCoins</string>
+   <string>How to send/receive PEV Coins?</string>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout_2">
    <item>
@@ -57,15 +57,16 @@
           </property>
           <property name="maximumSize">
            <size>
-            <width>16777215</width>
-            <height>267</height>
+            <width>1600</width>
+            <height>1200</height>
            </size>
           </property>
           <property name="cursor">
            <cursorShape>IBeamCursor</cursorShape>
           </property>
           <property name="text">
-           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;plusevcoin&lt;/span&gt; version: &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;plusevcoin&lt;/span&gt; version: &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
+</string>
           </property>
           <property name="textInteractionFlags">
            <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
@@ -98,6 +99,19 @@
       </widget>
      </item>
      <item>
+      <widget class="QLabel" name="label_topjump">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Maximum">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string></string>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QLabel" name="label_2">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
@@ -106,10 +120,10 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;How to send PlusEVCoin:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;How to send PEV Coins:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
        <property name="textInteractionFlags">
-        <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+        <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
        </property>
       </widget>
      </item>
@@ -122,15 +136,16 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>1. Get the address you want to send coins to
-2. Go to the 'send coins' tab, next to 'Central Cave'
-3. Click the first icon right of the 'Pay to' field (looks like a book)
-4.Click 'New Address'
-5. Enter in the address you want to send stuff too, and give it a name.
-6. Click the icon again
-7. Select the address you just added
-8. Enter in how many you want to send
-9. Click 'send'</string>
+        <string>1. Go to "Send PEV Coins" tab.
+2. Enter the PlusEVCoin address you want to send the coins to in the
+    "Pay To" field (or use your Address Book by clicking the book icon).
+3. Enter how much you want to send in the "Amount" field.
+4. Click "Send" button.
+
+</string>
+       </property>
+       <property name="textInteractionFlags">
+        <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
        </property>
       </widget>
      </item>
@@ -143,16 +158,36 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;How to receive PlusEVCoins:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;How to receive PEV Coins:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="textInteractionFlags">
+        <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QLabel" name="label_6">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Maximum">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="text">
-        <string>1. Go to the 'Receive coins' tab (Next to the send coins tab)
-2. Give somebody the address that is there (Right click, copy address)
-3. Wait</string>
+        <string>1. Go to "Receive PEV Coins" tab.
+2. Choose the address you want to receive PEV Coins to (we suggest
+    creating a different address for each recipient, so you can keep
+    track who is paying you).
+3. Click "Copy Addrees" to copy it to clipboard.
+4. Give the address to someone you want to receive the coins from.
+5. The coins will show up in your account in about two minutes after
+    the other person clicks the "Send" button.
+
+
+</string>
+       </property>
+       <property name="textInteractionFlags">
+        <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
        </property>
       </widget>
      </item>

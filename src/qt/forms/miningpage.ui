@@ -35,42 +35,18 @@
     </widget>
    </item>
    <item row="16" column="2">
-    <widget class="QComboBox" name="offloadSHA">
-     <item>
-      <property name="text">
-       <string>Offload to 1 thread [0]</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Offload to all threads [1]</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>All hashing to GPU [2]</string>
-      </property>
-     </item>
+    <widget class="QLineEdit" name="offLoadSHA">
+     <property name="placeholderText">
+      <string>default</string>
+     </property>
     </widget>
    </item>
    <item row="16" column="1">
-    <widget class="QComboBox" name="textureCache">
-     <item>
-      <property name="text">
-       <string>No Cache [0]</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>1D Cache [1]</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>2D Cache [2]</string>
-      </property>
-     </item>
-    </widget>
+    <widget class="QLineEdit" name="textureCache">
+      <property name="placeholderText">
+      <string>default</string>
+     </property>
+   </widget>
    </item>
    <item row="24" column="2">
     <widget class="QPushButton" name="startButton">
@@ -139,15 +115,15 @@
      </property>
     </widget>
    </item>
-   <item row="14" column="4">
-    <widget class="QLineEdit" name="kernel">
+   <item row="16" column="4">
+    <widget class="QLineEdit" name="launchConfig">
      <property name="placeholderText">
       <string>default</string>
      </property>
     </widget>
    </item>
-   <item row="13" column="4">
-    <widget class="QLabel" name="kernelLabel">
+   <item row="15" column="4">
+    <widget class="QLabel" name="launchConfigLabel">
      <property name="text">
       <string>Launch-Config (l)</string>
      </property>
@@ -168,15 +144,9 @@
     </widget>
    </item>
    <item row="5" column="4">
-    <widget class="QSpinBox" name="scantimeBox">
-     <property name="enabled">
-      <bool>true</bool>
-     </property>
-     <property name="minimum">
-      <number>1</number>
-     </property>
-     <property name="value">
-      <number>5</number>
+    <widget class="QLineEdit" name="scantimeBox">
+     <property name="placeholderText">
+      <string>default</string>
      </property>
     </widget>
    </item>
@@ -188,21 +158,9 @@
     </widget>
    </item>
    <item row="5" column="3">
-    <widget class="QSpinBox" name="threadsBox">
-     <property name="enabled">
-      <bool>true</bool>
-     </property>
-     <property name="minimum">
-      <number>-1</number>
-     </property>
-     <property name="maximum">
-      <number>99</number>
-     </property>
-     <property name="singleStep">
-      <number>1</number>
-     </property>
-     <property name="value">
-      <number>16</number>
+    <widget class="QLineEdit" name="threadsBox">
+     <property name="placeholderText">
+      <string>default</string>
      </property>
     </widget>
    </item>
@@ -368,7 +326,7 @@
     </widget>
    </item>
    <item row="14" column="1">
-    <widget class="QLineEdit" name="intensityBox">
+    <widget class="QLineEdit" name="intensity">
      <property name="enabled">
       <bool>true</bool>
      </property>
@@ -410,7 +368,7 @@
      </item>
      <item>
       <property name="text">
-       <string>CGMiner [AMD GPU]</string>
+       <string>CGMiner [AMD/Intel GPU]</string>
       </property>
      </item>
      <item>
@@ -442,27 +400,20 @@
     </widget>
    </item>
    <item row="16" column="3">
-    <widget class="QComboBox" name="memoryBlock">
-     <item>
-      <property name="text">
-       <string>Unlimited Blocks [0]</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>1 Block [1]</string>
-      </property>
-     </item>
+    <widget class="QLineEdit" name="memoryBlock">
+     <property name="placeholderText">
+      <string>default</string>
+     </property>
     </widget>
    </item>
-   <item row="15" column="4">
+   <item row="13" column="4">
     <widget class="QLabel" name="autotuneLabel">
      <property name="text">
       <string>Autotune</string>
      </property>
     </widget>
    </item>
-   <item row="16" column="4">
+   <item row="14" column="4">
     <widget class="QComboBox" name="autotune">
      <item>
       <property name="text">
