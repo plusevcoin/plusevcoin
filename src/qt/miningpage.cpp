@@ -151,7 +151,16 @@ void MiningPage::startExtMining()
     // CUDAMiner [nVidia GPU]
     else if (getMinerType() == ClientModel::CUDAMiner)
     {
+#if defined(Q_WS_WIN)
         program = QDir::current().filePath("cudaminer/cudaminer");
+#elif defined(Q_WS_MAC)
+        if(QSysInfo::macVersion()==QSysInfo::WV_10_7)
+            program = QDir::current().filePath("cudaminer/cudaminer.10.7");
+        else if(QSysInfo::macVersion()==QSysInfo::WV_10_8)
+            program = QDir::current().filePath("cudaminer/cudaminer.10.8");
+        else //if(QSysInfo::macVersion()==QSysInfo::WV_10_9)
+            program = QDir::current().filePath("cudaminer/cudaminer.10.9");
+#endif
         //if (!QFile::exists(program)) program = "cudaminer";
 
         args << "--url" << urlLine.toAscii();
