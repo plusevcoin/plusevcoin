@@ -66,7 +66,7 @@
           </property>
           <property name="text">
            <string>
-&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;plusevcoin&lt;/span&gt; version: &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;PlusEVCoin&lt;/span&gt; version: &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
           <property name="textInteractionFlags">
            <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
@@ -192,6 +192,25 @@ Mining with your graphics card is very effective, but it will usually require so
 Used" appropriate for your GPU (CUDAMiner for nVidia cards and CGMiner for AMD cards) and press "Start Mining" button. For best
 performance you should set the Advanced Options. To find the right values go to https://litecoin.info/Mining_hardware_comparison,
 find your GPU model and input the appropriate values.
+
+</string>
+       </property>
+       <property name="textInteractionFlags">
+        <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_7g">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Maximum">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+           <string>Be patient with mining. It might take some time before you mine a PlusEVCoin block, but when you do you will collect 50 PEV Coins :)
+If you want to see how effective your computer is, try leaving it to mine overnight. Happy mining!
 
 
 </string>
