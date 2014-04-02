@@ -228,8 +228,7 @@ void MiningPage::readProcessOutput()
             QString line = list.at(i);
 
             // Ignore protocol dump
-            // !line.startsWith("[") || 
-            if (line.contains("JSON protocol") || line.contains("HTTP hdr"))
+            if (line.contains("JSON protocol") || line.contains("HTTP hdr") || line.contains("No suitable long"))
                 continue;
             if (!line.startsWith("[") && !line.startsWith(" [") && !line.startsWith("("))
                 continue;
