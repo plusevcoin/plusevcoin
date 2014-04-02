@@ -185,7 +185,8 @@ Type works you may want to try this option.
            <string>Mining with CPU:
 Mining with your processor is the easiest, but also the least effective way to get PEV Coins. Just go to the "Mining" tab and press "Start
 Mining" button. You can edit mining options there, but for your convenience the default values are already set.
-The first thing you might want do edit is the "Threads" field. To use your CPU full capacity set it to number of cores your processor has.
+The first thing you might want do edit is the "Threads" field. If you want your CPU to not use its full capacity, set it to a smaller number
+than the number of cores your processor has.
 
 Mining with GPU:
 Mining with your graphics card is very effective, but it will usually require some configuration. Go to the "Mining tab" and choose "Miner

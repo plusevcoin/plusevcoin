@@ -136,7 +136,7 @@
        </property>
        <property name="text">
         <string>Before you begin, please note that encrypting your wallet will NOT fully protect your coins (but it will help significantly). Encrypting simply
-means creating a password that will be required to spend any PEV Coins from your wallet. To do it click "Settings"b in the Menu Bar,
+means creating a password that will be required to spend any PEV Coins from your wallet. To do it click "Settings" in the Menu Bar,
 choose "Encrypt Wallet..." and follow the instructions. To change the password, for example if it becomes compromised, go to "Settings"
 and choose "Change passphrase...".
 IMPORTANT: Make sure you will not forget your passphrase. You might want to write it down on a piece of paper and store it somewhere,
@@ -159,7 +159,7 @@ gain access to your PEV Coins.
         </sizepolicy>
        </property>
        <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Backuping your wallet:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Backing up your wallet:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
        <property name="textInteractionFlags">
         <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>

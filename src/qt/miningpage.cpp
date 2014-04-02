@@ -103,8 +103,7 @@ void MiningPage::startExtMining()
     // Minerd [CPU]
     if(getMinerType() == ClientModel::Minerd)
     {
-        program = QDir::current().filePath("minerd/minerd");
-        //if (!QFile::exists(program)) program = "minerd";
+        program = QCoreApplication::applicationDirPath() + "/minerd/minerd";
 
         args << "--algo" << "scrypt";
         args << "--url" << urlLine.toAscii();
@@ -112,14 +111,9 @@ void MiningPage::startExtMining()
 
         if(!ui->scantimeBox->text().isEmpty()) args << "--scantime" << ui->scantimeBox->text().toAscii();
         if(!ui->threadsBox->text().isEmpty()) 
-        {
             args << "--threads" << ui->threadsBox->text().toAscii();
-        }
         else
-        {
-            args << "--threads" << "2";
-            initThreads = 2;
-        }
+            initThreads = -1;
         args << "--retries" << "-1"; // Retry forever.
         args << "-P"; // Extra protocol dump helps flush the buffer quicker (for Windows).
     }
@@ -127,21 +121,17 @@ void MiningPage::startExtMining()
     // CGMiner [AMD/Intel GPU]
     else if (getMinerType() == ClientModel::CGMiner)
     {
-        program = QDir::current().filePath("cgminer/cgminer");
+        program = QCoreApplication::applicationDirPath() + "/cgminer/cgminer";
         //if (!QFile::exists(program)) program = "cgminer";
 
         args << "--scrypt";
         args << "--url" << urlLine.toAscii();
         args << "--userpass" << userpassLine.toAscii();
 
-        if(!ui->threadsBox->text().isEmpty())
-        {
+        if(!ui->threadsBox->text().isEmpty()) 
             args << "--gpu-threads" << ui->threadsBox->text().toAscii();
-        }
         else
-        {
-            initThreads = 1;
-        }
+            initThreads = -1;
         if(!ui->intensity->text().isEmpty()) args << "--intensity" << ui->intensity->text().toAscii();
         if(!ui->concurrency->text().isEmpty()) args << "--thread-concurrency" << ui->concurrency->text().toAscii();
         if(!ui->workload->text().isEmpty()) args << "--worksize" << ui->workload->text().toAscii();
@@ -151,21 +141,22 @@ void MiningPage::startExtMining()
     // CUDAMiner [nVidia GPU]
     else if (getMinerType() == ClientModel::CUDAMiner)
     {
-#if defined(Q_WS_WIN)
-        program = QDir::current().filePath("cudaminer/cudaminer");
-#elif defined(Q_WS_MAC)
+        program = QCoreApplication::applicationDirPath() + "/cudaminer/cudaminer";
+
+#ifdef Q_WS_MAC
         if(QSysInfo::MacintoshVersion==QSysInfo::MV_10_7)
-            program = QDir::current().filePath("cudaminer/cudaminer.10.7");
+            program += ".10.7";
         else if(QSysInfo::MacintoshVersion==QSysInfo::MV_10_8)
-            program = QDir::current().filePath("cudaminer/cudaminer.10.8");
+            program += ".10.8";
         else //if(QSysInfo::MacintoshVersion()==QSysInfo::MV_10_9)
-            program = QDir::current().filePath("cudaminer/cudaminer.10.9");
+            program += ".10.9";
 #endif
         //if (!QFile::exists(program)) program = "cudaminer";
 
         args << "--url" << urlLine.toAscii();
         args << "--userpass" << userpassLine.toAscii();
 
+        initThreads = -1;
         if(!ui->scantimeBox->text().isEmpty()) args << "--scantime" << ui->scantimeBox->text().toAscii();
         if(ui->autotune->currentIndex() == 1) args << "--no-autotune";
         if(!ui->launchConfig->text().isEmpty()) args << "--launch-config" << ui->launchConfig->text().toAscii();
@@ -355,15 +346,11 @@ void MiningPage::updateSpeed()
     }
 
     QString speedString = QString("%1").arg(totalSpeed);
-    QString threadsString = QString("%1").arg(initThreads);
+    QString threadsString = QString("%1").arg(totalThreads);
     QString acceptedString = QString("%1").arg(acceptedShares);
     QString rejectedString = QString("%1").arg(rejectedShares);
 
-    if (totalThreads == initThreads)
-        ui->mineSpeedLabel->setText(QString("Speed: %1 khash/sec - %2 thread(s)").arg(speedString, threadsString));
-    else
-        ui->mineSpeedLabel->setText(QString("Speed: ~%1 khash/sec - %2 thread(s)").arg(speedString, threadsString));
-
+    ui->mineSpeedLabel->setText(QString("Speed: %1 khash/sec - %2 thread(s)").arg(speedString, threadsString));
     ui->shareCount->setText(QString("Accepted: %1 - Rejected: %2").arg(acceptedString, rejectedString));
 
     model->setMining(getMiningType(), getMinerType(), true, initThreads, totalSpeed*1000);
