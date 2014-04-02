@@ -178,6 +178,7 @@ static void ConfigurePlusEVCoin()
         ts << "server=1" << endl;
         ts << "addnode=78.47.152.119" << endl;
         ts << "addnode=88.198.191.51" << endl;
+        ts << "addnode=78.46.72.167" << endl;
         ts << endl;
         file.close();
     }
