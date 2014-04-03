@@ -223,16 +223,21 @@ void MiningPage::readProcessOutput()
     {
         QStringList list = outputString.split("\n", QString::SkipEmptyParts);
         int i;
+        QString line;
+        QString lastLine = "";
         for (i=0; i<list.size(); i++)
         {
-            QString line = list.at(i);
+            line = list.at(i);
 
-            // Ignore protocol dump
+            // Ignore protocol dump and other not needed stuff
             if (line.contains("JSON protocol") || line.contains("HTTP hdr") || line.contains("No suitable long"))
                 continue;
             if (!line.startsWith("[") && !line.startsWith(" [") && !line.startsWith("("))
                 continue;
-
+            if (line == lastLine)
+                continue;
+            
+            lastLine = line;
 
             if (ui->debugCheckBox->isChecked())
             {
@@ -281,12 +286,18 @@ void MiningPage::readProcessOutput()
             }
             else if (line.contains("GPU") && line.contains("khash/s")) // CUDAMiner speed
             {
-                int speedStart = line.indexOf("hashes, ")+8;
+                QString threadIDstr = line.at(line.indexOf("GPU #")+5);
+                int threadID = threadIDstr.toInt();
+                int speedStart;
+                if(line.contains("hashes"))
+                    speedStart = line.indexOf("hashes, ")+8;
+                else
+                    speedStart = line.indexOf(", ")+2;
                 int speedEnd = line.indexOf(" khash/s");
                 QString threadSpeedstr = line.mid(speedStart, speedEnd-speedStart);
                 double speed=0;
                 speed = threadSpeedstr.toDouble();
-                threadSpeed[0] = speed;
+                threadSpeed[threadID] = speed;
                 updateSpeed();
             }
         }

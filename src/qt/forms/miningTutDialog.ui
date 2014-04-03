@@ -192,7 +192,7 @@ Mining with GPU:
 Mining with your graphics card is very effective, but it will usually require some configuration. Go to the "Mining tab" and choose "Miner
 Used" appropriate for your GPU (CUDAMiner for nVidia cards and CGMiner for AMD cards) and press "Start Mining" button. For best
 performance you should set the Advanced Options. To find the right values go to https://litecoin.info/Mining_hardware_comparison,
-find your GPU model and input the appropriate values.
+find your GPU model and input the appropriate numbers.
 
 </string>
        </property>
