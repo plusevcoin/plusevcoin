@@ -1,24 +1,24 @@
 TEMPLATE = app
-TARGET = plusevcoin-qt
-VERSION = 0.7.2.1
+TARGET = PlusEVCoin-Qt
+VERSION = 1.3.0.0
 INCLUDEPATH += src src/json src/qt
 DEFINES += QT_GUI BOOST_THREAD_USE_LIB BOOST_SPIRIT_THREADSAFE BOOST_THREAD_PROVIDES_GENERIC_SHARED_MUTEX_ON_WIN __NO_SYSTEM_INCLUDES
 CONFIG += no_include_pwd
 
 # UNCOMMENT THIS SECTION TO BUILD ON WINDOWS
 
-#windows:LIBS += -lshlwapi
-#LIBS += $$join(BOOST_LIB_PATH,,-L,) $$join(BDB_LIB_PATH,,-L,) $$join(OPENSSL_LIB_PATH,,-L,) $$join(QRENCODE_LIB_PATH,,-L,)
-#LIBS += -lssl -lcrypto -ldb_cxx$$BDB_LIB_SUFFIX
-#windows:LIBS += -lws2_32 -lole32 -loleaut32 -luuid -lgdi32
-#LIBS += -lboost_system-mgw48-mt-sd-1_54 -lboost_filesystem-mgw48-mt-sd-1_54 -lboost_program_options-mgw48-mt-sd-1_54 -lboost_thread-mgw48-mt-sd-1_54
-#BOOST_LIB_SUFFIX=-mgw48-mt-sd-1_54
-#BOOST_INCLUDE_PATH=C:/deps/boost
-#BOOST_LIB_PATH=C:/deps/boost/stage/lib
-#BDB_INCLUDE_PATH=c:/deps/db/build_unix
-#BDB_LIB_PATH=c:/deps/db/build_unix
-#OPENSSL_INCLUDE_PATH=c:/deps/ssl/include
-#OPENSSL_LIB_PATH=c:/deps/ssl
+windows:LIBS += -lshlwapi
+LIBS += $$join(BOOST_LIB_PATH,,-L,) $$join(BDB_LIB_PATH,,-L,) $$join(OPENSSL_LIB_PATH,,-L,) $$join(QRENCODE_LIB_PATH,,-L,)
+LIBS += -lssl -lcrypto -ldb_cxx$$BDB_LIB_SUFFIX
+windows:LIBS += -lws2_32 -lole32 -loleaut32 -luuid -lgdi32
+LIBS += -lboost_system-mgw48-mt-sd-1_54 -lboost_filesystem-mgw48-mt-sd-1_54 -lboost_program_options-mgw48-mt-sd-1_54 -lboost_thread-mgw48-mt-sd-1_54
+BOOST_LIB_SUFFIX=-mgw48-mt-sd-1_54
+BOOST_INCLUDE_PATH=C:/deps/boost
+BOOST_LIB_PATH=C:/deps/boost/stage/lib
+BDB_INCLUDE_PATH=c:/deps/db/build_unix
+BDB_LIB_PATH=c:/deps/db/build_unix
+OPENSSL_INCLUDE_PATH=c:/deps/ssl/include
+OPENSSL_LIB_PATH=c:/deps/ssl
 
 OBJECTS_DIR = build
 MOC_DIR = build
@@ -111,6 +111,7 @@ HEADERS += src/qt/bitcoingui.h \
     src/qt/signverifymessagedialog.h \
     src/qt/aboutdialog.h \
         src/qt/BeginnerDialog.h \
+        src/qt/miningBasicDialog.h \
         src/qt/miningTutDialog.h \
         src/qt/transactionTutDialog.h \
         src/qt/protectionTutDialog.h \
@@ -187,6 +188,7 @@ SOURCES += src/qt/bitcoin.cpp src/qt/bitcoingui.cpp \
     src/qt/signverifymessagedialog.cpp \
     src/qt/aboutdialog.cpp \
         src/qt/BeginnerDialog.cpp \
+        src/qt/miningBasicDialog.cpp \
         src/qt/miningTutDialog.cpp \
         src/qt/transactionTutDialog.cpp \
         src/qt/protectionTutDialog.cpp \
@@ -253,6 +255,7 @@ FORMS += \
     src/qt/forms/signverifymessagedialog.ui \
     src/qt/forms/aboutdialog.ui \
         src/qt/forms/BeginnerDialog.ui \
+        src/qt/forms/miningBasicDialog.ui \
         src/qt/forms/miningTutDialog.ui \
         src/qt/forms/transactionTutDialog.ui \
         src/qt/forms/protectionTutDialog.ui \

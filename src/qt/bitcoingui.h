@@ -87,6 +87,7 @@ private:
     QAction *firstClassMessagingAction;
     QAction *aboutAction;
     QAction *beginnerToPlusEVCoinAction;
+    QAction *miningBasicAction;
     QAction *miningTutorialAction;
     QAction *transactionTutorialAction;
     QAction *protectionTutorialAction;
@@ -168,6 +169,8 @@ private slots:
     void aboutClicked();
     /** Show beginner dialog*/
     void beginnerClicked();
+    /** Show mining basic tutorial dialog*/
+    void miningBasicClicked();
     /** Show mining tutorial dialog*/
     void miningTutClicked();
     /** Show transaction tutorial dialog */

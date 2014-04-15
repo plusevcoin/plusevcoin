@@ -126,8 +126,11 @@ static void ConfigurePlusEVCoin()
     bool update = false;
 
 #if defined(Q_WS_WIN)
-    QString directory = getenv("APPDATA");
-    directory += "/PlusEVCoin";
+    QString directory = "";
+    if(QSysInfo::windowsVersion()<=QSysInfo::WV_2003) 
+        directory = QDir::homePath() + "/Application Data/Roaming/PlusEVCoin";
+    else
+        directory = QDir::homePath() + "/AppData/Roaming/PlusEVCoin";
 #elif defined(Q_WS_MAC)
     QString directory = QDir::homePath() + "/Library/Application Support/PlusEVCoin";
 #else

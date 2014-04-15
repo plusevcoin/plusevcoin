@@ -1907,6 +1907,16 @@ bool CBlock::AcceptBlock()
     if (GetBlockTime() <= pindexPrev->GetMedianTimePast())
         return error("AcceptBlock() : block's timestamp is too early");
 
+    // Prevent blocks from too far in the future
+    if (nHeight > 99000  &&  GetBlockTime() > GetAdjustedTime() + 15 * 60) {
+        return error("AcceptBlock() : block's timestamp too far in the future");
+    }
+
+    // Prevent blocks from too far in the past
+    if (nHeight > 99000  &&  GetBlockTime() > GetAdjustedTime() + 15 * 60) {
+        return error("AcceptBlock() : block's timestamp is too early");
+    }
+
     // Check that all transactions are finalized
     BOOST_FOREACH(const CTransaction& tx, vtx)
         if (!tx.IsFinal(nHeight, GetBlockTime()))

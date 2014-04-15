@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>protectionTutDialog</class>
- <widget class="QDialog" name="protectionTutDialog">
+ <class>miningBasicDialog</class>
+ <widget class="QDialog" name="miningBasicDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>How to protect your PEV Coins?</string>
+   <string>How to mine PEV Coins? (basic)</string>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout_2">
    <item>
@@ -65,7 +65,8 @@
            <cursorShape>IBeamCursor</cursorShape>
           </property>
           <property name="text">
-           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;PlusEVCoin&lt;/span&gt; version: &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           <string>
+&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;PlusEVCoin&lt;/span&gt; version: &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
           <property name="textInteractionFlags">
            <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
@@ -111,15 +112,15 @@
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="label_2">
+      <widget class="QLabel" name="label_3">
        <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+        <sizepolicy hsizetype="Minimum" vsizetype="Maximum">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
        <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Encrypting your wallet:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;How to start mining:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
        <property name="textInteractionFlags">
         <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
@@ -127,21 +128,18 @@
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="label_3">
+      <widget class="QLabel" name="label_2">
        <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+        <sizepolicy hsizetype="Minimum" vsizetype="Maximum">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
        <property name="text">
-        <string>Before you begin, please note that encrypting your wallet will NOT fully protect your coins (but it will help signi-
-ficantly). Encrypting simply means creating a password that will be required to spend any PEV Coins from your
-wallet. To do it click "Settings" in the Menu Bar, choose "Encrypt Wallet..." and follow the instructions. To change
-the password, for example if it becomes compromised, go to "Settings" and choose "Change passphrase...".
-IMPORTANT: Make sure you will not forget your passphrase. You might want to write it down on a piece of paper
-and store it somewhere, but never save it in any file neither on your computer nor online. If you forget your
-passphrase, there will be ABSOLUTELY NO WAY to gain access to your PEV Coins.
+           <string>When you start PlusEVCoin-Qt you have to wait for your wallet to synchronize with the PlusEVCoin network
+(you will see a progress bar at the bottom of the application). Important - Synchronizing for the first time may
+take up to couple hours, but after that it will be practically instant. When your wallet is synchronized you can
+just go to the "Mining" tab and press "Start Mining" button (without changing any of the default settings). 
 
 </string>
        </property>
@@ -159,7 +157,7 @@ passphrase, there will be ABSOLUTELY NO WAY to gain access to your PEV Coins.
         </sizepolicy>
        </property>
        <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Backing up your wallet:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;How to mine with less intensity:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
        <property name="textInteractionFlags">
         <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
@@ -175,12 +173,32 @@ passphrase, there will be ABSOLUTELY NO WAY to gain access to your PEV Coins.
         </sizepolicy>
        </property>
        <property name="text">
-        <string>In the (hopefully unlikely :) case of something happening to your computer's hard drive it is good to have a ba-
-ckup copy of your wallet. To backup your wallet click "File" in the Menu Bar and choose "Backup Wallet...". You
-will be then prompted to choose where to save the wallet.dat file, which is the backup. We suggest to move
-this file to some secure location: external USB Flash Drive or an online file storage service (f.e. DropBox.com).
-IMPORTANT: Always encrypt your wallet before making a backup. Anyone who gets hold of your unencrypted
-copy (or encrypted copy with relevant passphrase) will be able to spend all PEV Coins from your wallet!
+           <string>If you want to mine with less intensity (because your system slows down, your laptop gets too hot or for any
+other reason) you need to decrease the number of Threads that your computer mines with. What does decre-
+ase mean? Go to the "Mining" tab, press "Start Mining" and look at the number of Threads that your computer
+is using - it will be displayed in the bottom right corner of the application. Now press "Stop Mining" and input the
+desired smaller number in the "Threads" field. For example: if your computer originally used 8 Threads and you
+set the "Threads" field to 2 it will use 25% of your computer power.
+
+</string>
+       </property>
+       <property name="textInteractionFlags">
+        <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_7g">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Maximum">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+           <string>Be patient with mining. It might take some time before you mine a PlusEVCoin block, but whenever you do you
+will collect 50 PEV Coins :) If you want to see how effective your computer is, try leaving it to mine overnight.
+Happy mining!
 
 
 </string>
@@ -211,7 +229,7 @@ copy (or encrypted copy with relevant passphrase) will be able to spend all PEV 
   <connection>
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
-   <receiver>protectionTutDialog</receiver>
+   <receiver>miningBasicDialog</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -227,7 +245,7 @@ copy (or encrypted copy with relevant passphrase) will be able to spend all PEV 
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
-   <receiver>protectionTutDialog</receiver>
+   <receiver>miningBasicDialog</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -242,4 +260,3 @@ copy (or encrypted copy with relevant passphrase) will be able to spend all PEV 
   </connection>
  </connections>
 </ui>
-

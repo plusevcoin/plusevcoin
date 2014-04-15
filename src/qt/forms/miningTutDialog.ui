@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>How to mine PEV Coins?</string>
+   <string>How to mine PEV Coins? (advanced)</string>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout_2">
    <item>
@@ -137,18 +137,19 @@
        </property>
        <property name="text">
         <string>Solo Mining:
-Mining by yourself is the most simple and straightforward way of getting PEV Coins, suggested for beginner users. Just go to the "Mining"
-tab and press "Start Mining" button. You can edit basic options there, but for your convenience the default values are already set.
+Mining by yourself is the most simple and straightforward way of getting PEV Coins, suggested for beginner
+users. Just go to the "Mining" tab and press "Start Mining" button. You can edit basic options there, but for
+your convenience the default values are already set.
 
 Pool and P2P mining:
-Mining with other people does not increase effectiveness (you still mine using only your own computer power), but it reduces variance. It
-works in a way that when anyone from your Pool or your P2P network finds a new block, the reward for it is shared among the people in
-this network, relatively to how much mining power they contributed. You will need a Server, Port, Username and Password provided by the
-Pool or P2P operator.
+Mining with other people does not increase effectiveness (you still mine using only your own computer power),
+but it reduces variance. It works in a way that when anyone from your Pool or your P2P network finds a new
+block, the reward for it is shared among the people in this network, relatively to how much mining power they
+contributed. You will need a Server, Port, Username and Password provided by the Pool or P2P operator.
 
 Internal mining:
-Ineffective type of mining, that requires no configuration. Used mostly for testing purposes. If for some unlikely reason no other Mining
-Type works you may want to try this option.
+Ineffective type of mining, that requires no configuration. Used mostly for testing purposes. If for some
+unlikely reason no other Mining Type works you may want to try this option.
 
 </string>
        </property>
@@ -182,36 +183,17 @@ Type works you may want to try this option.
         </sizepolicy>
        </property>
        <property name="text">
-           <string>Mining with CPU:
-Mining with your processor is the easiest, but also the least effective way to get PEV Coins. Just go to the "Mining" tab and press "Start
-Mining" button. You can edit mining options there, but for your convenience the default values are already set.
-The first thing you might want do edit is the "Threads" field. If you want your CPU to not use its full capacity, set it to a smaller number
-than the number of cores your processor has.
+        <string>Mining with CPU:
+Mining with your processor is the easiest, but also the least effective way to get PEV Coins. Just go to the
+"Mining" tab and press "Start Mining" button. You can edit mining options there, but for your convenience
+the default values are already set.
 
 Mining with GPU:
-Mining with your graphics card is very effective, but it will usually require some configuration. Go to the "Mining tab" and choose "Miner
-Used" appropriate for your GPU (CUDAMiner for nVidia cards and CGMiner for AMD cards) and press "Start Mining" button. For best
-performance you should set the Advanced Options. To find the right values go to https://litecoin.info/Mining_hardware_comparison,
-find your GPU model and input the appropriate numbers.
-
-</string>
-       </property>
-       <property name="textInteractionFlags">
-        <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="label_7g">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Minimum" vsizetype="Maximum">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="text">
-           <string>Be patient with mining. It might take some time before you mine a PlusEVCoin block, but when you do you will collect 50 PEV Coins :)
-If you want to see how effective your computer is, try leaving it to mine overnight. Happy mining!
+Mining with your graphics card is very effective, but it will usually require some configuration. Go to the "Mining
+tab" and choose "Miner Used" appropriate for your GPU (CUDAMiner for nVidia cards and CGMiner for AMD
+cards) and press "Start Mining" button. For best performance you should set the Advanced Options. To find
+the right values go to https://litecoin.info/Mining_hardware_comparison, find your GPU model and input the
+appropriate numbers.
 
 
 </string>

@@ -15,6 +15,7 @@
 #include "optionsdialog.h"
 #include "aboutdialog.h"
 #include "BeginnerDialog.h"
+#include "miningBasicDialog.h"
 #include "miningTutDialog.h"
 #include "transactionTutDialog.h"
 #include "protectionTutDialog.h"
@@ -299,8 +300,10 @@ void BitcoinGUI::createActions()
     openRPCConsoleAction->setToolTip(tr("Open debugging and diagnostic console"));
     beginnerToPlusEVCoinAction = new QAction(QIcon(":/icons/bitcoin"), tr("&What is PlusEVCoin?"), this);
     beginnerToPlusEVCoinAction->setToolTip(tr("A quick introduction to PlusEVCoin in general."));
-    miningTutorialAction = new QAction(QIcon(":/icons/mining_active"), tr("How to &mine PEV Coins?"), this);
-    miningTutorialAction->setToolTip(tr("A simple guide about more efficient mining."));
+    miningBasicAction = new QAction(QIcon(":/icons/mining_active"), tr("How to &mine PEV Coins? (basic)"), this);
+    miningBasicAction->setToolTip(tr("A simple guide about mining."));
+    miningTutorialAction = new QAction(QIcon(":/icons/mining"), tr("How to m&ine PEV Coins? (advanced)"), this);
+    miningTutorialAction->setToolTip(tr("An advanced guide about more efficient mining."));
     transactionTutorialAction = new QAction(QIcon(":/icons/tx_inout"), tr("How to &send/receive PEV Coins?"), this);
     transactionTutorialAction->setToolTip(tr("A simple guide about sending and receiving PEV Coins."));
     protectionTutorialAction = new QAction(QIcon(":/icons/lock_closed"), tr("How to &protect your PEV Coins?"), this);
@@ -317,6 +320,7 @@ void BitcoinGUI::createActions()
     connect(backupWalletAction, SIGNAL(triggered()), this, SLOT(backupWallet()));
     connect(changePassphraseAction, SIGNAL(triggered()), this, SLOT(changePassphrase()));
     connect(beginnerToPlusEVCoinAction, SIGNAL(triggered()), this, SLOT(beginnerClicked()));
+    connect(miningBasicAction, SIGNAL(triggered()), this, SLOT(miningBasicClicked()));
     connect(miningTutorialAction, SIGNAL(triggered()), this, SLOT(miningTutClicked()));
     connect(transactionTutorialAction, SIGNAL (triggered()), this, SLOT(transactionTutClicked()));
     connect(protectionTutorialAction, SIGNAL (triggered()), this, SLOT(protectionTutClicked()));
@@ -358,6 +362,7 @@ void BitcoinGUI::createMenuBar()
     
     QMenu *tutorial = appMenuBar->addMenu(tr("&Tutorials"));
     tutorial->addAction(beginnerToPlusEVCoinAction);
+    tutorial->addAction(miningBasicAction);
     tutorial->addAction(miningTutorialAction);
     tutorial->addAction(transactionTutorialAction);
     tutorial->addAction(protectionTutorialAction);
@@ -527,6 +532,14 @@ void BitcoinGUI::aboutClicked()
 void BitcoinGUI::beginnerClicked()
 {
     BeginnerDialog dlg;
+    dlg.setModel(clientModel);
+    dlg.setWindowModality(Qt::WindowModal);
+    dlg.exec();
+}
+
+void BitcoinGUI::miningBasicClicked()
+{
+    miningBasicDialog dlg;
     dlg.setModel(clientModel);
     dlg.setWindowModality(Qt::WindowModal);
     dlg.exec();
